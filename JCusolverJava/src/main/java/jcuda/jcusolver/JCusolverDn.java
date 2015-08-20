@@ -1186,7 +1186,7 @@ public class JCusolverDn
 
     public static int cusolverDnSsytrd(
         cusolverDnHandle handle, 
-        byte uplo, 
+        char uplo, 
         int n, 
         Pointer A, 
         int lda, 
@@ -1201,7 +1201,7 @@ public class JCusolverDn
     }
     private static native int cusolverDnSsytrdNative(
         cusolverDnHandle handle, 
-        byte uplo, 
+        char uplo, 
         int n, 
         Pointer A, 
         int lda, 
@@ -1215,7 +1215,7 @@ public class JCusolverDn
 
     public static int cusolverDnDsytrd(
         cusolverDnHandle handle, 
-        byte uplo, 
+        char uplo, 
         int n, 
         Pointer A, 
         int lda, 
@@ -1230,7 +1230,7 @@ public class JCusolverDn
     }
     private static native int cusolverDnDsytrdNative(
         cusolverDnHandle handle, 
-        byte uplo, 
+        char uplo, 
         int n, 
         Pointer A, 
         int lda, 
@@ -1366,8 +1366,8 @@ public class JCusolverDn
 
     public static int cusolverDnSgesvd(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1386,8 +1386,8 @@ public class JCusolverDn
     }
     private static native int cusolverDnSgesvdNative(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1405,8 +1405,8 @@ public class JCusolverDn
 
     public static int cusolverDnDgesvd(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1425,8 +1425,8 @@ public class JCusolverDn
     }
     private static native int cusolverDnDgesvdNative(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1444,8 +1444,8 @@ public class JCusolverDn
 
     public static int cusolverDnCgesvd(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1464,8 +1464,8 @@ public class JCusolverDn
     }
     private static native int cusolverDnCgesvdNative(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1483,8 +1483,8 @@ public class JCusolverDn
 
     public static int cusolverDnZgesvd(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
@@ -1503,8 +1503,8 @@ public class JCusolverDn
     }
     private static native int cusolverDnZgesvdNative(
         cusolverDnHandle handle, 
-        byte jobu, 
-        byte jobvt, 
+        char jobu, 
+        char jobvt, 
         int m, 
         int n, 
         Pointer A, 
