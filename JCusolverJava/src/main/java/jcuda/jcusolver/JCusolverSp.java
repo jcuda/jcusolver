@@ -1371,6 +1371,60 @@ public class JCusolverSp
         Pointer csrColIndA, 
         Pointer p);
 
+    /**
+     * <pre>
+     * --------- CPU symmdq
+     *   Symmetric minimum degree algorithm based on quotient graph
+     *
+     * </pre>
+     */
+    public static int cusolverSpXcsrsymmdqHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer p)
+    {
+        return checkResult(cusolverSpXcsrsymmdqHostNative(handle, n, nnzA, descrA, csrRowPtrA, csrColIndA, p));
+    }
+    private static native int cusolverSpXcsrsymmdqHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer p);
+
+
+    /**
+     * <pre>
+     * --------- CPU symmdq
+     *   Symmetric Approximate minimum degree algorithm based on quotient graph
+     *
+     * </pre>
+     */
+    public static int cusolverSpXcsrsymamdHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer p)
+    {
+        return checkResult(cusolverSpXcsrsymamdHostNative(handle, n, nnzA, descrA, csrRowPtrA, csrColIndA, p));
+    }
+    private static native int cusolverSpXcsrsymamdHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer p);
 
     /**
      * <pre>

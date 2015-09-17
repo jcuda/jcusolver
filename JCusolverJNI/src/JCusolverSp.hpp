@@ -373,6 +373,22 @@ extern "C" {
 
     /*
     * Class:     jcuda_jcusolver_JCusolverSp
+    * Method:    cusolverSpXcsrsymmdqHostNative
+    * Signature: (Ljcuda/jcusolver/cusolverSpHandle;IILjcuda/jcusparse/cusparseMatDescr;Ljcuda/Pointer;Ljcuda/Pointer;Ljcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHostNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jobject, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverSp
+    * Method:    cusolverSpXcsrsymamdHostNative
+    * Signature: (Ljcuda/jcusolver/cusolverSpHandle;IILjcuda/jcusparse/cusparseMatDescr;Ljcuda/Pointer;Ljcuda/Pointer;Ljcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHostNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jobject, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverSp
     * Method:    cusolverSpXcsrperm_bufferSizeHostNative
     * Signature: (Ljcuda/jcusolver/cusolverSpHandle;IIILjcuda/jcusparse/cusparseMatDescr;Ljcuda/Pointer;Ljcuda/Pointer;Ljcuda/Pointer;Ljcuda/Pointer;[J)I
     */

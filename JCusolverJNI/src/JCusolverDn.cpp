@@ -4190,8 +4190,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSgesvdNative(J
 
     // Native variable declarations
     cusolverDnHandle_t handle_native;
-    char jobu_native = 0;
-    char jobvt_native = 0;
+    signed char jobu_native = 0;
+    signed char jobvt_native = 0;
     int m_native = 0;
     int n_native = 0;
     float* A_native;
@@ -4208,8 +4208,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSgesvdNative(J
 
     // Obtain native variable values
     handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-    jobu_native = (char)jobu;
-    jobvt_native = (char)jobvt;
+    jobu_native = (signed char)jobu;
+    jobvt_native = (signed char)jobvt;
     m_native = (int)m;
     n_native = (int)n;
     A_native = (float*)getPointer(env, A);
@@ -4314,8 +4314,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDgesvdNative(J
 
     // Native variable declarations
     cusolverDnHandle_t handle_native;
-    char jobu_native = 0;
-    char jobvt_native = 0;
+    signed char jobu_native = 0;
+    signed char jobvt_native = 0;
     int m_native = 0;
     int n_native = 0;
     double* A_native;
@@ -4332,8 +4332,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDgesvdNative(J
 
     // Obtain native variable values
     handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-    jobu_native = (char)jobu;
-    jobvt_native = (char)jobvt;
+    jobu_native = (signed char)jobu;
+    jobvt_native = (signed char)jobvt;
     m_native = (int)m;
     n_native = (int)n;
     A_native = (double*)getPointer(env, A);
@@ -4438,8 +4438,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCgesvdNative(J
 
     // Native variable declarations
     cusolverDnHandle_t handle_native;
-    char jobu_native = 0;
-    char jobvt_native = 0;
+    signed char jobu_native = 0;
+    signed char jobvt_native = 0;
     int m_native = 0;
     int n_native = 0;
     cuComplex* A_native;
@@ -4456,8 +4456,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCgesvdNative(J
 
     // Obtain native variable values
     handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-    jobu_native = (char)jobu;
-    jobvt_native = (char)jobvt;
+    jobu_native = (signed char)jobu;
+    jobvt_native = (signed char)jobvt;
     m_native = (int)m;
     n_native = (int)n;
     A_native = (cuComplex*)getPointer(env, A);
@@ -4562,8 +4562,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdNative(J
 
     // Native variable declarations
     cusolverDnHandle_t handle_native;
-    char jobu_native = 0;
-    char jobvt_native = 0;
+    signed char jobu_native = 0;
+    signed char jobvt_native = 0;
     int m_native = 0;
     int n_native = 0;
     cuDoubleComplex* A_native;
@@ -4580,8 +4580,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdNative(J
 
     // Obtain native variable values
     handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-    jobu_native = (char)jobu;
-    jobvt_native = (char)jobvt;
+    jobu_native = (signed char)jobu;
+    jobvt_native = (signed char)jobvt;
     m_native = (int)m;
     n_native = (int)n;
     A_native = (cuDoubleComplex*)getPointer(env, A);
