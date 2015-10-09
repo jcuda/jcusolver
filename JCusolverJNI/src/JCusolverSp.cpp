@@ -326,25 +326,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
     // m is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrEndPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrEndPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, issym))
     {
         cudaDeviceSynchronize();
@@ -366,7 +366,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
 * [lu] stands for LU factorization
 * </pre>
 */
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -408,11 +408,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvluHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -430,7 +426,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     float tol_native = 0.0f;
     int reorder_native = 0;
     float* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -469,40 +465,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (float*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpScsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpScsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -510,18 +501,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -529,7 +515,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -571,11 +557,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvluHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -593,7 +575,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     double tol_native = 0.0;
     int reorder_native = 0;
     double* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -632,40 +614,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (double*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -673,18 +650,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -692,7 +664,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -734,11 +706,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvluHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -756,7 +724,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     float tol_native = 0.0f;
     int reorder_native = 0;
     cuComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -795,40 +763,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -836,18 +799,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -855,7 +813,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -897,11 +855,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvluHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -919,7 +873,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     double tol_native = 0.0;
     int reorder_native = 0;
     cuDoubleComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -958,40 +912,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -999,18 +948,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1027,7 +971,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
 * [qr] stands for QR factorization
 * </pre>
 */
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1069,11 +1013,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqr");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1091,7 +1031,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     float tol_native = 0.0f;
     int reorder_native = 0;
     float* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1105,10 +1045,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     x_native = (float*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpScsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpScsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -1122,7 +1062,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1130,7 +1070,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1172,11 +1112,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqr");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1194,7 +1130,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     double tol_native = 0.0;
     int reorder_native = 0;
     double* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1208,10 +1144,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     x_native = (double*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -1225,7 +1161,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1233,7 +1169,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1275,11 +1211,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqr");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1297,7 +1229,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     float tol_native = 0.0f;
     int reorder_native = 0;
     cuComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1311,10 +1243,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     x_native = (cuComplex*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -1328,7 +1260,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1336,7 +1268,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1378,11 +1310,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqr");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1400,7 +1328,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
     double tol_native = 0.0;
     int reorder_native = 0;
     cuDoubleComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1414,10 +1342,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     x_native = (cuDoubleComplex*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -1431,7 +1359,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1448,7 +1376,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
 * [qr] stands for QR factorization
 * </pre>
 */
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1490,11 +1418,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqrHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1512,7 +1436,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     float tol_native = 0.0f;
     int reorder_native = 0;
     float* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1551,40 +1475,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (float*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpScsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpScsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -1592,18 +1511,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1611,7 +1525,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1653,11 +1567,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqrHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1675,7 +1585,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     double tol_native = 0.0;
     int reorder_native = 0;
     double* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1714,40 +1624,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (double*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -1755,18 +1660,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1774,7 +1674,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1816,11 +1716,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqrHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1838,7 +1734,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     float tol_native = 0.0f;
     int reorder_native = 0;
     cuComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1877,40 +1773,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -1918,18 +1809,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -1937,7 +1823,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -1979,11 +1865,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqrHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2001,7 +1883,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     double tol_native = 0.0;
     int reorder_native = 0;
     cuDoubleComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2040,40 +1922,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -2081,18 +1958,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2112,7 +1984,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
 * The upper part of A is ignored.
 * </pre>
 */
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2154,11 +2026,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvcholHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2176,7 +2044,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     float tol_native = 0.0f;
     int reorder_native = 0;
     float* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2215,40 +2083,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (float*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpScsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpScsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrVal_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtr))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtr_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColInd))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColInd_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -2256,18 +2119,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2275,7 +2133,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2317,11 +2175,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvcholHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2339,7 +2193,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     double tol_native = 0.0;
     int reorder_native = 0;
     double* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2378,40 +2232,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (double*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrVal_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtr))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtr_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColInd))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColInd_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -2419,18 +2268,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2438,7 +2282,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2480,11 +2324,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvcholHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2502,7 +2342,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     float tol_native = 0.0f;
     int reorder_native = 0;
     cuComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2541,40 +2381,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrVal_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtr))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtr_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColInd))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColInd_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -2582,18 +2417,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2601,7 +2431,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2643,11 +2473,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvcholHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2665,7 +2491,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     double tol_native = 0.0;
     int reorder_native = 0;
     cuDoubleComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2704,40 +2530,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    PointerData *singularity_pointerData = initPointerData(env, singularity);
-    if (singularity_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    singularity_native = (int*)singularity_pointerData->getPointer(env);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrVal_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtr))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtr_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColInd))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColInd_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
@@ -2745,18 +2566,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
     // reorder is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, singularity))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, singularity_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2776,7 +2592,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
 * The upper part of A is ignored.
 * </pre>
 */
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2818,11 +2634,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvchol");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2840,7 +2652,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     float tol_native = 0.0f;
     int reorder_native = 0;
     float* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2854,10 +2666,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     x_native = (float*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpScsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpScsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -2871,7 +2683,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2879,7 +2691,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -2921,11 +2733,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvchol");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2943,7 +2751,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     double tol_native = 0.0;
     int reorder_native = 0;
     double* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2957,10 +2765,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     x_native = (double*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpDcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -2974,7 +2782,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -2982,7 +2790,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -3024,11 +2832,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvchol");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -3046,7 +2850,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     float tol_native = 0.0f;
     int reorder_native = 0;
     cuComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3060,10 +2864,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     x_native = (cuComplex*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpCcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -3077,7 +2881,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -3085,7 +2889,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     return jniResult;
 }
 
-JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jobject singularity)
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
     if (handle == NULL)
@@ -3127,11 +2931,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (singularity == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvchol");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // singularity may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -3149,7 +2949,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
     double tol_native = 0.0;
     int reorder_native = 0;
     cuDoubleComplex* x_native;
-    int* singularity_native;
+    int singularity_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3163,10 +2963,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     x_native = (cuDoubleComplex*)getPointer(env, x);
-    singularity_native = (int*)getPointer(env, singularity);
+    // singularity is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, singularity_native);
+    cusolverStatus_t jniResult_native = cusolverSpZcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -3180,7 +2980,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
     // tol is primitive
     // reorder is primitive
     // x is a native pointer
-    // singularity is a native pointer
+    if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -3340,50 +3140,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHost
     // n is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, rankA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, rankA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, min_norm))
     {
         cudaDeviceSynchronize();
@@ -3539,50 +3339,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHost
     // n is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, rankA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, rankA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, min_norm))
     {
         cudaDeviceSynchronize();
@@ -3738,50 +3538,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHost
     // n is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, rankA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, rankA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, min_norm))
     {
         cudaDeviceSynchronize();
@@ -3937,50 +3737,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHost
     // n is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, b))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, b_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, rankA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, rankA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, min_norm))
     {
         cudaDeviceSynchronize();
@@ -4123,26 +3923,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // mu0 is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
         cudaDeviceSynchronize();
@@ -4150,13 +3950,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     if (!releasePointerData(env, x0_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // maxite is primitive
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, mu))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, mu_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
@@ -4290,26 +4090,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // mu0 is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
         cudaDeviceSynchronize();
@@ -4317,13 +4117,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     if (!releasePointerData(env, x0_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // maxite is primitive
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, mu))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, mu_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
@@ -4461,26 +4261,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
         cudaDeviceSynchronize();
@@ -4488,13 +4288,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     if (!releasePointerData(env, x0_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // maxite is primitive
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, mu))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, mu_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
@@ -4632,26 +4432,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
         cudaDeviceSynchronize();
@@ -4659,13 +4459,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     if (!releasePointerData(env, x0_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     // maxite is primitive
     // tol is primitive
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, mu))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, mu_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x))
     {
         cudaDeviceSynchronize();
@@ -5226,19 +5026,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
@@ -5246,7 +5046,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
         cudaDeviceSynchronize();
@@ -5361,19 +5161,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
@@ -5381,7 +5181,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
         cudaDeviceSynchronize();
@@ -5496,19 +5296,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
@@ -5516,7 +5316,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
         cudaDeviceSynchronize();
@@ -5631,19 +5431,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     // m is primitive
     // nnz is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrValA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
@@ -5651,7 +5451,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
         cudaDeviceSynchronize();
@@ -5747,19 +5547,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHost
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
@@ -6031,11 +5831,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'q' is null for cusolverSpXcsrperm_bufferSizeHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    if (bufferSizeInBytes == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferSizeInBytes' is null for cusolverSpXcsrperm_bufferSizeHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // bufferSizeInBytes may be NULL
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrperm_bufferSizeHost(handle=%p, m=%d, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p, q=%p, bufferSizeInBytes=%p)\n",
@@ -6051,7 +5847,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
     int* csrColIndA_native;
     int* p_native;
     int* q_native;
-    size_t* bufferSizeInBytes_native;
+    size_t bufferSizeInBytes_native = 0;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6083,15 +5879,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
     q_native = (int*)q_pointerData->getPointer(env);
-    PointerData *bufferSizeInBytes_pointerData = initPointerData(env, bufferSizeInBytes);
-    if (bufferSizeInBytes_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    bufferSizeInBytes_native = (size_t*)bufferSizeInBytes_pointerData->getPointer(env);
+    // bufferSizeInBytes is set here
 
     // Native function call
-    cusolverStatus_t jniResult_native = cusolverSpXcsrperm_bufferSizeHost(handle_native, m_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native, q_native, bufferSizeInBytes_native);
+    cusolverStatus_t jniResult_native = cusolverSpXcsrperm_bufferSizeHost(handle_native, m_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native, q_native, &bufferSizeInBytes_native);
 
     // Write back native variable values
     // handle is a native pointer object
@@ -6099,36 +5890,31 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, q))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, q_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, bufferSizeInBytes))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, bufferSizeInBytes_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    if (!set(env, bufferSizeInBytes, 0, (jlong)bufferSizeInBytes_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
     jint jniResult;
@@ -6252,37 +6038,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrpermHostNa
     // n is primitive
     // nnzA is primitive
     // descrA is a native pointer object
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrRowPtrA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrColIndA))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, p))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, q))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, q_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, map))
     {
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, map_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    // If the PointerData is not a backed by native memory, then this call has to block
+    // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, pBuffer))
     {
         cudaDeviceSynchronize();
@@ -7293,4 +7079,5 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrsvBatche
     jniResult = (jint)jniResult_native;
     return jniResult;
 }
+
 

@@ -146,7 +146,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpScsrlsvluHostNative(handle, n, nnzA, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -162,7 +162,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpDcsrlsvluHost(
@@ -177,7 +177,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpDcsrlsvluHostNative(handle, n, nnzA, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -193,7 +193,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpCcsrlsvluHost(
@@ -208,7 +208,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpCcsrlsvluHostNative(handle, n, nnzA, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -224,7 +224,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpZcsrlsvluHost(
@@ -239,7 +239,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpZcsrlsvluHostNative(handle, n, nnzA, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -255,7 +255,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     /**
@@ -279,7 +279,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpScsrlsvqrNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -295,7 +295,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpDcsrlsvqr(
@@ -310,7 +310,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpDcsrlsvqrNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -326,7 +326,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpCcsrlsvqr(
@@ -341,7 +341,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpCcsrlsvqrNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -357,7 +357,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpZcsrlsvqr(
@@ -372,7 +372,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpZcsrlsvqrNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -388,7 +388,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     /**
@@ -412,7 +412,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpScsrlsvqrHostNative(handle, m, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -428,7 +428,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpDcsrlsvqrHost(
@@ -443,7 +443,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpDcsrlsvqrHostNative(handle, m, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -459,7 +459,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpCcsrlsvqrHost(
@@ -474,7 +474,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpCcsrlsvqrHostNative(handle, m, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -490,7 +490,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpZcsrlsvqrHost(
@@ -505,7 +505,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpZcsrlsvqrHostNative(handle, m, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, b, tol, reorder, x, singularity));
     }
@@ -521,7 +521,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     /**
@@ -548,7 +548,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpScsrlsvcholHostNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -564,7 +564,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpDcsrlsvcholHost(
@@ -579,7 +579,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpDcsrlsvcholHostNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -595,7 +595,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpCcsrlsvcholHost(
@@ -610,7 +610,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpCcsrlsvcholHostNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -626,7 +626,7 @@ public class JCusolverSp
         float tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpZcsrlsvcholHost(
@@ -641,7 +641,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpZcsrlsvcholHostNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -657,7 +657,7 @@ public class JCusolverSp
         double tol, 
         int reorder, 
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     /**
@@ -685,7 +685,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpScsrlsvcholNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -702,7 +702,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpDcsrlsvchol(
@@ -718,7 +718,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpDcsrlsvcholNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -735,7 +735,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpCcsrlsvchol(
@@ -751,7 +751,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpCcsrlsvcholNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -768,7 +768,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     public static int cusolverSpZcsrlsvchol(
@@ -784,7 +784,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity)
+        int[] singularity)
     {
         return checkResult(cusolverSpZcsrlsvcholNative(handle, m, nnz, descrA, csrVal, csrRowPtr, csrColInd, b, tol, reorder, x, singularity));
     }
@@ -801,7 +801,7 @@ public class JCusolverSp
         int reorder, 
         // output
         Pointer x, 
-        Pointer singularity);
+        int[] singularity);
 
 
     /**
@@ -1371,6 +1371,7 @@ public class JCusolverSp
         Pointer csrColIndA, 
         Pointer p);
 
+
     /**
      * <pre>
      * --------- CPU symmdq
@@ -1425,6 +1426,7 @@ public class JCusolverSp
         Pointer csrRowPtrA, 
         Pointer csrColIndA, 
         Pointer p);
+
 
     /**
      * <pre>

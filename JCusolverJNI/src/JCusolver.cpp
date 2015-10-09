@@ -27,6 +27,7 @@
  */
 
 #include "JCusolver_common.hpp"
+#include "JCusolver.hpp"
 #include <iostream>
 #include <string>
 
@@ -74,11 +75,11 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 /*
  * Set the log level
  *
- * Class:     jcuda_jcurand_JCurand
+ * Class:     jcuda_jcusolver_JCusolver
  * Method:    setLogLevelNative
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_jcuda_jcurand_JCurand_setLogLevelNative
+JNIEXPORT void JNICALL Java_jcuda_jcusolver_JCusolver_setLogLevelNative
   (JNIEnv *env, jclass cla, jint logLevel)
 {
     Logger::setLogLevel((LogLevel)logLevel);
