@@ -1,1 +1,6 @@
-JCusolverJava/target/
+/JCusolverJava/target/
+/JCusolverJava/.settings
+/JCusolverJava/.classpath
+/JCusolverJava/.project
+/target
+/nativeLibraries

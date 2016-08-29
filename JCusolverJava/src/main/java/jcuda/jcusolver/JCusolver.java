@@ -28,6 +28,7 @@
 package jcuda.jcusolver;
 
 import jcuda.*;
+import jcuda.runtime.JCuda;
 
 /**
  * Java bindings for CUSOLVER, the NVIDIA CUDA solver library. <br />
@@ -74,7 +75,10 @@ public class JCusolver
     {
         if (!initialized)
         {
-            LibUtils.loadLibrary("JCusolver");
+            String libraryBaseName = "JCusolver-" + JCuda.getJCudaVersion();
+            String libraryName = 
+                LibUtils.createPlatformLibraryName(libraryBaseName);
+            LibUtils.loadLibrary(libraryName);
             initialized = true;
         }
     }
