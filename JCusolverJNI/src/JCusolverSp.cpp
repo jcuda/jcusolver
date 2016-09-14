@@ -116,7 +116,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateNative(J
     cusolverSpHandle_t handle_native;
 
     // Obtain native variable values
-    // handle is initialized here
+    // handle is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCreate(&handle_native);
@@ -125,8 +125,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateNative(J
     setNativePointerValue(env, handle, (jlong)handle_native);
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -153,11 +152,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyNative(
     cusolverStatus_t jniResult_native = cusolverSpDestroy(handle_native);
 
     // Write back native variable values
-    // handle is destroyed here
+    // handle is read-only
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -177,25 +175,21 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpSetStreamNativ
 
     // Native variable declarations
     cusolverSpHandle_t handle_native;
-    cudaStream_t streamId_native = NULL;
+    cudaStream_t streamId_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
-    if (streamId != NULL)
-    {
-        streamId_native = (cudaStream_t)getNativePointerValue(env, streamId);
-    }
+    streamId_native = (cudaStream_t)getNativePointerValue(env, streamId);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpSetStream(handle_native, streamId_native);
 
     // Write back native variable values
-    // handle is a native pointer object
-    // streamId is a read-only native pointer
+    // handle is read-only
+    // streamId is read-only
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -219,22 +213,21 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpGetStreamNativ
 
     // Native variable declarations
     cusolverSpHandle_t handle_native;
-    cudaStream_t streamId_native = NULL;
+    cudaStream_t streamId_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
-    // streamId is initialized here
+    // streamId is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpGetStream(handle_native, &streamId_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     setNativePointerValue(env, streamId, (jlong)streamId_native);
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -283,10 +276,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
     int m_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrEndPtrA_native;
-    int* csrColIndA_native;
-    int* issym_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrEndPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * issym_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -298,34 +291,34 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrEndPtrA_pointerData = initPointerData(env, csrEndPtrA);
     if (csrEndPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrEndPtrA_native = (int*)csrEndPtrA_pointerData->getPointer(env);
+    csrEndPtrA_native = (int *)csrEndPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *issym_pointerData = initPointerData(env, issym);
     if (issym_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    issym_native = (int*)issym_pointerData->getPointer(env);
+    issym_native = (int *)issym_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrissymHost(handle_native, m_native, nnzA_native, descrA_native, csrRowPtrA_native, csrEndPtrA_native, csrColIndA_native, issym_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -352,8 +345,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
     if (!releasePointerData(env, issym_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -408,7 +400,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -419,14 +415,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    float* b_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    float* x_native;
-    int singularity_native = 0;
+    float * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -438,25 +434,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (float*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (float *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (float*)b_pointerData->getPointer(env);
+    b_native = (float *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -464,17 +460,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (float*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (float *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -510,8 +506,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -557,7 +552,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -568,14 +567,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    double* b_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    double* x_native;
-    int singularity_native = 0;
+    double * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -587,25 +586,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (double*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (double *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (double*)b_pointerData->getPointer(env);
+    b_native = (double *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -613,17 +612,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (double*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (double *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -659,8 +658,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -706,7 +704,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -717,14 +719,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuComplex* b_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    cuComplex* x_native;
-    int singularity_native = 0;
+    cuComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -736,25 +738,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuComplex*)b_pointerData->getPointer(env);
+    b_native = (cuComplex *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -762,17 +764,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -808,8 +810,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -855,7 +856,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvluHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -866,14 +871,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    cuDoubleComplex* x_native;
-    int singularity_native = 0;
+    cuDoubleComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -885,25 +890,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuDoubleComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuDoubleComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuDoubleComplex*)b_pointerData->getPointer(env);
+    b_native = (cuDoubleComplex *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -911,17 +916,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuDoubleComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsvluHost(handle_native, n_native, nnzA_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -957,8 +962,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1013,7 +1017,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1024,37 +1032,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    float* b_native;
+    float * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    float* x_native;
-    int singularity_native = 0;
+    float * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (float*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (float*)getPointer(env, b);
+    csrVal_native = (float *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (float *)getPointer(env, b);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
-    x_native = (float*)getPointer(env, x);
-    // singularity is set here
+    x_native = (float *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -1065,8 +1073,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1112,7 +1119,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1123,37 +1134,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    double* b_native;
+    double * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    double* x_native;
-    int singularity_native = 0;
+    double * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (double*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (double*)getPointer(env, b);
+    csrVal_native = (double *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (double *)getPointer(env, b);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
-    x_native = (double*)getPointer(env, x);
-    // singularity is set here
+    x_native = (double *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -1164,8 +1175,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1211,7 +1221,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1222,37 +1236,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuComplex* b_native;
+    cuComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    cuComplex* x_native;
-    int singularity_native = 0;
+    cuComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (cuComplex*)getPointer(env, b);
+    csrVal_native = (cuComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (cuComplex *)getPointer(env, b);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
-    x_native = (cuComplex*)getPointer(env, x);
-    // singularity is set here
+    x_native = (cuComplex *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -1263,8 +1277,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1310,7 +1323,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqr");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1321,37 +1338,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    cuDoubleComplex* x_native;
-    int singularity_native = 0;
+    cuDoubleComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuDoubleComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (cuDoubleComplex*)getPointer(env, b);
+    csrVal_native = (cuDoubleComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (cuDoubleComplex *)getPointer(env, b);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
-    x_native = (cuDoubleComplex*)getPointer(env, x);
-    // singularity is set here
+    x_native = (cuDoubleComplex *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqr(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -1362,8 +1379,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1418,7 +1434,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1429,14 +1449,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    float* b_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    float* x_native;
-    int singularity_native = 0;
+    float * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1448,25 +1468,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (float*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (float *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (float*)b_pointerData->getPointer(env);
+    b_native = (float *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -1474,17 +1494,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (float*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (float *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -1520,8 +1540,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1567,7 +1586,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1578,14 +1601,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    double* b_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    double* x_native;
-    int singularity_native = 0;
+    double * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1597,25 +1620,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (double*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (double *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (double*)b_pointerData->getPointer(env);
+    b_native = (double *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -1623,17 +1646,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (double*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (double *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -1669,8 +1692,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1716,7 +1738,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1727,14 +1753,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuComplex* b_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    cuComplex* x_native;
-    int singularity_native = 0;
+    cuComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1746,25 +1772,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuComplex*)b_pointerData->getPointer(env);
+    b_native = (cuComplex *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -1772,17 +1798,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -1818,8 +1844,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -1865,7 +1890,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqrHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1876,14 +1905,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    cuDoubleComplex* x_native;
-    int singularity_native = 0;
+    cuDoubleComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -1895,25 +1924,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuDoubleComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuDoubleComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuDoubleComplex*)b_pointerData->getPointer(env);
+    b_native = (cuDoubleComplex *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -1921,17 +1950,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuDoubleComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsvqrHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -1967,8 +1996,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2026,7 +2054,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2037,14 +2069,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    float* b_native;
+    float * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    float* x_native;
-    int singularity_native = 0;
+    float * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2056,25 +2088,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrVal_native = (float*)csrVal_pointerData->getPointer(env);
+    csrVal_native = (float *)csrVal_pointerData->getPointer(env);
     PointerData *csrRowPtr_pointerData = initPointerData(env, csrRowPtr);
     if (csrRowPtr_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtr_native = (int*)csrRowPtr_pointerData->getPointer(env);
+    csrRowPtr_native = (int *)csrRowPtr_pointerData->getPointer(env);
     PointerData *csrColInd_pointerData = initPointerData(env, csrColInd);
     if (csrColInd_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColInd_native = (int*)csrColInd_pointerData->getPointer(env);
+    csrColInd_native = (int *)csrColInd_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (float*)b_pointerData->getPointer(env);
+    b_native = (float *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -2082,17 +2114,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (float*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (float *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
@@ -2128,8 +2160,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2175,7 +2206,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2186,14 +2221,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    double* b_native;
+    double * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    double* x_native;
-    int singularity_native = 0;
+    double * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2205,25 +2240,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrVal_native = (double*)csrVal_pointerData->getPointer(env);
+    csrVal_native = (double *)csrVal_pointerData->getPointer(env);
     PointerData *csrRowPtr_pointerData = initPointerData(env, csrRowPtr);
     if (csrRowPtr_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtr_native = (int*)csrRowPtr_pointerData->getPointer(env);
+    csrRowPtr_native = (int *)csrRowPtr_pointerData->getPointer(env);
     PointerData *csrColInd_pointerData = initPointerData(env, csrColInd);
     if (csrColInd_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColInd_native = (int*)csrColInd_pointerData->getPointer(env);
+    csrColInd_native = (int *)csrColInd_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (double*)b_pointerData->getPointer(env);
+    b_native = (double *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -2231,17 +2266,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (double*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (double *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
@@ -2277,8 +2312,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2324,7 +2358,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2335,14 +2373,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuComplex* b_native;
+    cuComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    cuComplex* x_native;
-    int singularity_native = 0;
+    cuComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2354,25 +2392,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrVal_native = (cuComplex*)csrVal_pointerData->getPointer(env);
+    csrVal_native = (cuComplex *)csrVal_pointerData->getPointer(env);
     PointerData *csrRowPtr_pointerData = initPointerData(env, csrRowPtr);
     if (csrRowPtr_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtr_native = (int*)csrRowPtr_pointerData->getPointer(env);
+    csrRowPtr_native = (int *)csrRowPtr_pointerData->getPointer(env);
     PointerData *csrColInd_pointerData = initPointerData(env, csrColInd);
     if (csrColInd_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColInd_native = (int*)csrColInd_pointerData->getPointer(env);
+    csrColInd_native = (int *)csrColInd_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuComplex*)b_pointerData->getPointer(env);
+    b_native = (cuComplex *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -2380,17 +2418,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
@@ -2426,8 +2464,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2473,7 +2510,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvcholHost");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2484,14 +2525,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    cuDoubleComplex* x_native;
-    int singularity_native = 0;
+    cuDoubleComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -2503,25 +2544,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrVal_native = (cuDoubleComplex*)csrVal_pointerData->getPointer(env);
+    csrVal_native = (cuDoubleComplex *)csrVal_pointerData->getPointer(env);
     PointerData *csrRowPtr_pointerData = initPointerData(env, csrRowPtr);
     if (csrRowPtr_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtr_native = (int*)csrRowPtr_pointerData->getPointer(env);
+    csrRowPtr_native = (int *)csrRowPtr_pointerData->getPointer(env);
     PointerData *csrColInd_pointerData = initPointerData(env, csrColInd);
     if (csrColInd_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColInd_native = (int*)csrColInd_pointerData->getPointer(env);
+    csrColInd_native = (int *)csrColInd_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuDoubleComplex*)b_pointerData->getPointer(env);
+    b_native = (cuDoubleComplex *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
     PointerData *x_pointerData = initPointerData(env, x);
@@ -2529,17 +2570,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
-    // singularity is set here
+    x_native = (cuDoubleComplex *)x_pointerData->getPointer(env);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsvcholHost(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrVal))
     {
@@ -2575,8 +2616,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2634,7 +2674,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2645,37 +2689,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    float* b_native;
+    float * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    float* x_native;
-    int singularity_native = 0;
+    float * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (float*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (float*)getPointer(env, b);
+    csrVal_native = (float *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (float *)getPointer(env, b);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
-    x_native = (float*)getPointer(env, x);
-    // singularity is set here
+    x_native = (float *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -2686,8 +2730,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2733,7 +2776,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2744,37 +2791,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    double* b_native;
+    double * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    double* x_native;
-    int singularity_native = 0;
+    double * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (double*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (double*)getPointer(env, b);
+    csrVal_native = (double *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (double *)getPointer(env, b);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
-    x_native = (double*)getPointer(env, x);
-    // singularity is set here
+    x_native = (double *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -2785,8 +2832,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2832,7 +2878,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2843,37 +2893,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuComplex* b_native;
+    cuComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
     int reorder_native = 0;
-    cuComplex* x_native;
-    int singularity_native = 0;
+    cuComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (cuComplex*)getPointer(env, b);
+    csrVal_native = (cuComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (cuComplex *)getPointer(env, b);
     tol_native = (float)tol;
     reorder_native = (int)reorder;
-    x_native = (cuComplex*)getPointer(env, x);
-    // singularity is set here
+    x_native = (cuComplex *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -2884,8 +2934,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -2931,7 +2980,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvchol");
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    // singularity may be NULL
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2942,37 +2995,37 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
     int reorder_native = 0;
-    cuDoubleComplex* x_native;
-    int singularity_native = 0;
+    cuDoubleComplex * x_native = NULL;
+    int singularity_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuDoubleComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
-    b_native = (cuDoubleComplex*)getPointer(env, b);
+    csrVal_native = (cuDoubleComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
+    b_native = (cuDoubleComplex *)getPointer(env, b);
     tol_native = (double)tol;
     reorder_native = (int)reorder;
-    x_native = (cuDoubleComplex*)getPointer(env, x);
-    // singularity is set here
+    x_native = (cuDoubleComplex *)getPointer(env, x);
+    // singularity is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsvchol(handle_native, m_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, b_native, tol_native, reorder_native, x_native, &singularity_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
@@ -2983,8 +3036,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
     if (!set(env, singularity, 0, (jint)singularity_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -3065,15 +3117,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHost
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    float* b_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    float * b_native = NULL;
     float tol_native = 0.0f;
-    int* rankA_native;
-    float* x_native;
-    int* p_native;
-    float* min_norm_native;
+    int * rankA_native = NULL;
+    float * x_native = NULL;
+    int * p_native = NULL;
+    float * min_norm_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3086,60 +3138,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (float*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (float *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (float*)b_pointerData->getPointer(env);
+    b_native = (float *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     PointerData *rankA_pointerData = initPointerData(env, rankA);
     if (rankA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    rankA_native = (int*)rankA_pointerData->getPointer(env);
+    rankA_native = (int *)rankA_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (float*)x_pointerData->getPointer(env);
+    x_native = (float *)x_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *min_norm_pointerData = initPointerData(env, min_norm);
     if (min_norm_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    min_norm_native = (float*)min_norm_pointerData->getPointer(env);
+    min_norm_native = (float *)min_norm_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrlsqvqrHost(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, rankA_native, x_native, p_native, min_norm_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -3191,8 +3243,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHost
     if (!releasePointerData(env, min_norm_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -3264,15 +3315,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHost
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    double* b_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    double * b_native = NULL;
     double tol_native = 0.0;
-    int* rankA_native;
-    double* x_native;
-    int* p_native;
-    double* min_norm_native;
+    int * rankA_native = NULL;
+    double * x_native = NULL;
+    int * p_native = NULL;
+    double * min_norm_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3285,60 +3336,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (double*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (double *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (double*)b_pointerData->getPointer(env);
+    b_native = (double *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     PointerData *rankA_pointerData = initPointerData(env, rankA);
     if (rankA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    rankA_native = (int*)rankA_pointerData->getPointer(env);
+    rankA_native = (int *)rankA_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (double*)x_pointerData->getPointer(env);
+    x_native = (double *)x_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *min_norm_pointerData = initPointerData(env, min_norm);
     if (min_norm_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    min_norm_native = (double*)min_norm_pointerData->getPointer(env);
+    min_norm_native = (double *)min_norm_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrlsqvqrHost(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, rankA_native, x_native, p_native, min_norm_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -3390,8 +3441,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHost
     if (!releasePointerData(env, min_norm_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -3463,15 +3513,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHost
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuComplex* b_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuComplex * b_native = NULL;
     float tol_native = 0.0f;
-    int* rankA_native;
-    cuComplex* x_native;
-    int* p_native;
-    float* min_norm_native;
+    int * rankA_native = NULL;
+    cuComplex * x_native = NULL;
+    int * p_native = NULL;
+    float * min_norm_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3484,60 +3534,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuComplex*)b_pointerData->getPointer(env);
+    b_native = (cuComplex *)b_pointerData->getPointer(env);
     tol_native = (float)tol;
     PointerData *rankA_pointerData = initPointerData(env, rankA);
     if (rankA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    rankA_native = (int*)rankA_pointerData->getPointer(env);
+    rankA_native = (int *)rankA_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuComplex*)x_pointerData->getPointer(env);
+    x_native = (cuComplex *)x_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *min_norm_pointerData = initPointerData(env, min_norm);
     if (min_norm_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    min_norm_native = (float*)min_norm_pointerData->getPointer(env);
+    min_norm_native = (float *)min_norm_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrlsqvqrHost(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, rankA_native, x_native, p_native, min_norm_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -3589,8 +3639,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHost
     if (!releasePointerData(env, min_norm_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -3662,15 +3711,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHost
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuDoubleComplex* b_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuDoubleComplex * b_native = NULL;
     double tol_native = 0.0;
-    int* rankA_native;
-    cuDoubleComplex* x_native;
-    int* p_native;
-    double* min_norm_native;
+    int * rankA_native = NULL;
+    cuDoubleComplex * x_native = NULL;
+    int * p_native = NULL;
+    double * min_norm_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3683,60 +3732,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuDoubleComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuDoubleComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *b_pointerData = initPointerData(env, b);
     if (b_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    b_native = (cuDoubleComplex*)b_pointerData->getPointer(env);
+    b_native = (cuDoubleComplex *)b_pointerData->getPointer(env);
     tol_native = (double)tol;
     PointerData *rankA_pointerData = initPointerData(env, rankA);
     if (rankA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    rankA_native = (int*)rankA_pointerData->getPointer(env);
+    rankA_native = (int *)rankA_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
+    x_native = (cuDoubleComplex *)x_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *min_norm_pointerData = initPointerData(env, min_norm);
     if (min_norm_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    min_norm_native = (double*)min_norm_pointerData->getPointer(env);
+    min_norm_native = (double *)min_norm_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrlsqvqrHost(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, tol_native, rankA_native, x_native, p_native, min_norm_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -3788,8 +3837,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHost
     if (!releasePointerData(env, min_norm_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -3860,15 +3908,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     float mu0_native = 0.0f;
-    float* x0_native;
+    float * x0_native = NULL;
     int maxite_native = 0;
     float tol_native = 0.0f;
-    float* mu_native;
-    float* x_native;
+    float * mu_native = NULL;
+    float * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -3880,26 +3928,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (float*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (float *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     mu0_native = (float)mu0;
     PointerData *x0_pointerData = initPointerData(env, x0);
     if (x0_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x0_native = (float*)x0_pointerData->getPointer(env);
+    x0_native = (float *)x0_pointerData->getPointer(env);
     maxite_native = (int)maxite;
     tol_native = (float)tol;
     PointerData *mu_pointerData = initPointerData(env, mu);
@@ -3907,22 +3955,22 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    mu_native = (float*)mu_pointerData->getPointer(env);
+    mu_native = (float *)mu_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (float*)x_pointerData->getPointer(env);
+    x_native = (float *)x_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsreigvsiHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, tol_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -3964,8 +4012,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4027,15 +4074,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     double mu0_native = 0.0;
-    double* x0_native;
+    double * x0_native = NULL;
     int maxite_native = 0;
     double tol_native = 0.0;
-    double* mu_native;
-    double* x_native;
+    double * mu_native = NULL;
+    double * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -4047,26 +4094,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (double*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (double *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     mu0_native = (double)mu0;
     PointerData *x0_pointerData = initPointerData(env, x0);
     if (x0_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x0_native = (double*)x0_pointerData->getPointer(env);
+    x0_native = (double *)x0_pointerData->getPointer(env);
     maxite_native = (int)maxite;
     tol_native = (double)tol;
     PointerData *mu_pointerData = initPointerData(env, mu);
@@ -4074,22 +4121,22 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    mu_native = (double*)mu_pointerData->getPointer(env);
+    mu_native = (double *)mu_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (double*)x_pointerData->getPointer(env);
+    x_native = (double *)x_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsreigvsiHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, tol_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -4131,8 +4178,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4198,15 +4244,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuComplex mu0_native;
-    cuComplex* x0_native;
+    cuComplex * x0_native = NULL;
     int maxite_native = 0;
     float tol_native = 0.0f;
-    cuComplex* mu_native;
-    cuComplex* x_native;
+    cuComplex * mu_native = NULL;
+    cuComplex * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -4218,26 +4264,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, mu0, mu0_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *x0_pointerData = initPointerData(env, x0);
     if (x0_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x0_native = (cuComplex*)x0_pointerData->getPointer(env);
+    x0_native = (cuComplex *)x0_pointerData->getPointer(env);
     maxite_native = (int)maxite;
     tol_native = (float)tol;
     PointerData *mu_pointerData = initPointerData(env, mu);
@@ -4245,22 +4291,22 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    mu_native = (cuComplex*)mu_pointerData->getPointer(env);
+    mu_native = (cuComplex *)mu_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuComplex*)x_pointerData->getPointer(env);
+    x_native = (cuComplex *)x_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsreigvsiHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, tol_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -4279,7 +4325,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // mu0 is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
@@ -4302,8 +4348,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4369,15 +4414,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuDoubleComplex mu0_native;
-    cuDoubleComplex* x0_native;
+    cuDoubleComplex * x0_native = NULL;
     int maxite_native = 0;
     double tol_native = 0.0;
-    cuDoubleComplex* mu_native;
-    cuDoubleComplex* x_native;
+    cuDoubleComplex * mu_native = NULL;
+    cuDoubleComplex * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -4389,26 +4434,26 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuDoubleComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuDoubleComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, mu0, mu0_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *x0_pointerData = initPointerData(env, x0);
     if (x0_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x0_native = (cuDoubleComplex*)x0_pointerData->getPointer(env);
+    x0_native = (cuDoubleComplex *)x0_pointerData->getPointer(env);
     maxite_native = (int)maxite;
     tol_native = (double)tol;
     PointerData *mu_pointerData = initPointerData(env, mu);
@@ -4416,22 +4461,22 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    mu_native = (cuDoubleComplex*)mu_pointerData->getPointer(env);
+    mu_native = (cuDoubleComplex *)mu_pointerData->getPointer(env);
     PointerData *x_pointerData = initPointerData(env, x);
     if (x_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    x_native = (cuDoubleComplex*)x_pointerData->getPointer(env);
+    x_native = (cuDoubleComplex *)x_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsreigvsiHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, tol_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -4450,7 +4495,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // mu0 is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, x0))
     {
@@ -4473,8 +4518,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
     if (!releasePointerData(env, x_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4545,39 +4589,39 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiNati
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     float mu0_native = 0.0f;
-    float* x0_native;
+    float * x0_native = NULL;
     int maxite_native = 0;
     float eps_native = 0.0f;
-    float* mu_native;
-    float* x_native;
+    float * mu_native = NULL;
+    float * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (float*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
+    csrValA_native = (float *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
     mu0_native = (float)mu0;
-    x0_native = (float*)getPointer(env, x0);
+    x0_native = (float *)getPointer(env, x0);
     maxite_native = (int)maxite;
     eps_native = (float)eps;
-    mu_native = (float*)getPointer(env, mu);
-    x_native = (float*)getPointer(env, x);
+    mu_native = (float *)getPointer(env, mu);
+    x_native = (float *)getPointer(env, x);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsreigvsi(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, eps_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
@@ -4589,8 +4633,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiNati
     // x is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4652,39 +4695,39 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiNati
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     double mu0_native = 0.0;
-    double* x0_native;
+    double * x0_native = NULL;
     int maxite_native = 0;
     double eps_native = 0.0;
-    double* mu_native;
-    double* x_native;
+    double * mu_native = NULL;
+    double * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (double*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
+    csrValA_native = (double *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
     mu0_native = (double)mu0;
-    x0_native = (double*)getPointer(env, x0);
+    x0_native = (double *)getPointer(env, x0);
     maxite_native = (int)maxite;
     eps_native = (double)eps;
-    mu_native = (double*)getPointer(env, mu);
-    x_native = (double*)getPointer(env, x);
+    mu_native = (double *)getPointer(env, mu);
+    x_native = (double *)getPointer(env, x);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsreigvsi(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, eps_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
@@ -4696,8 +4739,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiNati
     // x is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4763,43 +4805,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiNati
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuComplex mu0_native;
-    cuComplex* x0_native;
+    cuComplex * x0_native = NULL;
     int maxite_native = 0;
     float eps_native = 0.0f;
-    cuComplex* mu_native;
-    cuComplex* x_native;
+    cuComplex * mu_native = NULL;
+    cuComplex * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (cuComplex*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
+    csrValA_native = (cuComplex *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
     if (!initNative(env, mu0, mu0_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    x0_native = (cuComplex*)getPointer(env, x0);
+    x0_native = (cuComplex *)getPointer(env, x0);
     maxite_native = (int)maxite;
     eps_native = (float)eps;
-    mu_native = (cuComplex*)getPointer(env, mu);
-    x_native = (cuComplex*)getPointer(env, x);
+    mu_native = (cuComplex *)getPointer(env, mu);
+    x_native = (cuComplex *)getPointer(env, x);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsreigvsi(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, eps_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
-    if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // mu0 is read-only
     // x0 is a native pointer
     // maxite is primitive
     // eps is primitive
@@ -4807,8 +4849,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiNati
     // x is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4874,43 +4915,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiNati
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuDoubleComplex mu0_native;
-    cuDoubleComplex* x0_native;
+    cuDoubleComplex * x0_native = NULL;
     int maxite_native = 0;
     double eps_native = 0.0;
-    cuDoubleComplex* mu_native;
-    cuDoubleComplex* x_native;
+    cuDoubleComplex * mu_native = NULL;
+    cuDoubleComplex * x_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
     m_native = (int)m;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (cuDoubleComplex*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
+    csrValA_native = (cuDoubleComplex *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
     if (!initNative(env, mu0, mu0_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    x0_native = (cuDoubleComplex*)getPointer(env, x0);
+    x0_native = (cuDoubleComplex *)getPointer(env, x0);
     maxite_native = (int)maxite;
     eps_native = (double)eps;
-    mu_native = (cuDoubleComplex*)getPointer(env, mu);
-    x_native = (cuDoubleComplex*)getPointer(env, x);
+    mu_native = (cuDoubleComplex *)getPointer(env, mu);
+    x_native = (cuDoubleComplex *)getPointer(env, x);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsreigvsi(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, mu0_native, x0_native, maxite_native, eps_native, mu_native, x_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
-    if (!releaseNative(env, mu0_native, mu0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // mu0 is read-only
     // x0 is a native pointer
     // maxite is primitive
     // eps is primitive
@@ -4918,8 +4959,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiNati
     // x is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -4979,12 +5019,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuComplex left_bottom_corner_native;
     cuComplex right_upper_corner_native;
-    int* num_eigs_native;
+    int * num_eigs_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -4996,19 +5036,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (float*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (float *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, left_bottom_corner, left_bottom_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!initNative(env, right_upper_corner, right_upper_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *num_eigs_pointerData = initPointerData(env, num_eigs);
@@ -5016,16 +5056,16 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    num_eigs_native = (int*)num_eigs_pointerData->getPointer(env);
+    num_eigs_native = (int *)num_eigs_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsreigsHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, left_bottom_corner_native, right_upper_corner_native, num_eigs_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -5044,8 +5084,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // left_bottom_corner is read-only
+    // right_upper_corner is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
@@ -5054,8 +5094,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
     if (!releasePointerData(env, num_eigs_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5114,12 +5153,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuDoubleComplex left_bottom_corner_native;
     cuDoubleComplex right_upper_corner_native;
-    int* num_eigs_native;
+    int * num_eigs_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5131,19 +5170,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (double*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (double *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, left_bottom_corner, left_bottom_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!initNative(env, right_upper_corner, right_upper_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *num_eigs_pointerData = initPointerData(env, num_eigs);
@@ -5151,16 +5190,16 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    num_eigs_native = (int*)num_eigs_pointerData->getPointer(env);
+    num_eigs_native = (int *)num_eigs_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsreigsHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, left_bottom_corner_native, right_upper_corner_native, num_eigs_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -5179,8 +5218,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // left_bottom_corner is read-only
+    // right_upper_corner is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
@@ -5189,8 +5228,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
     if (!releasePointerData(env, num_eigs_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5249,12 +5287,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuComplex left_bottom_corner_native;
     cuComplex right_upper_corner_native;
-    int* num_eigs_native;
+    int * num_eigs_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5266,19 +5304,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, left_bottom_corner, left_bottom_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!initNative(env, right_upper_corner, right_upper_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *num_eigs_pointerData = initPointerData(env, num_eigs);
@@ -5286,16 +5324,16 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    num_eigs_native = (int*)num_eigs_pointerData->getPointer(env);
+    num_eigs_native = (int *)num_eigs_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsreigsHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, left_bottom_corner_native, right_upper_corner_native, num_eigs_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -5314,8 +5352,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // left_bottom_corner is read-only
+    // right_upper_corner is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
@@ -5324,8 +5362,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
     if (!releasePointerData(env, num_eigs_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5384,12 +5421,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     int m_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     cuDoubleComplex left_bottom_corner_native;
     cuDoubleComplex right_upper_corner_native;
-    int* num_eigs_native;
+    int * num_eigs_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5401,19 +5438,19 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrValA_native = (cuDoubleComplex*)csrValA_pointerData->getPointer(env);
+    csrValA_native = (cuDoubleComplex *)csrValA_pointerData->getPointer(env);
     PointerData *csrRowPtrA_pointerData = initPointerData(env, csrRowPtrA);
     if (csrRowPtrA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     if (!initNative(env, left_bottom_corner, left_bottom_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     if (!initNative(env, right_upper_corner, right_upper_corner_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
     PointerData *num_eigs_pointerData = initPointerData(env, num_eigs);
@@ -5421,16 +5458,16 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    num_eigs_native = (int*)num_eigs_pointerData->getPointer(env);
+    num_eigs_native = (int *)num_eigs_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsreigsHost(handle_native, m_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, left_bottom_corner_native, right_upper_corner_native, num_eigs_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrValA))
     {
@@ -5449,8 +5486,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
         cudaDeviceSynchronize();
     }
     if (!releasePointerData(env, csrColIndA_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, left_bottom_corner_native, left_bottom_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    if (!releaseNative(env, right_upper_corner_native, right_upper_corner)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // left_bottom_corner is read-only
+    // right_upper_corner is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, num_eigs))
     {
@@ -5459,8 +5496,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
     if (!releasePointerData(env, num_eigs_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5511,9 +5547,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHost
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    int* p_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * p_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5525,28 +5561,28 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrsymrcmHost(handle_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -5567,8 +5603,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHost
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5619,9 +5654,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHost
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    int* p_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * p_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5633,28 +5668,28 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrsymmdqHost(handle_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -5675,8 +5710,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHost
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5727,9 +5761,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHost
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    int* p_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * p_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5741,28 +5775,28 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHost
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrsymamdHost(handle_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -5783,8 +5817,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHost
     if (!releasePointerData(env, p_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5843,11 +5876,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    int* p_native;
-    int* q_native;
-    size_t bufferSizeInBytes_native = 0;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * p_native = NULL;
+    int * q_native = NULL;
+    size_t bufferSizeInBytes_native;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5860,36 +5893,36 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *q_pointerData = initPointerData(env, q);
     if (q_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    q_native = (int*)q_pointerData->getPointer(env);
-    // bufferSizeInBytes is set here
+    q_native = (int *)q_pointerData->getPointer(env);
+    // bufferSizeInBytes is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrperm_bufferSizeHost(handle_native, m_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native, q_native, &bufferSizeInBytes_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -5917,8 +5950,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
     if (!set(env, bufferSizeInBytes, 0, (jlong)bufferSizeInBytes_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -5979,12 +6011,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrpermHostNa
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    int* p_native;
-    int* q_native;
-    int* map_native;
-    void* pBuffer_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    int * p_native = NULL;
+    int * q_native = NULL;
+    int * map_native = NULL;
+    void * pBuffer_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -5997,47 +6029,47 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrpermHostNa
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrRowPtrA_native = (int*)csrRowPtrA_pointerData->getPointer(env);
+    csrRowPtrA_native = (int *)csrRowPtrA_pointerData->getPointer(env);
     PointerData *csrColIndA_pointerData = initPointerData(env, csrColIndA);
     if (csrColIndA_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    csrColIndA_native = (int*)csrColIndA_pointerData->getPointer(env);
+    csrColIndA_native = (int *)csrColIndA_pointerData->getPointer(env);
     PointerData *p_pointerData = initPointerData(env, p);
     if (p_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    p_native = (int*)p_pointerData->getPointer(env);
+    p_native = (int *)p_pointerData->getPointer(env);
     PointerData *q_pointerData = initPointerData(env, q);
     if (q_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    q_native = (int*)q_pointerData->getPointer(env);
+    q_native = (int *)q_pointerData->getPointer(env);
     PointerData *map_pointerData = initPointerData(env, map);
     if (map_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    map_native = (int*)map_pointerData->getPointer(env);
+    map_native = (int *)map_pointerData->getPointer(env);
     PointerData *pBuffer_pointerData = initPointerData(env, pBuffer);
     if (pBuffer_pointerData == NULL)
     {
         return JCUSOLVER_STATUS_INTERNAL_ERROR;
     }
-    pBuffer_native = (void*)pBuffer_pointerData->getPointer(env);
+    pBuffer_native = (void *)pBuffer_pointerData->getPointer(env);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrpermHost(handle_native, m_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, p_native, q_native, map_native, pBuffer_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // If the PointerData is not backed by native memory, then this call has to block
     if (!isPointerBackedByNativeMemory(env, csrRowPtrA))
     {
@@ -6076,8 +6108,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrpermHostNa
     if (!releasePointerData(env, pBuffer_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6104,7 +6135,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateCsrqrInf
     csrqrInfo_t info_native;
 
     // Obtain native variable values
-    // info is initialized here
+    // info is write-only
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCreateCsrqrInfo(&info_native);
@@ -6113,8 +6144,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateCsrqrInf
     setNativePointerValue(env, info, (jlong)info_native);
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6141,11 +6171,10 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyCsrqrIn
     cusolverStatus_t jniResult_native = cusolverSpDestroyCsrqrInfo(info_native);
 
     // Write back native variable values
-    // info is destroyed here
+    // info is read-only
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6191,8 +6220,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrqrAnalysis
     int n_native = 0;
     int nnzA_native = 0;
     cusparseMatDescr_t descrA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
     csrqrInfo_t info_native;
 
     // Obtain native variable values
@@ -6201,26 +6230,25 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrqrAnalysis
     n_native = (int)n;
     nnzA_native = (int)nnzA;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpXcsrqrAnalysisBatched(handle_native, m_native, n_native, nnzA_native, descrA_native, csrRowPtrA_native, csrColIndA_native, info_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
-    // info is a native pointer object
+    // info is read-only
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6282,13 +6310,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrBufferIn
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
+    float * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    size_t* internalDataInBytes_native;
-    size_t* workspaceInBytes_native;
+    size_t * internalDataInBytes_native = NULL;
+    size_t * workspaceInBytes_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6296,34 +6324,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrBufferIn
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (float*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
+    csrVal_native = (float *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    internalDataInBytes_native = (size_t*)getPointer(env, internalDataInBytes);
-    workspaceInBytes_native = (size_t*)getPointer(env, workspaceInBytes);
+    internalDataInBytes_native = (size_t *)getPointer(env, internalDataInBytes);
+    workspaceInBytes_native = (size_t *)getPointer(env, workspaceInBytes);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrqrBufferInfoBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, batchSize_native, info_native, internalDataInBytes_native, workspaceInBytes_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // internalDataInBytes is a native pointer
     // workspaceInBytes is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6385,13 +6412,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrBufferIn
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
+    double * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    size_t* internalDataInBytes_native;
-    size_t* workspaceInBytes_native;
+    size_t * internalDataInBytes_native = NULL;
+    size_t * workspaceInBytes_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6399,34 +6426,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrBufferIn
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (double*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
+    csrVal_native = (double *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    internalDataInBytes_native = (size_t*)getPointer(env, internalDataInBytes);
-    workspaceInBytes_native = (size_t*)getPointer(env, workspaceInBytes);
+    internalDataInBytes_native = (size_t *)getPointer(env, internalDataInBytes);
+    workspaceInBytes_native = (size_t *)getPointer(env, workspaceInBytes);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrqrBufferInfoBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, batchSize_native, info_native, internalDataInBytes_native, workspaceInBytes_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // internalDataInBytes is a native pointer
     // workspaceInBytes is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6488,13 +6514,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrBufferIn
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
+    cuComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    size_t* internalDataInBytes_native;
-    size_t* workspaceInBytes_native;
+    size_t * internalDataInBytes_native = NULL;
+    size_t * workspaceInBytes_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6502,34 +6528,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrBufferIn
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
+    csrVal_native = (cuComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    internalDataInBytes_native = (size_t*)getPointer(env, internalDataInBytes);
-    workspaceInBytes_native = (size_t*)getPointer(env, workspaceInBytes);
+    internalDataInBytes_native = (size_t *)getPointer(env, internalDataInBytes);
+    workspaceInBytes_native = (size_t *)getPointer(env, workspaceInBytes);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrqrBufferInfoBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, batchSize_native, info_native, internalDataInBytes_native, workspaceInBytes_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // internalDataInBytes is a native pointer
     // workspaceInBytes is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6591,13 +6616,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrBufferIn
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrVal_native;
-    int* csrRowPtr_native;
-    int* csrColInd_native;
+    cuDoubleComplex * csrVal_native = NULL;
+    int * csrRowPtr_native = NULL;
+    int * csrColInd_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    size_t* internalDataInBytes_native;
-    size_t* workspaceInBytes_native;
+    size_t * internalDataInBytes_native = NULL;
+    size_t * workspaceInBytes_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6605,34 +6630,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrBufferIn
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrVal_native = (cuDoubleComplex*)getPointer(env, csrVal);
-    csrRowPtr_native = (int*)getPointer(env, csrRowPtr);
-    csrColInd_native = (int*)getPointer(env, csrColInd);
+    csrVal_native = (cuDoubleComplex *)getPointer(env, csrVal);
+    csrRowPtr_native = (int *)getPointer(env, csrRowPtr);
+    csrColInd_native = (int *)getPointer(env, csrColInd);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    internalDataInBytes_native = (size_t*)getPointer(env, internalDataInBytes);
-    workspaceInBytes_native = (size_t*)getPointer(env, workspaceInBytes);
+    internalDataInBytes_native = (size_t *)getPointer(env, internalDataInBytes);
+    workspaceInBytes_native = (size_t *)getPointer(env, workspaceInBytes);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrqrBufferInfoBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrVal_native, csrRowPtr_native, csrColInd_native, batchSize_native, info_native, internalDataInBytes_native, workspaceInBytes_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrVal is a native pointer
     // csrRowPtr is a native pointer
     // csrColInd is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // internalDataInBytes is a native pointer
     // workspaceInBytes is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6699,14 +6723,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrsvBatche
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    float* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    float* b_native;
-    float* x_native;
+    float * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    float * b_native = NULL;
+    float * x_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    void* pBuffer_native;
+    void * pBuffer_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6714,36 +6738,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrsvBatche
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (float*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
-    b_native = (float*)getPointer(env, b);
-    x_native = (float*)getPointer(env, x);
+    csrValA_native = (float *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
+    b_native = (float *)getPointer(env, b);
+    x_native = (float *)getPointer(env, x);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    pBuffer_native = (void*)getPointer(env, pBuffer);
+    pBuffer_native = (void *)getPointer(env, pBuffer);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpScsrqrsvBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, x_native, batchSize_native, info_native, pBuffer_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
     // b is a native pointer
     // x is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // pBuffer is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6810,14 +6833,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrsvBatche
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    double* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    double* b_native;
-    double* x_native;
+    double * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    double * b_native = NULL;
+    double * x_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    void* pBuffer_native;
+    void * pBuffer_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6825,36 +6848,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrsvBatche
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (double*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
-    b_native = (double*)getPointer(env, b);
-    x_native = (double*)getPointer(env, x);
+    csrValA_native = (double *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
+    b_native = (double *)getPointer(env, b);
+    x_native = (double *)getPointer(env, x);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    pBuffer_native = (void*)getPointer(env, pBuffer);
+    pBuffer_native = (void *)getPointer(env, pBuffer);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpDcsrqrsvBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, x_native, batchSize_native, info_native, pBuffer_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
     // b is a native pointer
     // x is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // pBuffer is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -6921,14 +6943,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrsvBatche
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuComplex* b_native;
-    cuComplex* x_native;
+    cuComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuComplex * b_native = NULL;
+    cuComplex * x_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    void* pBuffer_native;
+    void * pBuffer_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -6936,36 +6958,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrsvBatche
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (cuComplex*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
-    b_native = (cuComplex*)getPointer(env, b);
-    x_native = (cuComplex*)getPointer(env, x);
+    csrValA_native = (cuComplex *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
+    b_native = (cuComplex *)getPointer(env, b);
+    x_native = (cuComplex *)getPointer(env, x);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    pBuffer_native = (void*)getPointer(env, pBuffer);
+    pBuffer_native = (void *)getPointer(env, pBuffer);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpCcsrqrsvBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, x_native, batchSize_native, info_native, pBuffer_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
     // b is a native pointer
     // x is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // pBuffer is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
 
@@ -7032,14 +7053,14 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrsvBatche
     int n_native = 0;
     int nnz_native = 0;
     cusparseMatDescr_t descrA_native;
-    cuDoubleComplex* csrValA_native;
-    int* csrRowPtrA_native;
-    int* csrColIndA_native;
-    cuDoubleComplex* b_native;
-    cuDoubleComplex* x_native;
+    cuDoubleComplex * csrValA_native = NULL;
+    int * csrRowPtrA_native = NULL;
+    int * csrColIndA_native = NULL;
+    cuDoubleComplex * b_native = NULL;
+    cuDoubleComplex * x_native = NULL;
     int batchSize_native = 0;
     csrqrInfo_t info_native;
-    void* pBuffer_native;
+    void * pBuffer_native = NULL;
 
     // Obtain native variable values
     handle_native = (cusolverSpHandle_t)getNativePointerValue(env, handle);
@@ -7047,37 +7068,35 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrsvBatche
     n_native = (int)n;
     nnz_native = (int)nnz;
     descrA_native = (cusparseMatDescr_t)getNativePointerValue(env, descrA);
-    csrValA_native = (cuDoubleComplex*)getPointer(env, csrValA);
-    csrRowPtrA_native = (int*)getPointer(env, csrRowPtrA);
-    csrColIndA_native = (int*)getPointer(env, csrColIndA);
-    b_native = (cuDoubleComplex*)getPointer(env, b);
-    x_native = (cuDoubleComplex*)getPointer(env, x);
+    csrValA_native = (cuDoubleComplex *)getPointer(env, csrValA);
+    csrRowPtrA_native = (int *)getPointer(env, csrRowPtrA);
+    csrColIndA_native = (int *)getPointer(env, csrColIndA);
+    b_native = (cuDoubleComplex *)getPointer(env, b);
+    x_native = (cuDoubleComplex *)getPointer(env, x);
     batchSize_native = (int)batchSize;
     info_native = (csrqrInfo_t)getNativePointerValue(env, info);
-    pBuffer_native = (void*)getPointer(env, pBuffer);
+    pBuffer_native = (void *)getPointer(env, pBuffer);
 
     // Native function call
     cusolverStatus_t jniResult_native = cusolverSpZcsrqrsvBatched(handle_native, m_native, n_native, nnz_native, descrA_native, csrValA_native, csrRowPtrA_native, csrColIndA_native, b_native, x_native, batchSize_native, info_native, pBuffer_native);
 
     // Write back native variable values
-    // handle is a native pointer object
+    // handle is read-only
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is a native pointer object
+    // descrA is read-only
     // csrValA is a native pointer
     // csrRowPtrA is a native pointer
     // csrColIndA is a native pointer
     // b is a native pointer
     // x is a native pointer
     // batchSize is primitive
-    // info is a native pointer object
+    // info is read-only
     // pBuffer is a native pointer
 
     // Return the result
-    jint jniResult;
-    jniResult = (jint)jniResult_native;
+    jint jniResult = (jint)jniResult_native;
     return jniResult;
 }
-
 

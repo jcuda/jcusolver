@@ -47,5 +47,17 @@ extern jfieldID cuComplex_y; // float
 extern jfieldID cuDoubleComplex_x; // double
 extern jfieldID cuDoubleComplex_y; // double
 
+// Initialization / release of handles
+bool initNative(JNIEnv *env, jobject &handle, cusolverDnHandle_t &handle_native, bool fill);
+bool releaseNative(JNIEnv *env, cusolverDnHandle_t &handle_native, jobject &handle, bool writeBack);
+bool initNative(JNIEnv *env, jobject &handle, cusolverDnHandle_t* &handle_native, bool fill);
+bool releaseNative(JNIEnv *env, cusolverDnHandle_t* &handle_native, jobject &handle, bool writeBack);
+
+// Initialization / release of streams
+bool initNative(JNIEnv *env, jobject &stream, cudaStream_t &stream_native, bool fill);
+bool releaseNative(JNIEnv *env, cudaStream_t &stream_native, jobject &stream, bool writeBack);
+bool initNative(JNIEnv *env, jobject &stream, cudaStream_t* &stream_native, bool fill);
+bool releaseNative(JNIEnv *env, cudaStream_t* &stream_native, jobject &stream, bool writeBack);
+
 
 #endif

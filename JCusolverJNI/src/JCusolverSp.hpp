@@ -2,7 +2,7 @@
  * JCusolver - Java bindings for CUSOLVER, the NVIDIA CUDA solver
  * library, to be used with JCuda
  *
- * Copyright (c) 2010-2015 Marco Hutter - http://www.jcuda.org
+ * Copyright (c) 2010-2016 Marco Hutter - http://www.jcuda.org
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation

@@ -33,8 +33,8 @@ import jcuda.runtime.JCuda;
 /**
  * Java bindings for CUSOLVER, the NVIDIA CUDA solver library. <br />
  * <br />
- * Note that this class is only intended for setting managing common
- * settings of the solver library, like logging and exception handling.
+ * Note that this class is only intended for managing common settings 
+ * of the solver library, like logging and exception handling.
  * The actual implementations are in {@link JCusolverDn}, {@link JCusolverSp}
  * and {@link JCusolverRf}.  
  * <br />

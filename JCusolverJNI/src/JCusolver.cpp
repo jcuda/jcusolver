@@ -87,6 +87,81 @@ JNIEXPORT void JNICALL Java_jcuda_jcusolver_JCusolver_setLogLevelNative
 
 
 
+// Initialization / release of handles
+
+bool initNative(JNIEnv *env, jobject &handle, cusolverDnHandle_t &handle_native, bool fill)
+{
+    if (fill)
+    {
+        handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    }
+    return true;
+}
+
+bool releaseNative(JNIEnv *env, cusolverDnHandle_t &handle_native, jobject &handle, bool writeBack)
+{
+    if (handle != NULL && writeBack)
+    {
+        setNativePointerValue(env, handle, (jlong)handle_native);
+    }
+    return true;
+}
+
+bool initNative(JNIEnv *env, jobject &handle, cusolverDnHandle_t* &handle_native, bool fill)
+{
+    handle_native = new cusolverDnHandle_t[1];
+    initNative(env, handle, handle_native[0], fill);
+    return true;
+}
+
+bool releaseNative(JNIEnv *env, cusolverDnHandle_t* &handle_native, jobject &handle, bool writeBack)
+{
+    if (handle_native != NULL)
+    {
+        releaseNative(env, handle_native[0], handle, writeBack);
+        delete[] handle_native;
+    }
+    return true;
+}
+
+
+
+// Initialization / release of streams
+
+bool initNative(JNIEnv *env, jobject &stream, cudaStream_t &stream_native, bool fill)
+{
+    if (fill)
+    {
+        stream_native = (cudaStream_t)getNativePointerValue(env, stream);
+    }
+    return true;
+}
+
+bool releaseNative(JNIEnv *env, cudaStream_t &stream_native, jobject &stream, bool writeBack)
+{
+    if (stream != NULL && writeBack)
+    {
+        setNativePointerValue(env, stream, (jlong)stream_native);
+    }
+    return true;
+}
+
+bool initNative(JNIEnv *env, jobject &stream, cudaStream_t* &stream_native, bool fill)
+{
+    stream_native = new cudaStream_t[1];
+    initNative(env, stream, stream_native[0], fill);
+    return true;
+}
+
+bool releaseNative(JNIEnv *env, cudaStream_t* &stream_native, jobject &stream, bool writeBack)
+{
+    if (stream_native != NULL)
+    {
+        releaseNative(env, stream_native[0], stream, writeBack);
+        delete[] stream_native;
+    }
+    return true;
+}
 
 
 
