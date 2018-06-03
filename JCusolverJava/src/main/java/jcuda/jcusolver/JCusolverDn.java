@@ -370,6 +370,199 @@ public class JCusolverDn
         Pointer devInfo);
 
 
+    /** batched Cholesky factorization and its solver */
+    public static int cusolverDnSpotrfBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnSpotrfBatchedNative(handle, uplo, n, Aarray, lda, infoArray, batchSize));
+    }
+    private static native int cusolverDnSpotrfBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize);
+
+
+    public static int cusolverDnDpotrfBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnDpotrfBatchedNative(handle, uplo, n, Aarray, lda, infoArray, batchSize));
+    }
+    private static native int cusolverDnDpotrfBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize);
+
+
+    public static int cusolverDnCpotrfBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnCpotrfBatchedNative(handle, uplo, n, Aarray, lda, infoArray, batchSize));
+    }
+    private static native int cusolverDnCpotrfBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize);
+
+
+    public static int cusolverDnZpotrfBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnZpotrfBatchedNative(handle, uplo, n, Aarray, lda, infoArray, batchSize));
+    }
+    private static native int cusolverDnZpotrfBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer Aarray, 
+        int lda, 
+        Pointer infoArray, 
+        int batchSize);
+
+
+    public static int cusolverDnSpotrsBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnSpotrsBatchedNative(handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize));
+    }
+    private static native int cusolverDnSpotrsBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize);
+
+
+    public static int cusolverDnDpotrsBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnDpotrsBatchedNative(handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize));
+    }
+    private static native int cusolverDnDpotrsBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize);
+
+
+    public static int cusolverDnCpotrsBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnCpotrsBatchedNative(handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize));
+    }
+    private static native int cusolverDnCpotrsBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize);
+
+
+    public static int cusolverDnZpotrsBatched(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnZpotrsBatchedNative(handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize));
+    }
+    private static native int cusolverDnZpotrsBatchedNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, /** only support rhs = 1*/
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        Pointer d_info, 
+        int batchSize);
+
+
     /** LU Factorization */
     public static int cusolverDnSgetrf_bufferSize(
         cusolverDnHandle handle, 
