@@ -127,7 +127,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * -------- GPU linear solver based on LU factorization
+     * -------- GPU linear solver by LU factorization
      *       solve A*x = b, A can be singular 
      * [ls] stands for linear solve
      * [v] stands for vector
@@ -260,7 +260,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * -------- GPU linear solver based on QR factorization
+     * -------- GPU linear solver by QR factorization
      *       solve A*x = b, A can be singular 
      * [ls] stands for linear solve
      * [v] stands for vector
@@ -393,7 +393,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * -------- CPU linear solver based on QR factorization
+     * -------- CPU linear solver by QR factorization
      *       solve A*x = b, A can be singular 
      * [ls] stands for linear solve
      * [v] stands for vector
@@ -526,7 +526,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * -------- CPU linear solver based on Cholesky factorization
+     * -------- CPU linear solver by Cholesky factorization
      *       solve A*x = b, A can be singular 
      * [ls] stands for linear solve
      * [v] stands for vector
@@ -662,7 +662,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * -------- GPU linear solver based on Cholesky factorization
+     * -------- GPU linear solver by Cholesky factorization
      *       solve A*x = b, A can be singular 
      * [ls] stands for linear solve
      * [v] stands for vector
@@ -806,7 +806,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * ----------- CPU least square solver based on QR factorization
+     * ----------- CPU least square solver by QR factorization
      *       solve min|b - A*x| 
      * [lsq] stands for least square
      * [v] stands for vector
@@ -955,7 +955,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * --------- CPU eigenvalue solver based on shift inverse
+     * --------- CPU eigenvalue solver by shift inverse
      *      solve A*x = lambda * x 
      *   where lambda is the eigenvalue nearest mu0.
      * [eig] stands for eigenvalue solver
@@ -1096,7 +1096,7 @@ public class JCusolverSp
 
     /**
      * <pre>
-     * --------- GPU eigenvalue solver based on shift inverse
+     * --------- GPU eigenvalue solver by shift inverse
      *      solve A*x = lambda * x 
      *   where lambda is the eigenvalue nearest mu0.
      * [eig] stands for eigenvalue solver
@@ -1375,7 +1375,7 @@ public class JCusolverSp
     /**
      * <pre>
      * --------- CPU symmdq
-     *   Symmetric minimum degree algorithm based on quotient graph
+     *   Symmetric minimum degree algorithm by quotient graph
      *
      * </pre>
      */
@@ -1403,7 +1403,7 @@ public class JCusolverSp
     /**
      * <pre>
      * --------- CPU symmdq
-     *   Symmetric Approximate minimum degree algorithm based on quotient graph
+     *   Symmetric Approximate minimum degree algorithm by quotient graph
      *
      * </pre>
      */
@@ -1426,6 +1426,135 @@ public class JCusolverSp
         Pointer csrRowPtrA, 
         Pointer csrColIndA, 
         Pointer p);
+
+
+    /** --------- CPU metis 
+     *   symmetric reordering 
+     */
+    public static int cusolverSpXcsrmetisndHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        long[] options, 
+        Pointer p)
+    {
+        return checkResult(cusolverSpXcsrmetisndHostNative(handle, n, nnzA, descrA, csrRowPtrA, csrColIndA, options, p));
+    }
+    private static native int cusolverSpXcsrmetisndHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnzA, 
+        cusparseMatDescr descrA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        long[] options, 
+        Pointer p);
+
+
+    /** --------- CPU zfd
+     *  Zero free diagonal reordering
+     */
+    public static int cusolverSpScsrzfdHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz)
+    {
+        return checkResult(cusolverSpScsrzfdHostNative(handle, n, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, P, numnz));
+    }
+    private static native int cusolverSpScsrzfdHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz);
+
+
+    public static int cusolverSpDcsrzfdHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz)
+    {
+        return checkResult(cusolverSpDcsrzfdHostNative(handle, n, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, P, numnz));
+    }
+    private static native int cusolverSpDcsrzfdHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz);
+
+
+    public static int cusolverSpCcsrzfdHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz)
+    {
+        return checkResult(cusolverSpCcsrzfdHostNative(handle, n, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, P, numnz));
+    }
+    private static native int cusolverSpCcsrzfdHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz);
+
+
+    public static int cusolverSpZcsrzfdHost(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz)
+    {
+        return checkResult(cusolverSpZcsrzfdHostNative(handle, n, nnz, descrA, csrValA, csrRowPtrA, csrColIndA, P, numnz));
+    }
+    private static native int cusolverSpZcsrzfdHostNative(
+        cusolverSpHandle handle, 
+        int n, 
+        int nnz, 
+        cusparseMatDescr descrA, 
+        Pointer csrValA, 
+        Pointer csrRowPtrA, 
+        Pointer csrColIndA, 
+        Pointer P, 
+        Pointer numnz);
 
 
     /**
