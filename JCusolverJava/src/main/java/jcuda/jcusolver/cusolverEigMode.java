@@ -33,7 +33,7 @@ package jcuda.jcusolver;
 public class cusolverEigMode
 {
     public static final int CUSOLVER_EIG_MODE_NOVECTOR = 0;
-    public static final int CUSOLVER_EIG_MODE_VECTOR = 2;
+    public static final int CUSOLVER_EIG_MODE_VECTOR = 1;
 
     /**
      * Private constructor to prevent instantiation
