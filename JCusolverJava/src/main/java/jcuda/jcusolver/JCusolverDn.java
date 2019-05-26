@@ -563,6 +563,528 @@ public class JCusolverDn
         int batchSize);
 
 
+    /** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM)  */
+    public static int cusolverDnSpotri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnSpotri_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnSpotri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnDpotri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnDpotri_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnDpotri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnCpotri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnCpotri_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnCpotri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnZpotri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnZpotri_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnZpotri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnSpotri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnSpotriNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnSpotriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnDpotri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnDpotriNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnDpotriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnCpotri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnCpotriNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnCpotriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnZpotri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnZpotriNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnZpotriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnStrtri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnStrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
+    }
+    private static native int cusolverDnStrtri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnDtrtri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnDtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
+    }
+    private static native int cusolverDnDtrtri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnCtrtri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnCtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
+    }
+    private static native int cusolverDnCtrtri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnZtrtri_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnZtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
+    }
+    private static native int cusolverDnZtrtri_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnStrtri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnStrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnStrtriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnDtrtri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnDtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnDtrtriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnCtrtri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnCtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnCtrtriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnZtrtri(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnZtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnZtrtriNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int diag, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    /** lauum, auxiliar routine for s.p.d matrix inversion */
+    public static int cusolverDnSlauum_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnSlauum_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnSlauum_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnDlauum_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnDlauum_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnDlauum_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnClauum_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnClauum_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnClauum_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnZlauum_bufferSize(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnZlauum_bufferSizeNative(handle, uplo, n, A, lda, lwork));
+    }
+    private static native int cusolverDnZlauum_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        int[] lwork);
+
+
+    public static int cusolverDnSlauum(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnSlauumNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnSlauumNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnDlauum(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnDlauumNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnDlauumNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnClauum(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnClauumNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnClauumNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
+    public static int cusolverDnZlauum(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo)
+    {
+        return checkResult(cusolverDnZlauumNative(handle, uplo, n, A, lda, work, lwork, devInfo));
+    }
+    private static native int cusolverDnZlauumNative(
+        cusolverDnHandle handle, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer work, 
+        int lwork, 
+        Pointer devInfo);
+
+
     /** LU Factorization */
     public static int cusolverDnSgetrf_bufferSize(
         cusolverDnHandle handle, 
@@ -3233,6 +3755,648 @@ public class JCusolverDn
         Pointer info);
 
 
+    /** standard selective symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+    public static int cusolverDnSsyevdx_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnSsyevdx_bufferSizeNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnSsyevdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnDsyevdx_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnDsyevdx_bufferSizeNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnDsyevdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnCheevdx_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnCheevdx_bufferSizeNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnCheevdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnZheevdx_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnZheevdx_bufferSizeNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnZheevdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnSsyevdx(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnSsyevdxNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnSsyevdxNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnDsyevdx(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnDsyevdxNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnDsyevdxNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnCheevdx(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnCheevdxNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnCheevdxNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnZheevdx(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnZheevdxNative(handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnZheevdxNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    /** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+    public static int cusolverDnSsygvdx_bufferSize(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnSsygvdx_bufferSizeNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnSsygvdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnDsygvdx_bufferSize(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnDsygvdx_bufferSizeNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnDsygvdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnChegvdx_bufferSize(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnChegvdx_bufferSizeNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnChegvdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnZhegvdx_bufferSize(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork)
+    {
+        return checkResult(cusolverDnZhegvdx_bufferSizeNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork));
+    }
+    private static native int cusolverDnZhegvdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        int[] lwork);
+
+
+    public static int cusolverDnSsygvdx(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnSsygvdxNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnSsygvdxNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnDsygvdx(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnDsygvdxNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnDsygvdxNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnChegvdx(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnChegvdxNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnChegvdxNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        float vl, 
+        float vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
+    public static int cusolverDnZhegvdx(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnZhegvdxNative(handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info));
+    }
+    private static native int cusolverDnZhegvdxNative(
+        cusolverDnHandle handle, 
+        int itype, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        int n, 
+        Pointer A, 
+        int lda, 
+        Pointer B, 
+        int ldb, 
+        double vl, 
+        double vu, 
+        int il, 
+        int iu, 
+        Pointer meig, 
+        Pointer W, 
+        Pointer work, 
+        int lwork, 
+        Pointer info);
+
+
     /** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
     public static int cusolverDnSsygvd_bufferSize(
         cusolverDnHandle handle, 
@@ -4938,6 +6102,375 @@ public class JCusolverDn
         int lwork, 
         Pointer info, 
         gesvdjInfo params);
+
+
+    /** batched approximate SVD */
+    public static int cusolverDnSgesvdaStridedBatched_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnSgesvdaStridedBatched_bufferSizeNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize));
+    }
+    private static native int cusolverDnSgesvdaStridedBatched_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize);
+
+
+    public static int cusolverDnDgesvdaStridedBatched_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnDgesvdaStridedBatched_bufferSizeNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize));
+    }
+    private static native int cusolverDnDgesvdaStridedBatched_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize);
+
+
+    public static int cusolverDnCgesvdaStridedBatched_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnCgesvdaStridedBatched_bufferSizeNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize));
+    }
+    private static native int cusolverDnCgesvdaStridedBatched_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize);
+
+
+    public static int cusolverDnZgesvdaStridedBatched_bufferSize(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnZgesvdaStridedBatched_bufferSizeNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize));
+    }
+    private static native int cusolverDnZgesvdaStridedBatched_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        int[] lwork, 
+        int batchSize);
+
+
+    public static int cusolverDnSgesvdaStridedBatched(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnSgesvdaStridedBatchedNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize));
+    }
+    private static native int cusolverDnSgesvdaStridedBatchedNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize);
+
+
+    public static int cusolverDnDgesvdaStridedBatched(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnDgesvdaStridedBatchedNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize));
+    }
+    private static native int cusolverDnDgesvdaStridedBatchedNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize);
+
+
+    public static int cusolverDnCgesvdaStridedBatched(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnCgesvdaStridedBatchedNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize));
+    }
+    private static native int cusolverDnCgesvdaStridedBatchedNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize);
+
+
+    public static int cusolverDnZgesvdaStridedBatched(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize)
+    {
+        return checkResult(cusolverDnZgesvdaStridedBatchedNative(handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize));
+    }
+    private static native int cusolverDnZgesvdaStridedBatchedNative(
+        cusolverDnHandle handle, 
+        int jobz, 
+        int rank, 
+        int m, 
+        int n, 
+        Pointer d_A, 
+        int lda, 
+        long strideA, 
+        Pointer d_S, 
+        long strideS, 
+        Pointer d_U, 
+        int ldu, 
+        long strideU, 
+        Pointer d_V, 
+        int ldv, 
+        long strideV, 
+        Pointer d_work, 
+        int lwork, 
+        Pointer d_info, 
+        Pointer h_R_nrmF, 
+        int batchSize);
     
 
 }

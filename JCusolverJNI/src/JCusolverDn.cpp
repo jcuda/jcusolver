@@ -1030,562 +1030,2132 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotrsNative(J
 /** batched Cholesky factorization and its solver */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSpotrfBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject Aarray, jint lda, jobject infoArray, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	if (Aarray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnSpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (infoArray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnSpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (Aarray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnSpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (infoArray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnSpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnSpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
-		handle, uplo, n, Aarray, lda, infoArray, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
+        handle, uplo, n, Aarray, lda, infoArray, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	float** Aarray_native = NULL;
-	int lda_native = 0;
-	int * infoArray_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float** Aarray_native = NULL;
+    int lda_native = 0;
+    int * infoArray_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	Aarray_native = (float **)getPointer(env, Aarray);
-	lda_native = (int)lda;
-	infoArray_native = (int *)getPointer(env, infoArray);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    Aarray_native = (float **)getPointer(env, Aarray);
+    lda_native = (int)lda;
+    infoArray_native = (int *)getPointer(env, infoArray);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnSpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// Aarray is a native pointer
-	// lda is primitive
-	// infoArray is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // Aarray is a native pointer
+    // lda is primitive
+    // infoArray is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDpotrfBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject Aarray, jint lda, jobject infoArray, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	if (Aarray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnDpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (infoArray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnDpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (Aarray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnDpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (infoArray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnDpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnDpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
-		handle, uplo, n, Aarray, lda, infoArray, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
+        handle, uplo, n, Aarray, lda, infoArray, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	double** Aarray_native = NULL;
-	int lda_native = 0;
-	int * infoArray_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double** Aarray_native = NULL;
+    int lda_native = 0;
+    int * infoArray_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	Aarray_native = (double **)getPointer(env, Aarray);
-	lda_native = (int)lda;
-	infoArray_native = (int *)getPointer(env, infoArray);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    Aarray_native = (double **)getPointer(env, Aarray);
+    lda_native = (int)lda;
+    infoArray_native = (int *)getPointer(env, infoArray);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnDpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// Aarray is a native pointer
-	// lda is primitive
-	// infoArray is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // Aarray is a native pointer
+    // lda is primitive
+    // infoArray is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCpotrfBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject Aarray, jint lda, jobject infoArray, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	if (Aarray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnCpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (infoArray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnCpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (Aarray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnCpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (infoArray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnCpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnCpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
-		handle, uplo, n, Aarray, lda, infoArray, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
+        handle, uplo, n, Aarray, lda, infoArray, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	cuComplex** Aarray_native = NULL;
-	int lda_native = 0;
-	int * infoArray_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex** Aarray_native = NULL;
+    int lda_native = 0;
+    int * infoArray_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	Aarray_native = (cuComplex **)getPointer(env, Aarray);
-	lda_native = (int)lda;
-	infoArray_native = (int *)getPointer(env, infoArray);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    Aarray_native = (cuComplex **)getPointer(env, Aarray);
+    lda_native = (int)lda;
+    infoArray_native = (int *)getPointer(env, infoArray);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnCpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// Aarray is a native pointer
-	// lda is primitive
-	// infoArray is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // Aarray is a native pointer
+    // lda is primitive
+    // infoArray is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotrfBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject Aarray, jint lda, jobject infoArray, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	if (Aarray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnZpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (infoArray == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnZpotrfBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (Aarray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Aarray' is null for cusolverDnZpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (infoArray == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'infoArray' is null for cusolverDnZpotrfBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnZpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
-		handle, uplo, n, Aarray, lda, infoArray, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZpotrfBatched(handle=%p, uplo=%d, n=%d, Aarray=%p, lda=%d, infoArray=%p, batchSize=%d)\n",
+        handle, uplo, n, Aarray, lda, infoArray, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	cuDoubleComplex** Aarray_native = NULL;
-	int lda_native = 0;
-	int * infoArray_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex** Aarray_native = NULL;
+    int lda_native = 0;
+    int * infoArray_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	Aarray_native = (cuDoubleComplex **)getPointer(env, Aarray);
-	lda_native = (int)lda;
-	infoArray_native = (int *)getPointer(env, infoArray);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    Aarray_native = (cuDoubleComplex **)getPointer(env, Aarray);
+    lda_native = (int)lda;
+    infoArray_native = (int *)getPointer(env, infoArray);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnZpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZpotrfBatched(handle_native, uplo_native, n_native, Aarray_native, lda_native, infoArray_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// Aarray is a native pointer
-	// lda is primitive
-	// infoArray is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // Aarray is a native pointer
+    // lda is primitive
+    // infoArray is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSpotrsBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jint nrhs, jobject A, jint lda, jobject B, jint ldb, jobject d_info, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	if (A == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (B == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnSpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// ldb is primitive
-	if (d_info == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnSpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnSpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnSpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnSpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
-		handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
+        handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	int nrhs_native = 0;
-	float** A_native = NULL;
-	int lda_native = 0;
-	float** B_native = NULL;
-	int ldb_native = 0;
-	int * d_info_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    int nrhs_native = 0;
+    float** A_native = NULL;
+    int lda_native = 0;
+    float** B_native = NULL;
+    int ldb_native = 0;
+    int * d_info_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	nrhs_native = (int)nrhs;
-	A_native = (float **)getPointer(env, A);
-	lda_native = (int)lda;
-	B_native = (float **)getPointer(env, B);
-	ldb_native = (int)ldb;
-	d_info_native = (int *)getPointer(env, d_info);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    nrhs_native = (int)nrhs;
+    A_native = (float **)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (float **)getPointer(env, B);
+    ldb_native = (int)ldb;
+    d_info_native = (int *)getPointer(env, d_info);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnSpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	// A is a native pointer
-	// lda is primitive
-	// B is a native pointer
-	// ldb is primitive
-	// d_info is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // d_info is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDpotrsBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jint nrhs, jobject A, jint lda, jobject B, jint ldb, jobject d_info, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	if (A == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (B == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnDpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// ldb is primitive
-	if (d_info == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnDpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnDpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnDpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnDpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
-		handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
+        handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	int nrhs_native = 0;
-	double** A_native = NULL;
-	int lda_native = 0;
-	double** B_native = NULL;
-	int ldb_native = 0;
-	int * d_info_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    int nrhs_native = 0;
+    double** A_native = NULL;
+    int lda_native = 0;
+    double** B_native = NULL;
+    int ldb_native = 0;
+    int * d_info_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	nrhs_native = (int)nrhs;
-	A_native = (double **)getPointer(env, A);
-	lda_native = (int)lda;
-	B_native = (double **)getPointer(env, B);
-	ldb_native = (int)ldb;
-	d_info_native = (int *)getPointer(env, d_info);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    nrhs_native = (int)nrhs;
+    A_native = (double **)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (double **)getPointer(env, B);
+    ldb_native = (int)ldb;
+    d_info_native = (int *)getPointer(env, d_info);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnDpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	// A is a native pointer
-	// lda is primitive
-	// B is a native pointer
-	// ldb is primitive
-	// d_info is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // d_info is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCpotrsBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jint nrhs, jobject A, jint lda, jobject B, jint ldb, jobject d_info, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	if (A == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (B == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnCpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// ldb is primitive
-	if (d_info == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnCpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnCpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnCpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnCpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
-		handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
+        handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	int nrhs_native = 0;
-	cuComplex** A_native = NULL;
-	int lda_native = 0;
-	cuComplex** B_native = NULL;
-	int ldb_native = 0;
-	int * d_info_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    int nrhs_native = 0;
+    cuComplex** A_native = NULL;
+    int lda_native = 0;
+    cuComplex** B_native = NULL;
+    int ldb_native = 0;
+    int * d_info_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	nrhs_native = (int)nrhs;
-	A_native = (cuComplex **)getPointer(env, A);
-	lda_native = (int)lda;
-	B_native = (cuComplex **)getPointer(env, B);
-	ldb_native = (int)ldb;
-	d_info_native = (int *)getPointer(env, d_info);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    nrhs_native = (int)nrhs;
+    A_native = (cuComplex **)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuComplex **)getPointer(env, B);
+    ldb_native = (int)ldb;
+    d_info_native = (int *)getPointer(env, d_info);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnCpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	// A is a native pointer
-	// lda is primitive
-	// B is a native pointer
-	// ldb is primitive
-	// d_info is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // d_info is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotrsBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jint nrhs, jobject A, jint lda, jobject B, jint ldb, jobject d_info, jint batchSize)
 {
-	// Null-checks for non-primitive arguments
-	if (handle == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	if (A == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// lda is primitive
-	if (B == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnZpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// ldb is primitive
-	if (d_info == NULL)
-	{
-		ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnZpotrsBatched");
-		return JCUSOLVER_STATUS_INTERNAL_ERROR;
-	}
-	// batchSize is primitive
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnZpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnZpotrsBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
 
-	// Log message
-	Logger::log(LOG_TRACE, "Executing cusolverDnZpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
-		handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZpotrsBatched(handle=%p, uplo=%d, n=%d, nrhs=%d, A=%p, lda=%d, B=%p, ldb=%d, d_info=%p, batchSize=%d)\n",
+        handle, uplo, n, nrhs, A, lda, B, ldb, d_info, batchSize);
 
-	// Native variable declarations
-	cusolverDnHandle_t handle_native;
-	cublasFillMode_t uplo_native;
-	int n_native = 0;
-	int nrhs_native = 0;
-	cuDoubleComplex** A_native = NULL;
-	int lda_native = 0;
-	cuDoubleComplex** B_native = NULL;
-	int ldb_native = 0;
-	int * d_info_native = NULL;
-	int batchSize_native = 0;
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    int nrhs_native = 0;
+    cuDoubleComplex** A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex** B_native = NULL;
+    int ldb_native = 0;
+    int * d_info_native = NULL;
+    int batchSize_native = 0;
 
-	// Obtain native variable values
-	handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
-	uplo_native = (cublasFillMode_t)uplo;
-	n_native = (int)n;
-	nrhs_native = (int)nrhs;
-	A_native = (cuDoubleComplex **)getPointer(env, A);
-	lda_native = (int)lda;
-	B_native = (cuDoubleComplex **)getPointer(env, B);
-	ldb_native = (int)ldb;
-	d_info_native = (int *)getPointer(env, d_info);
-	batchSize_native = (int)batchSize;
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    nrhs_native = (int)nrhs;
+    A_native = (cuDoubleComplex **)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuDoubleComplex **)getPointer(env, B);
+    ldb_native = (int)ldb;
+    d_info_native = (int *)getPointer(env, d_info);
+    batchSize_native = (int)batchSize;
 
-	// Native function call
-	cusolverStatus_t jniResult_native = cusolverDnZpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZpotrsBatched(handle_native, uplo_native, n_native, nrhs_native, A_native, lda_native, B_native, ldb_native, d_info_native, batchSize_native);
 
-	// Write back native variable values
-	// handle is read-only
-	// uplo is primitive
-	// n is primitive
-	// nrhs is primitive
-	// A is a native pointer
-	// lda is primitive
-	// B is a native pointer
-	// ldb is primitive
-	// d_info is a native pointer
-	// batchSize is primitive
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // d_info is a native pointer
+    // batchSize is primitive
 
-	// Return the result
-	jint jniResult = (jint)jniResult_native;
-	return jniResult;
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM)  */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSpotri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnSpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSpotri_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSpotri_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDpotri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDpotri_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDpotri_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCpotri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnCpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCpotri_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCpotri_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZpotri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZpotri_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZpotri_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSpotriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnSpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnSpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSpotri(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (float *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSpotri(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDpotriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnDpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnDpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDpotri(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (double *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDpotri(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCpotriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnCpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnCpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCpotri(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    cuComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCpotri(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnZpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnZpotri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZpotri(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuDoubleComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZpotri(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnStrtri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnStrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnStrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnStrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnStrtri_bufferSize(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, diag, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnStrtri_bufferSize(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDtrtri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDtrtri_bufferSize(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, diag, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDtrtri_bufferSize(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCtrtri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnCtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCtrtri_bufferSize(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, diag, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCtrtri_bufferSize(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZtrtri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZtrtri_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZtrtri_bufferSize(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, diag, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZtrtri_bufferSize(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnStrtriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnStrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnStrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnStrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnStrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnStrtri(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, diag, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (float *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnStrtri(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDtrtriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnDtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnDtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDtrtri(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, diag, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (double *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDtrtri(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCtrtriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnCtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnCtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCtrtri(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, diag, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    cuComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCtrtri(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZtrtriNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint diag, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnZtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnZtrtri");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZtrtri(handle=%p, uplo=%d, diag=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, diag, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    cublasDiagType_t diag_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    diag_native = (cublasDiagType_t)diag;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuDoubleComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZtrtri(handle_native, uplo_native, diag_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // diag is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** lauum, auxiliar routine for s.p.d matrix inversion */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSlauum_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnSlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSlauum_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSlauum_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDlauum_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDlauum_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDlauum_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnClauum_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnClauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnClauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnClauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnClauum_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnClauum_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZlauum_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZlauum_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZlauum_bufferSize(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, lwork=%p)\n",
+        handle, uplo, n, A, lda, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZlauum_bufferSize(handle_native, uplo_native, n_native, A_native, lda_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSlauumNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnSlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnSlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSlauum(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (float *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSlauum(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDlauumNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnDlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnDlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDlauum(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (double *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDlauum(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnClauumNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnClauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnClauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnClauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnClauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnClauum(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    cuComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnClauum(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZlauumNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jobject work, jint lwork, jobject devInfo)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnZlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (devInfo == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'devInfo' is null for cusolverDnZlauum");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZlauum(handle=%p, uplo=%d, n=%d, A=%p, lda=%d, work=%p, lwork=%d, devInfo=%p)\n",
+        handle, uplo, n, A, lda, work, lwork, devInfo);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * devInfo_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    work_native = (cuDoubleComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    devInfo_native = (int *)getPointer(env, devInfo);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZlauum(handle_native, uplo_native, n_native, A_native, lda_native, work_native, lwork_native, devInfo_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // work is a native pointer
+    // lwork is primitive
+    // devInfo is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
 }
 
 /** LU Factorization */
@@ -9734,6 +11304,1800 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZheevdNative(J
     return jniResult;
 }
 
+/** standard selective symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsyevdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnSsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnSsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnSsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSsyevdx_bufferSize(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSsyevdx_bufferSize(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsyevdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnDsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnDsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDsyevdx_bufferSize(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDsyevdx_bufferSize(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCheevdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnCheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnCheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnCheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCheevdx_bufferSize(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCheevdx_bufferSize(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZheevdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnZheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnZheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZheevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZheevdx_bufferSize(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZheevdx_bufferSize(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsyevdxNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnSsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSsyevdx(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    float * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    work_native = (float *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSsyevdx(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsyevdxNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnDsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDsyevdx(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    double * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    work_native = (double *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDsyevdx(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCheevdxNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnCheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCheevdx(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    cuComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    work_native = (cuComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCheevdx(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZheevdxNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnZheevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZheevdx(handle=%p, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, jobz, range, uplo, n, A, lda, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    cuDoubleComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    work_native = (cuDoubleComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZheevdx(handle_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsygvdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnSsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSsygvdx_bufferSize(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float * B_native = NULL;
+    int ldb_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (float *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSsygvdx_bufferSize(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsygvdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDsygvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDsygvdx_bufferSize(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double * B_native = NULL;
+    int ldb_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (double *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDsygvdx_bufferSize(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnChegvdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnChegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnChegvdx_bufferSize(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    cuComplex * B_native = NULL;
+    int ldb_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuComplex *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnChegvdx_bufferSize(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZhegvdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZhegvdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZhegvdx_bufferSize(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, lwork=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, lwork);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex * B_native = NULL;
+    int ldb_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    int lwork_native;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuDoubleComplex *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    // lwork is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZhegvdx_bufferSize(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, &lwork_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsygvdxNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnSsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSsygvdx(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    float * A_native = NULL;
+    int lda_native = 0;
+    float * B_native = NULL;
+    int ldb_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    float * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (float *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (float *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    work_native = (float *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSsygvdx(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsygvdxNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnDsygvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDsygvdx(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    double * A_native = NULL;
+    int lda_native = 0;
+    double * B_native = NULL;
+    int ldb_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    double * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (double *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (double *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    work_native = (double *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDsygvdx(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnChegvdxNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnChegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnChegvdx(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%f, vu=%f, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuComplex * A_native = NULL;
+    int lda_native = 0;
+    cuComplex * B_native = NULL;
+    int ldb_native = 0;
+    float vl_native = 0.0f;
+    float vu_native = 0.0f;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    float * W_native = NULL;
+    cuComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuComplex *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (float)vl;
+    vu_native = (float)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (float *)getPointer(env, W);
+    work_native = (cuComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnChegvdx(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZhegvdxNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jdouble vl, jdouble vu, jint il, jint iu, jobject meig, jobject W, jobject work, jint lwork, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    if (meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'work' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnZhegvdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZhegvdx(handle=%p, itype=%d, jobz=%d, range=%d, uplo=%d, n=%d, A=%p, lda=%d, B=%p, ldb=%d, vl=%lf, vu=%lf, il=%d, iu=%d, meig=%p, W=%p, work=%p, lwork=%d, info=%p)\n",
+        handle, itype, jobz, range, uplo, n, A, lda, B, ldb, vl, vu, il, iu, meig, W, work, lwork, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigType_t itype_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int n_native = 0;
+    cuDoubleComplex * A_native = NULL;
+    int lda_native = 0;
+    cuDoubleComplex * B_native = NULL;
+    int ldb_native = 0;
+    double vl_native = 0.0;
+    double vu_native = 0.0;
+    int il_native = 0;
+    int iu_native = 0;
+    int * meig_native = NULL;
+    double * W_native = NULL;
+    cuDoubleComplex * work_native = NULL;
+    int lwork_native = 0;
+    int * info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    itype_native = (cusolverEigType_t)itype;
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int)n;
+    A_native = (cuDoubleComplex *)getPointer(env, A);
+    lda_native = (int)lda;
+    B_native = (cuDoubleComplex *)getPointer(env, B);
+    ldb_native = (int)ldb;
+    vl_native = (double)vl;
+    vu_native = (double)vu;
+    il_native = (int)il;
+    iu_native = (int)iu;
+    meig_native = (int *)getPointer(env, meig);
+    W_native = (double *)getPointer(env, W);
+    work_native = (cuDoubleComplex *)getPointer(env, work);
+    lwork_native = (int)lwork;
+    info_native = (int *)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZhegvdx(handle_native, itype_native, jobz_native, range_native, uplo_native, n_native, A_native, lda_native, B_native, ldb_native, vl_native, vu_native, il_native, iu_native, meig_native, W_native, work_native, lwork_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // itype is primitive
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // A is a native pointer
+    // lda is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // vl is primitive
+    // vu is primitive
+    // il is primitive
+    // iu is primitive
+    // meig is a native pointer
+    // W is a native pointer
+    // work is a native pointer
+    // lwork is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
 /** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsygvd_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jobject W, jintArray lwork)
 {
@@ -14941,6 +18305,1031 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdjNative(
     // lwork is primitive
     // info is a native pointer
     // params is read-only
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** batched approximate SVD */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSgesvdaStridedBatched_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jintArray lwork, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnSgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSgesvdaStridedBatched_bufferSize(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, lwork=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    float * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    float * d_S_native = NULL;
+    long long  strideS_native = 0;
+    float * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    float * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    int lwork_native;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (float *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (float *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (float *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (float *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    // lwork is write-only
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSgesvdaStridedBatched_bufferSize(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, &lwork_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDgesvdaStridedBatched_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jintArray lwork, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnDgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDgesvdaStridedBatched_bufferSize(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, lwork=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    double * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    double * d_S_native = NULL;
+    long long  strideS_native = 0;
+    double * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    double * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    int lwork_native;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (double *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (double *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (double *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (double *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    // lwork is write-only
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDgesvdaStridedBatched_bufferSize(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, &lwork_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCgesvdaStridedBatched_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jintArray lwork, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnCgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCgesvdaStridedBatched_bufferSize(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, lwork=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    cuComplex * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    float * d_S_native = NULL;
+    long long  strideS_native = 0;
+    cuComplex * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    cuComplex * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    int lwork_native;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (cuComplex *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (float *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (cuComplex *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (cuComplex *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    // lwork is write-only
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCgesvdaStridedBatched_bufferSize(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, &lwork_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdaStridedBatched_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jintArray lwork, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverDnZgesvdaStridedBatched_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZgesvdaStridedBatched_bufferSize(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, lwork=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, lwork, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    cuDoubleComplex * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    double * d_S_native = NULL;
+    long long  strideS_native = 0;
+    cuDoubleComplex * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    cuDoubleComplex * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    int lwork_native;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (cuDoubleComplex *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (double *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (cuDoubleComplex *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (cuDoubleComplex *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    // lwork is write-only
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZgesvdaStridedBatched_bufferSize(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, &lwork_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    if (!set(env, lwork, 0, (jint)lwork_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSgesvdaStridedBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jobject d_work, jint lwork, jobject d_info, jobject h_R_nrmF, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_work' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (h_R_nrmF == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_R_nrmF' is null for cusolverDnSgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnSgesvdaStridedBatched(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, d_work=%p, lwork=%d, d_info=%p, h_R_nrmF=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    float * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    float * d_S_native = NULL;
+    long long  strideS_native = 0;
+    float * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    float * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    float * d_work_native = NULL;
+    int lwork_native = 0;
+    int * d_info_native = NULL;
+    double * h_R_nrmF_native = NULL;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (float *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (float *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (float *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (float *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    d_work_native = (float *)getPointer(env, d_work);
+    lwork_native = (int)lwork;
+    d_info_native = (int *)getPointer(env, d_info);
+    h_R_nrmF_native = (double *)getPointer(env, h_R_nrmF);
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnSgesvdaStridedBatched(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, d_work_native, lwork_native, d_info_native, h_R_nrmF_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    // d_work is a native pointer
+    // lwork is primitive
+    // d_info is a native pointer
+    // h_R_nrmF is a native pointer
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDgesvdaStridedBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jobject d_work, jint lwork, jobject d_info, jobject h_R_nrmF, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_work' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (h_R_nrmF == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_R_nrmF' is null for cusolverDnDgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnDgesvdaStridedBatched(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, d_work=%p, lwork=%d, d_info=%p, h_R_nrmF=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    double * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    double * d_S_native = NULL;
+    long long  strideS_native = 0;
+    double * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    double * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    double * d_work_native = NULL;
+    int lwork_native = 0;
+    int * d_info_native = NULL;
+    double * h_R_nrmF_native = NULL;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (double *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (double *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (double *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (double *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    d_work_native = (double *)getPointer(env, d_work);
+    lwork_native = (int)lwork;
+    d_info_native = (int *)getPointer(env, d_info);
+    h_R_nrmF_native = (double *)getPointer(env, h_R_nrmF);
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnDgesvdaStridedBatched(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, d_work_native, lwork_native, d_info_native, h_R_nrmF_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    // d_work is a native pointer
+    // lwork is primitive
+    // d_info is a native pointer
+    // h_R_nrmF is a native pointer
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCgesvdaStridedBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jobject d_work, jint lwork, jobject d_info, jobject h_R_nrmF, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_work' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (h_R_nrmF == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_R_nrmF' is null for cusolverDnCgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnCgesvdaStridedBatched(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, d_work=%p, lwork=%d, d_info=%p, h_R_nrmF=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    cuComplex * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    float * d_S_native = NULL;
+    long long  strideS_native = 0;
+    cuComplex * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    cuComplex * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    cuComplex * d_work_native = NULL;
+    int lwork_native = 0;
+    int * d_info_native = NULL;
+    double * h_R_nrmF_native = NULL;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (cuComplex *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (float *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (cuComplex *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (cuComplex *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    d_work_native = (cuComplex *)getPointer(env, d_work);
+    lwork_native = (int)lwork;
+    d_info_native = (int *)getPointer(env, d_info);
+    h_R_nrmF_native = (double *)getPointer(env, h_R_nrmF);
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnCgesvdaStridedBatched(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, d_work_native, lwork_native, d_info_native, h_R_nrmF_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    // d_work is a native pointer
+    // lwork is primitive
+    // d_info is a native pointer
+    // h_R_nrmF is a native pointer
+    // batchSize is primitive
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdaStridedBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint rank, jint m, jint n, jobject d_A, jint lda, jlong strideA, jobject d_S, jlong strideS, jobject d_U, jint ldu, jlong strideU, jobject d_V, jint ldv, jlong strideV, jobject d_work, jint lwork, jobject d_info, jobject h_R_nrmF, jint batchSize)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    if (d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_A' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // strideA is primitive
+    if (d_S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_S' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // strideS is primitive
+    if (d_U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_U' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // strideU is primitive
+    if (d_V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_V' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // strideV is primitive
+    if (d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_work' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lwork is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (h_R_nrmF == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_R_nrmF' is null for cusolverDnZgesvdaStridedBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // batchSize is primitive
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnZgesvdaStridedBatched(handle=%p, jobz=%d, rank=%d, m=%d, n=%d, d_A=%p, lda=%d, strideA=%ld, d_S=%p, strideS=%ld, d_U=%p, ldu=%d, strideU=%ld, d_V=%p, ldv=%d, strideV=%ld, d_work=%p, lwork=%d, d_info=%p, h_R_nrmF=%p, batchSize=%d)\n",
+        handle, jobz, rank, m, n, d_A, lda, strideA, d_S, strideS, d_U, ldu, strideU, d_V, ldv, strideV, d_work, lwork, d_info, h_R_nrmF, batchSize);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverEigMode_t jobz_native;
+    int rank_native = 0;
+    int m_native = 0;
+    int n_native = 0;
+    cuDoubleComplex * d_A_native = NULL;
+    int lda_native = 0;
+    long long  strideA_native = 0;
+    double * d_S_native = NULL;
+    long long  strideS_native = 0;
+    cuDoubleComplex * d_U_native = NULL;
+    int ldu_native = 0;
+    long long  strideU_native = 0;
+    cuDoubleComplex * d_V_native = NULL;
+    int ldv_native = 0;
+    long long  strideV_native = 0;
+    cuDoubleComplex * d_work_native = NULL;
+    int lwork_native = 0;
+    int * d_info_native = NULL;
+    double * h_R_nrmF_native = NULL;
+    int batchSize_native = 0;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    jobz_native = (cusolverEigMode_t)jobz;
+    rank_native = (int)rank;
+    m_native = (int)m;
+    n_native = (int)n;
+    d_A_native = (cuDoubleComplex *)getPointer(env, d_A);
+    lda_native = (int)lda;
+    strideA_native = (long long)strideA;
+    d_S_native = (double *)getPointer(env, d_S);
+    strideS_native = (long long)strideS;
+    d_U_native = (cuDoubleComplex *)getPointer(env, d_U);
+    ldu_native = (int)ldu;
+    strideU_native = (long long)strideU;
+    d_V_native = (cuDoubleComplex *)getPointer(env, d_V);
+    ldv_native = (int)ldv;
+    strideV_native = (long long)strideV;
+    d_work_native = (cuDoubleComplex *)getPointer(env, d_work);
+    lwork_native = (int)lwork;
+    d_info_native = (int *)getPointer(env, d_info);
+    h_R_nrmF_native = (double *)getPointer(env, h_R_nrmF);
+    batchSize_native = (int)batchSize;
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnZgesvdaStridedBatched(handle_native, jobz_native, rank_native, m_native, n_native, d_A_native, lda_native, strideA_native, d_S_native, strideS_native, d_U_native, ldu_native, strideU_native, d_V_native, ldv_native, strideV_native, d_work_native, lwork_native, d_info_native, h_R_nrmF_native, batchSize_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // jobz is primitive
+    // rank is primitive
+    // m is primitive
+    // n is primitive
+    // d_A is a native pointer
+    // lda is primitive
+    // strideA is primitive
+    // d_S is a native pointer
+    // strideS is primitive
+    // d_U is a native pointer
+    // ldu is primitive
+    // strideU is primitive
+    // d_V is a native pointer
+    // ldv is primitive
+    // strideV is primitive
+    // d_work is a native pointer
+    // lwork is primitive
+    // d_info is a native pointer
+    // h_R_nrmF is a native pointer
+    // batchSize is primitive
 
     // Return the result
     jint jniResult = (jint)jniResult_native;
