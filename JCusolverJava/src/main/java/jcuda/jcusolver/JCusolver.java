@@ -138,5 +138,23 @@ public class JCusolver
         return result;
     }
     
+    public static int cusolverGetProperty(
+        int type, 
+        int[] value)
+    {
+        return checkResult(cusolverGetPropertyNative(type, value));
+    }
+    private static native int cusolverGetPropertyNative(
+        int type, 
+        int[] value);
+
+
+    public static int cusolverGetVersion(
+        int[] version)
+    {
+        return checkResult(cusolverGetVersionNative(version));
+    }
+    private static native int cusolverGetVersionNative(
+        int[] version);
 
 }

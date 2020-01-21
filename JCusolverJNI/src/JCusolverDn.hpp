@@ -69,6 +69,342 @@ extern "C" {
 
     /*
     * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsCreateNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsCreateNative
+        (JNIEnv *, jclass, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsDestroyNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsDestroyNative
+        (JNIEnv *, jclass, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetTolNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;ID)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetTolNative
+        (JNIEnv *, jclass, jobject, jint, jdouble);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetTolInnerNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;ID)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetTolInnerNative
+        (JNIEnv *, jclass, jobject, jint, jdouble);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetSolverPrecisionsNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;II)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetSolverPrecisionsNative
+        (JNIEnv *, jclass, jobject, jint, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetRefinementSolverNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetRefinementSolverNative
+        (JNIEnv *, jclass, jobject, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetMaxItersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetMaxItersNative
+        (JNIEnv *, jclass, jobject, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetMaxItersInnerNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetMaxItersInnerNative
+        (JNIEnv *, jclass, jobject, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsGetNitersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsGetNitersNative
+        (JNIEnv *, jclass, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsGetOuterNitersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsGetOuterNitersNative
+        (JNIEnv *, jclass, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsGetMaxItersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsGetMaxItersNative
+        (JNIEnv *, jclass, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetSolverMainPrecisionNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetSolverMainPrecisionNative
+        (JNIEnv *, jclass, jobject, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSParamsSetSolverLowestPrecisionNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSParamsSetSolverLowestPrecisionNative
+        (JNIEnv *, jclass, jobject, jint);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosDestroyNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosDestroyNative
+        (JNIEnv *, jclass, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosCreateNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosCreateNative
+        (JNIEnv *, jclass, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosGetNitersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosGetNitersNative
+        (JNIEnv *, jclass, jobject, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosGetOuterNitersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosGetOuterNitersNative
+        (JNIEnv *, jclass, jobject, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosGetMaxItersNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosGetMaxItersNative
+        (JNIEnv *, jclass, jobject, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosRequestResidualNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosRequestResidualNative
+        (JNIEnv *, jclass, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSInfosGetResidualHistoryNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;Ljcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosGetResidualHistoryNative
+        (JNIEnv *, jclass, jobject, jobject, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZZgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZCgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZCgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZKgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZKgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCCgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCCgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCKgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCKgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDDgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDDgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDSgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDSgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDHgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDHgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSSgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSSgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSHgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSHgesvNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZZgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZCgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZCgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZKgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZKgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCCgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCCgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCKgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCKgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDDgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDDgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDSgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDSgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDHgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDHgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSSgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSSgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSHgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSHgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSXgesvNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;Ljcuda/jcusolver/cusolverDnIRSParams;Ljcuda/jcusolver/cusolverDnIRSInfos;IIILjcuda/Pointer;I[ILjcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;J[I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSXgesvNative
+        (JNIEnv *, jclass, jobject, jobject, jobject, jint, jint, jint, jobject, jint, jintArray, jobject, jint, jobject, jint, jobject, jlong, jintArray, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnIRSXgesv_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;Ljcuda/jcusolver/cusolverDnIRSParams;II[J)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSXgesv_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jobject, jint, jint, jlongArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
     * Method:    cusolverDnSpotrf_bufferSizeNative
     * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;I[I)I
     */
@@ -801,6 +1137,134 @@ extern "C" {
     * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;)I
     */
     JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZsytrfNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSsytrs_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsytrs_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDsytrs_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsytrs_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCsytrs_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCsytrs_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZsytrs_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;I[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZsytrs_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSsytrsNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsytrsNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDsytrsNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsytrsNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCsytrsNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCsytrsNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZsytrsNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IIILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZsytrsNative
+        (JNIEnv *, jclass, jobject, jint, jint, jint, jobject, jint, jobject, jobject, jint, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSsytri_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsytri_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDsytri_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsytri_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCsytri_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCsytri_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZsytri_bufferSizeNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;[I)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZsytri_1bufferSizeNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jintArray);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnSsytriNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsytriNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnDsytriNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnDsytriNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnCsytriNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCsytriNative
+        (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jobject, jint, jobject);
+
+    /*
+    * Class:     jcuda_jcusolver_JCusolverDn
+    * Method:    cusolverDnZsytriNative
+    * Signature: (Ljcuda/jcusolver/cusolverDnHandle;IILjcuda/Pointer;ILjcuda/Pointer;Ljcuda/Pointer;ILjcuda/Pointer;)I
+    */
+    JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZsytriNative
         (JNIEnv *, jclass, jobject, jint, jint, jobject, jint, jobject, jobject, jint, jobject);
 
     /*

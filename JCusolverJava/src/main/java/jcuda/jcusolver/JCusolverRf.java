@@ -60,7 +60,6 @@ public class JCusolverRf
     
     //=== Auto-generated part: ===============================================
     
-
     /** CUSOLVERRF create (allocate memory) and destroy (free memory) in the handle */
     public static int cusolverRfCreate(
         cusolverRfHandle handle)

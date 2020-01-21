@@ -2,7 +2,7 @@
  * JCusolver - Java bindings for CUSOLVER, the NVIDIA CUDA solver
  * library, to be used with JCuda
  *
- * Copyright (c) 2010-2015 Marco Hutter - http://www.jcuda.org
+ * Copyright (c) 2010-2017 Marco Hutter - http://www.jcuda.org
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,27 +25,38 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+package jcuda.jcusolver;
 
-#ifndef JCUSOLVER_COMMON
-#define JCUSOLVER_COMMON
+public class cusolverNorm
+{
+    public static final int CUSOLVER_INF_NORM = 104;
+    public static final int CUSOLVER_MAX_NORM = 105;
+    public static final int CUSOLVER_ONE_NORM = 106;
+    public static final int CUSOLVER_FRO_NORM = 107;
 
-#define JCUSOLVER_STATUS_INTERNAL_ERROR (-1)
+    /**
+     * Private constructor to prevent instantiation
+     */
+    private cusolverNorm()
+    {
+        // Private constructor to prevent instantiation
+    }
 
-#include <stdlib.h>
-#include <jni.h>
-#include <cusolverDn.h>
-#include <cusolverSp.h>
-#include <cusolverRf.h>
-#include <cusolverMg.h>
+    /**
+     * Returns a string representation of the given constant
+     *
+     * @return A string representation of the given constant
+     */
+    public static String stringFor(int n)
+    {
+        switch (n)
+        {
+            case CUSOLVER_INF_NORM: return "CUSOLVER_INF_NORM";
+            case CUSOLVER_MAX_NORM: return "CUSOLVER_MAX_NORM";
+            case CUSOLVER_ONE_NORM: return "CUSOLVER_ONE_NORM";
+            case CUSOLVER_FRO_NORM: return "CUSOLVER_FRO_NORM";
+        }
+        return "INVALID cusolverNorm: "+n;
+    }
+}
 
-#include "Logger.hpp"
-#include "JNIUtils.hpp"
-#include "PointerUtils.hpp"
-
-extern jfieldID cuComplex_x; // float
-extern jfieldID cuComplex_y; // float
-
-extern jfieldID cuDoubleComplex_x; // double
-extern jfieldID cuDoubleComplex_y; // double
-
-#endif

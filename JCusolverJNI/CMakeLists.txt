@@ -26,6 +26,7 @@ cuda_add_library(${PROJECT_NAME}
     src/JCusolverDn.cpp 
     src/JCusolverRf.cpp 
     src/JCusolverSp.cpp  
+    src/JCusolverMg.cpp  
 )
 
 cuda_add_cusolver_to_target(${PROJECT_NAME})

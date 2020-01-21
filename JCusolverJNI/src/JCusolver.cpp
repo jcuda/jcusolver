@@ -88,7 +88,7 @@ JNIEXPORT void JNICALL Java_jcuda_jcusolver_JCusolver_setLogLevelNative
 
 
 // Initialization / release of handles
-
+/*
 bool initNative(JNIEnv *env, jobject &handle, cusolverDnHandle_t &handle_native, bool fill)
 {
     if (fill)
@@ -123,7 +123,7 @@ bool releaseNative(JNIEnv *env, cusolverDnHandle_t* &handle_native, jobject &han
     }
     return true;
 }
-
+*/
 
 
 // Initialization / release of streams
@@ -164,4 +164,68 @@ bool releaseNative(JNIEnv *env, cudaStream_t* &stream_native, jobject &stream, b
 }
 
 
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolver_cusolverGetPropertyNative(JNIEnv *env, jclass cls, jint type, jintArray value)
+{
+    // Null-checks for non-primitive arguments
+    // type is primitive
+    if (value == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'value' is null for cusolverGetProperty");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverGetProperty(type=%d, value=%p)\n",
+        type, value);
+
+    // Native variable declarations
+    libraryPropertyType type_native;
+    int value_native;
+
+    // Obtain native variable values
+    type_native = (libraryPropertyType)type;
+    // value is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverGetProperty(type_native, &value_native);
+
+    // Write back native variable values
+    // type is primitive
+    if (!set(env, value, 0, (jint)value_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolver_cusolverGetVersionNative(JNIEnv *env, jclass cls, jintArray version)
+{
+    // Null-checks for non-primitive arguments
+    if (version == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'version' is null for cusolverGetVersion");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverGetVersion(version=%p)\n",
+        version);
+
+    // Native variable declarations
+    int version_native;
+
+    // Obtain native variable values
+    // version is write-only
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverGetVersion(&version_native);
+
+    // Write back native variable values
+    if (!set(env, version, 0, (jint)version_native)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
 

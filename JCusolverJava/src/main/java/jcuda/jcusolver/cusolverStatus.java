@@ -116,6 +116,41 @@ public class cusolverStatus
     public static final int CUSOLVER_STATUS_INVALID_LICENSE = 11;
 
     /**
+     * IRS parameters not initialized
+     */
+    public static final int CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED=12;
+
+    /**
+     * IRS parameters invalid
+     */
+    public static final int CUSOLVER_STATUS_IRS_PARAMS_INVALID = 13;
+
+    /**
+     * IRS internal error
+     */
+    public static final int CUSOLVER_STATUS_IRS_INTERNAL_ERROR = 14;
+
+    /**
+     * IRS not supported
+     */
+    public static final int CUSOLVER_STATUS_IRS_NOT_SUPPORTED = 15;
+
+    /**
+     * IRS out of range
+     */
+    public static final int CUSOLVER_STATUS_IRS_OUT_OF_RANGE = 16;
+
+    /**
+     * IRS NRHS not supposed
+     */
+    public static final int CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES = 17;
+
+    /**
+     * IRS infos not initialized
+     */
+    public static final int CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED = 18;
+    
+    /**
      * Private constructor to prevent instantiation
      */
     private cusolverStatus(){}

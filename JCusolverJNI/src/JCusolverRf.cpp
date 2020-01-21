@@ -70,11 +70,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfCreateNative(J
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfDestroyNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfDestroy");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfDestroy(handle=%p)\n",
@@ -101,21 +97,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfDestroyNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetMatrixFormatNative(JNIEnv *env, jclass cls, jobject handle, jintArray format, jintArray diag)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfGetMatrixFormat");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (format == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'format' is null for cusolverRfGetMatrixFormat");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (diag == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'diag' is null for cusolverRfGetMatrixFormat");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // format is checked by the library
+    // diag is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfGetMatrixFormat(handle=%p, format=%p, diag=%p)\n",
@@ -147,11 +131,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetMatrixForma
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetMatrixFormatNative(JNIEnv *env, jclass cls, jobject handle, jint format, jint diag)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetMatrixFormat");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
     // format is primitive
     // diag is primitive
 
@@ -186,11 +166,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetMatrixForma
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetNumericPropertiesNative(JNIEnv *env, jclass cls, jobject handle, jdouble zero, jdouble boost)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetNumericProperties");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
     // zero is primitive
     // boost is primitive
 
@@ -224,21 +200,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetNumericProp
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetNumericPropertiesNative(JNIEnv *env, jclass cls, jobject handle, jdoubleArray zero, jdoubleArray boost)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfGetNumericProperties");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (zero == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'zero' is null for cusolverRfGetNumericProperties");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (boost == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'boost' is null for cusolverRfGetNumericProperties");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // zero is checked by the library
+    // boost is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfGetNumericProperties(handle=%p, zero=%p, boost=%p)\n",
@@ -270,16 +234,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetNumericProp
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetNumericBoostReportNative(JNIEnv *env, jclass cls, jobject handle, jintArray report)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfGetNumericBoostReport");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (report == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'report' is null for cusolverRfGetNumericBoostReport");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // report is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfGetNumericBoostReport(handle=%p, report=%p)\n",
@@ -309,11 +265,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetNumericBoos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetAlgsNative(JNIEnv *env, jclass cls, jobject handle, jint factAlg, jint solveAlg)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetAlgs");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
     // factAlg is primitive
     // solveAlg is primitive
 
@@ -347,21 +299,9 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetAlgsNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetAlgsNative(JNIEnv *env, jclass cls, jobject handle, jintArray factAlg, jintArray solveAlg)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfGetAlgs");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (factAlg == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'factAlg' is null for cusolverRfGetAlgs");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (solveAlg == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'solveAlg' is null for cusolverRfGetAlgs");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // factAlg is checked by the library
+    // solveAlg is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfGetAlgs(handle=%p, factAlg=%p, solveAlg=%p)\n",
@@ -394,16 +334,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetAlgsNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetResetValuesFastModeNative(JNIEnv *env, jclass cls, jobject handle, jintArray fastMode)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfGetResetValuesFastMode");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (fastMode == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'fastMode' is null for cusolverRfGetResetValuesFastMode");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // fastMode is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfGetResetValuesFastMode(handle=%p, fastMode=%p)\n",
@@ -432,11 +364,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfGetResetValues
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetResetValuesFastModeNative(JNIEnv *env, jclass cls, jobject handle, jint fastMode)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetResetValuesFastMode");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
     // fastMode is primitive
 
     // Log message
@@ -470,68 +398,20 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetupHostNativ
     // Null-checks for non-primitive arguments
     // n is primitive
     // nnzA is primitive
-    if (h_csrRowPtrA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrA' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndA' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValA' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrA is checked by the library
+    // h_csrColIndA is checked by the library
+    // h_csrValA is checked by the library
     // nnzL is primitive
-    if (h_csrRowPtrL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrL' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndL' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValL' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrL is checked by the library
+    // h_csrColIndL is checked by the library
+    // h_csrValL is checked by the library
     // nnzU is primitive
-    if (h_csrRowPtrU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrU' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndU' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValU' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_P' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_Q' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrU is checked by the library
+    // h_csrColIndU is checked by the library
+    // h_csrValU is checked by the library
+    // h_P is checked by the library
+    // h_Q is checked by the library
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfSetupHost(n=%d, nnzA=%d, h_csrRowPtrA=%p, h_csrColIndA=%p, h_csrValA=%p, nnzL=%d, h_csrRowPtrL=%p, h_csrColIndL=%p, h_csrValL=%p, nnzU=%d, h_csrRowPtrU=%p, h_csrColIndU=%p, h_csrValU=%p, h_P=%p, h_Q=%p, handle=%p)\n",
@@ -714,68 +594,20 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSetupDeviceNat
     // Null-checks for non-primitive arguments
     // n is primitive
     // nnzA is primitive
-    if (csrRowPtrA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrColIndA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrValA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // csrRowPtrA is checked by the library
+    // csrColIndA is checked by the library
+    // csrValA is checked by the library
     // nnzL is primitive
-    if (csrRowPtrL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrL' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrColIndL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndL' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrValL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValL' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // csrRowPtrL is checked by the library
+    // csrColIndL is checked by the library
+    // csrValL is checked by the library
     // nnzU is primitive
-    if (csrRowPtrU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrU' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrColIndU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndU' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrValU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValU' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Q' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSetupDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // csrRowPtrU is checked by the library
+    // csrColIndU is checked by the library
+    // csrValU is checked by the library
+    // P is checked by the library
+    // Q is checked by the library
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfSetupDevice(n=%d, nnzA=%d, csrRowPtrA=%p, csrColIndA=%p, csrValA=%p, nnzL=%d, csrRowPtrL=%p, csrColIndL=%p, csrValL=%p, nnzU=%d, csrRowPtrU=%p, csrColIndU=%p, csrValU=%p, P=%p, Q=%p, handle=%p)\n",
@@ -851,36 +683,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfResetValuesNat
     // Null-checks for non-primitive arguments
     // n is primitive
     // nnzA is primitive
-    if (csrRowPtrA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrColIndA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrValA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Q' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // csrRowPtrA is checked by the library
+    // csrColIndA is checked by the library
+    // csrValA is checked by the library
+    // P is checked by the library
+    // Q is checked by the library
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfResetValues(n=%d, nnzA=%d, csrRowPtrA=%p, csrColIndA=%p, csrValA=%p, P=%p, Q=%p, handle=%p)\n",
@@ -928,11 +736,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfResetValuesNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAnalyzeNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfAnalyze");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfAnalyze(handle=%p)\n",
@@ -959,11 +763,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAnalyzeNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfRefactorNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfRefactor");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfRefactor(handle=%p)\n",
@@ -990,31 +790,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfRefactorNative
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAccessBundledFactorsDeviceNative(JNIEnv *env, jclass cls, jobject handle, jobject nnzM, jobject Mp, jobject Mi, jobject Mx)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfAccessBundledFactorsDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (nnzM == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'nnzM' is null for cusolverRfAccessBundledFactorsDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Mp == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Mp' is null for cusolverRfAccessBundledFactorsDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Mi == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Mi' is null for cusolverRfAccessBundledFactorsDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Mx == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Mx' is null for cusolverRfAccessBundledFactorsDevice");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // nnzM is checked by the library
+    // Mp is checked by the library
+    // Mi is checked by the library
+    // Mx is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfAccessBundledFactorsDevice(handle=%p, nnzM=%p, Mp=%p, Mi=%p, Mx=%p)\n",
@@ -1029,12 +809,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAccessBundledF
 
     // Obtain native variable values
     handle_native = (cusolverRfHandle_t)getNativePointerValue(env, handle);
-    PointerData *nnzM_pointerData = initPointerData(env, nnzM);
-    if (nnzM_pointerData == NULL)
-    {
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    nnzM_native = (int *)nnzM_pointerData->getPointer(env);
+    nnzM_native = (int *)getPointer(env, nnzM);
     Mp_native = (int * *)getPointer(env, Mp);
     Mi_native = (int * *)getPointer(env, Mi);
     Mx_native = (double * *)getPointer(env, Mx);
@@ -1044,12 +819,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAccessBundledF
 
     // Write back native variable values
     // handle is read-only
-    // If the PointerData is not backed by native memory, then this call has to block
-    if (!isPointerBackedByNativeMemory(env, nnzM))
-    {
-        cudaDeviceSynchronize();
-    }
-    if (!releasePointerData(env, nnzM_pointerData, 0)) return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    // nnzM is a native pointer
     // Mp is a native pointer
     // Mi is a native pointer
     // Mx is a native pointer
@@ -1062,31 +832,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfAccessBundledF
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfExtractBundledFactorsHostNative(JNIEnv *env, jclass cls, jobject handle, jobject h_nnzM, jobject h_Mp, jobject h_Mi, jobject h_Mx)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfExtractBundledFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_nnzM == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_nnzM' is null for cusolverRfExtractBundledFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_Mp == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_Mp' is null for cusolverRfExtractBundledFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_Mi == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_Mi' is null for cusolverRfExtractBundledFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_Mx == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_Mx' is null for cusolverRfExtractBundledFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // h_nnzM is checked by the library
+    // h_Mp is checked by the library
+    // h_Mi is checked by the library
+    // h_Mx is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfExtractBundledFactorsHost(handle=%p, h_nnzM=%p, h_Mp=%p, h_Mi=%p, h_Mx=%p)\n",
@@ -1165,51 +915,15 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfExtractBundled
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfExtractSplitFactorsHostNative(JNIEnv *env, jclass cls, jobject handle, jobject h_nnzL, jobject h_csrRowPtrL, jobject h_csrColIndL, jobject h_csrValL, jobject h_nnzU, jobject h_csrRowPtrU, jobject h_csrColIndU, jobject h_csrValU)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_nnzL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_nnzL' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrRowPtrL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrL' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndL' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValL' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_nnzU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_nnzU' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrRowPtrU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrU' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndU' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValU' is null for cusolverRfExtractSplitFactorsHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // h_nnzL is checked by the library
+    // h_csrRowPtrL is checked by the library
+    // h_csrColIndL is checked by the library
+    // h_csrValL is checked by the library
+    // h_nnzU is checked by the library
+    // h_csrRowPtrU is checked by the library
+    // h_csrColIndU is checked by the library
+    // h_csrValU is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfExtractSplitFactorsHost(handle=%p, h_nnzL=%p, h_csrRowPtrL=%p, h_csrColIndL=%p, h_csrValL=%p, h_nnzU=%p, h_csrRowPtrU=%p, h_csrColIndU=%p, h_csrValU=%p)\n",
@@ -1340,33 +1054,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfExtractSplitFa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfSolveNative(JNIEnv *env, jclass cls, jobject handle, jobject P, jobject Q, jint nrhs, jobject Temp, jint ldt, jobject XF, jint ldxf)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverRfSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Q' is null for cusolverRfSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // P is checked by the library
+    // Q is checked by the library
     // nrhs is primitive
-    if (Temp == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Temp' is null for cusolverRfSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // Temp is checked by the library
     // ldt is primitive
-    if (XF == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'XF' is null for cusolverRfSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // XF is checked by the library
     // ldxf is primitive
 
     // Log message
@@ -1419,68 +1113,20 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchSetupHost
     // batchSize is primitive
     // n is primitive
     // nnzA is primitive
-    if (h_csrRowPtrA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrA' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndA' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValA_array == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValA_array' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrA is checked by the library
+    // h_csrColIndA is checked by the library
+    // h_csrValA_array is checked by the library
     // nnzL is primitive
-    if (h_csrRowPtrL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrL' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndL' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValL == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValL' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrL is checked by the library
+    // h_csrColIndL is checked by the library
+    // h_csrValL is checked by the library
     // nnzU is primitive
-    if (h_csrRowPtrU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrRowPtrU' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrColIndU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrColIndU' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_csrValU == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_csrValU' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_P' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (h_Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_Q' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchSetupHost");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // h_csrRowPtrU is checked by the library
+    // h_csrColIndU is checked by the library
+    // h_csrValU is checked by the library
+    // h_P is checked by the library
+    // h_Q is checked by the library
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfBatchSetupHost(batchSize=%d, n=%d, nnzA=%d, h_csrRowPtrA=%p, h_csrColIndA=%p, h_csrValA_array=%p, nnzL=%d, h_csrRowPtrL=%p, h_csrColIndL=%p, h_csrValL=%p, nnzU=%d, h_csrRowPtrU=%p, h_csrColIndU=%p, h_csrValU=%p, h_P=%p, h_Q=%p, handle=%p)\n",
@@ -1660,36 +1306,12 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchResetValu
     // batchSize is primitive
     // n is primitive
     // nnzA is primitive
-    if (csrRowPtrA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrColIndA == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (csrValA_array == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA_array' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Q' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchResetValues");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // csrRowPtrA is checked by the library
+    // csrColIndA is checked by the library
+    // csrValA_array is checked by the library
+    // P is checked by the library
+    // Q is checked by the library
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfBatchResetValues(batchSize=%d, n=%d, nnzA=%d, csrRowPtrA=%p, csrColIndA=%p, csrValA_array=%p, P=%p, Q=%p, handle=%p)\n",
@@ -1740,11 +1362,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchResetValu
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchAnalyzeNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchAnalyze");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfBatchAnalyze(handle=%p)\n",
@@ -1771,11 +1389,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchAnalyzeNa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchRefactorNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchRefactor");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfBatchRefactor(handle=%p)\n",
@@ -1802,33 +1416,13 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchRefactorN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchSolveNative(JNIEnv *env, jclass cls, jobject handle, jobject P, jobject Q, jint nrhs, jobject Temp, jint ldt, jobject XF_array, jint ldxf)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (P == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverRfBatchSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (Q == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Q' is null for cusolverRfBatchSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // P is checked by the library
+    // Q is checked by the library
     // nrhs is primitive
-    if (Temp == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'Temp' is null for cusolverRfBatchSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // Temp is checked by the library
     // ldt is primitive
-    if (XF_array == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'XF_array' is null for cusolverRfBatchSolve");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // XF_array is checked by the library
     // ldxf is primitive
 
     // Log message
@@ -1877,16 +1471,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchSolveNati
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverRf_cusolverRfBatchZeroPivotNative(JNIEnv *env, jclass cls, jobject handle, jobject position)
 {
     // Null-checks for non-primitive arguments
-    if (handle == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverRfBatchZeroPivot");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
-    if (position == NULL)
-    {
-        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'position' is null for cusolverRfBatchZeroPivot");
-        return JCUSOLVER_STATUS_INTERNAL_ERROR;
-    }
+    // handle is checked by the library
+    // position is checked by the library
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverRfBatchZeroPivot(handle=%p, position=%p)\n",
