@@ -132,7 +132,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateNative(J
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDestroy");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDestroy(handle=%p)\n",
@@ -158,7 +162,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpSetStreamNative(JNIEnv *env, jclass cls, jobject handle, jobject streamId)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpSetStream");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // streamId is checked by the library
 
     // Log message
@@ -188,7 +196,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpSetStreamNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpGetStreamNative(JNIEnv *env, jclass cls, jobject handle, jobject streamId)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpGetStream");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     if (streamId == NULL)
     {
         ThrowByName(env, "java/lang/NullPointerException", "Parameter 'streamId' is null for cusolverSpGetStream");
@@ -222,14 +234,38 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpGetStreamNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrEndPtrA, jobject csrColIndA, jobject issym)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrEndPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // issym is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrEndPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrEndPtrA' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (issym == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'issym' is null for cusolverSpXcsrissymHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrissymHost(handle=%p, m=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrEndPtrA=%p, csrColIndA=%p, issym=%p)\n",
@@ -325,18 +361,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrissymHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -445,18 +513,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvluHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -565,18 +665,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvluHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -685,18 +817,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvluHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvluHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvluHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -814,18 +978,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvluHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -884,18 +1080,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -954,18 +1182,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1024,18 +1284,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqr");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqr(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1103,18 +1395,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrNativ
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1223,18 +1547,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvqrHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1343,18 +1699,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvqrHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1463,18 +1851,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvqrHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvqrHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1595,18 +2015,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvqrHostN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1715,18 +2167,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholHos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -1835,18 +2319,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholHos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -1955,18 +2471,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholHos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvcholHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvcholHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2087,18 +2635,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholHos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpScsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2157,18 +2737,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsvcholNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpDcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2227,18 +2839,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsvcholNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jfloat tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpCcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%f, reorder=%d, x=%p, singularity=%p)\n",
@@ -2297,18 +2941,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsvcholNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jobject b, jdouble tol, jint reorder, jobject x, jintArray singularity)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
     // reorder is primitive
-    // x is checked by the library
-    // singularity is checked by the library
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (singularity == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'singularity' is null for cusolverSpZcsrlsvchol");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsvchol(handle=%p, m=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, b=%p, tol=%lf, reorder=%d, x=%p, singularity=%p)\n",
@@ -2376,20 +3052,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsvcholNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jobject rankA, jobject x, jobject p, jobject min_norm)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
-    // rankA is checked by the library
-    // x is checked by the library
-    // p is checked by the library
-    // min_norm is checked by the library
+    if (rankA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'rankA' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (min_norm == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'min_norm' is null for cusolverSpScsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrlsqvqrHost(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, rankA=%p, x=%p, p=%p, min_norm=%p)\n",
@@ -2534,20 +3250,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrlsqvqrHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jobject rankA, jobject x, jobject p, jobject min_norm)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
-    // rankA is checked by the library
-    // x is checked by the library
-    // p is checked by the library
-    // min_norm is checked by the library
+    if (rankA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'rankA' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (min_norm == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'min_norm' is null for cusolverSpDcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrlsqvqrHost(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, rankA=%p, x=%p, p=%p, min_norm=%p)\n",
@@ -2692,20 +3448,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrlsqvqrHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jfloat tol, jobject rankA, jobject x, jobject p, jobject min_norm)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
-    // rankA is checked by the library
-    // x is checked by the library
-    // p is checked by the library
-    // min_norm is checked by the library
+    if (rankA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'rankA' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (min_norm == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'min_norm' is null for cusolverSpCcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrlsqvqrHost(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%f, rankA=%p, x=%p, p=%p, min_norm=%p)\n",
@@ -2850,20 +3646,60 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrlsqvqrHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jdouble tol, jobject rankA, jobject x, jobject p, jobject min_norm)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // tol is primitive
-    // rankA is checked by the library
-    // x is checked by the library
-    // p is checked by the library
-    // min_norm is checked by the library
+    if (rankA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'rankA' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (min_norm == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'min_norm' is null for cusolverSpZcsrlsqvqrHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrlsqvqrHost(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, tol=%lf, rankA=%p, x=%p, p=%p, min_norm=%p)\n",
@@ -3017,19 +3853,51 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrlsqvqrHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jfloat mu0, jobject x0, jint maxite, jfloat tol, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // mu0 is primitive
-    // x0 is checked by the library
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // tol is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsreigvsiHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%f, x0=%p, maxite=%d, tol=%f, mu=%p, x=%p)\n",
@@ -3151,19 +4019,51 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jdouble mu0, jobject x0, jint maxite, jdouble tol, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // mu0 is primitive
-    // x0 is checked by the library
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // tol is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsreigvsiHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%lf, x0=%p, maxite=%d, tol=%lf, mu=%p, x=%p)\n",
@@ -3285,19 +4185,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject mu0, jobject x0, jint maxite, jfloat tol, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // mu0 is checked by the library
-    // x0 is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (mu0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu0' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // tol is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsreigvsiHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%p, x0=%p, maxite=%d, tol=%f, mu=%p, x=%p)\n",
@@ -3419,19 +4355,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject mu0, jobject x0, jint maxite, jdouble tol, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // mu0 is checked by the library
-    // x0 is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (mu0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu0' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // tol is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsreigvsiHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsreigvsiHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%p, x0=%p, maxite=%d, tol=%lf, mu=%p, x=%p)\n",
@@ -3562,19 +4534,51 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jfloat mu0, jobject x0, jint maxite, jfloat eps, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // mu0 is primitive
-    // x0 is checked by the library
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // eps is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsreigvsi(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%f, x0=%p, maxite=%d, eps=%f, mu=%p, x=%p)\n",
@@ -3636,19 +4640,51 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigvsiNati
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jdouble mu0, jobject x0, jint maxite, jdouble eps, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // mu0 is primitive
-    // x0 is checked by the library
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // eps is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsreigvsi(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%lf, x0=%p, maxite=%d, eps=%lf, mu=%p, x=%p)\n",
@@ -3710,19 +4746,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigvsiNati
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject mu0, jobject x0, jint maxite, jfloat eps, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // mu0 is checked by the library
-    // x0 is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (mu0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu0' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // eps is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsreigvsi(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%p, x0=%p, maxite=%d, eps=%f, mu=%p, x=%p)\n",
@@ -3784,19 +4856,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigvsiNati
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject mu0, jobject x0, jint maxite, jdouble eps, jobject mu, jobject x)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // mu0 is checked by the library
-    // x0 is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (mu0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu0' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x0 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x0' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // maxite is primitive
     // eps is primitive
-    // mu is checked by the library
-    // x is checked by the library
+    if (mu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'mu' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsreigvsi");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsreigvsi(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, mu0=%p, x0=%p, maxite=%d, eps=%lf, mu=%p, x=%p)\n",
@@ -3859,16 +4967,48 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigvsiNati
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject left_bottom_corner, jobject right_upper_corner, jobject num_eigs)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // left_bottom_corner is checked by the library
-    // right_upper_corner is checked by the library
-    // num_eigs is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (left_bottom_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'left_bottom_corner' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (right_upper_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'right_upper_corner' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (num_eigs == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'num_eigs' is null for cusolverSpScsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsreigsHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, left_bottom_corner=%p, right_upper_corner=%p, num_eigs=%p)\n",
@@ -3961,16 +5101,48 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsreigsHostNa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject left_bottom_corner, jobject right_upper_corner, jobject num_eigs)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // left_bottom_corner is checked by the library
-    // right_upper_corner is checked by the library
-    // num_eigs is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (left_bottom_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'left_bottom_corner' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (right_upper_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'right_upper_corner' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (num_eigs == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'num_eigs' is null for cusolverSpDcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsreigsHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, left_bottom_corner=%p, right_upper_corner=%p, num_eigs=%p)\n",
@@ -4063,16 +5235,48 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsreigsHostNa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject left_bottom_corner, jobject right_upper_corner, jobject num_eigs)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // left_bottom_corner is checked by the library
-    // right_upper_corner is checked by the library
-    // num_eigs is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (left_bottom_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'left_bottom_corner' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (right_upper_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'right_upper_corner' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (num_eigs == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'num_eigs' is null for cusolverSpCcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsreigsHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, left_bottom_corner=%p, right_upper_corner=%p, num_eigs=%p)\n",
@@ -4165,16 +5369,48 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsreigsHostNa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject left_bottom_corner, jobject right_upper_corner, jobject num_eigs)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // left_bottom_corner is checked by the library
-    // right_upper_corner is checked by the library
-    // num_eigs is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (left_bottom_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'left_bottom_corner' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (right_upper_corner == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'right_upper_corner' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (num_eigs == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'num_eigs' is null for cusolverSpZcsreigsHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsreigsHost(handle=%p, m=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, left_bottom_corner=%p, right_upper_corner=%p, num_eigs=%p)\n",
@@ -4274,13 +5510,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsreigsHostNa
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject p)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrsymrcmHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // p is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrsymrcmHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrsymrcmHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrsymrcmHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrsymrcmHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrsymrcmHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p)\n",
@@ -4361,13 +5617,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymrcmHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject p)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrsymmdqHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // p is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrsymmdqHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrsymmdqHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrsymmdqHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrsymmdqHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrsymmdqHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p)\n",
@@ -4448,13 +5724,33 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymmdqHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject p)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrsymamdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // p is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrsymamdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrsymamdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrsymamdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrsymamdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrsymamdHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p)\n",
@@ -4531,14 +5827,38 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrsymamdHost
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrmetisndHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jlongArray options, jobject p)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // options is checked by the library
-    // p is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (options == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'options' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrmetisndHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrmetisndHost(handle=%p, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, options=%p, p=%p)\n",
@@ -4628,15 +5948,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrmetisndHos
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrzfdHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject P, jobject numnz)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // P is checked by the library
-    // numnz is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (P == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (numnz == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'numnz' is null for cusolverSpScsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrzfdHost(handle=%p, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, P=%p, numnz=%p)\n",
@@ -4736,15 +6084,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrzfdHostNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrzfdHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject P, jobject numnz)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // P is checked by the library
-    // numnz is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (P == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (numnz == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'numnz' is null for cusolverSpDcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrzfdHost(handle=%p, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, P=%p, numnz=%p)\n",
@@ -4844,15 +6220,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrzfdHostNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrzfdHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject P, jobject numnz)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // P is checked by the library
-    // numnz is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (P == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (numnz == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'numnz' is null for cusolverSpCcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrzfdHost(handle=%p, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, P=%p, numnz=%p)\n",
@@ -4952,15 +6356,43 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrzfdHostNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrzfdHostNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject P, jobject numnz)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // P is checked by the library
-    // numnz is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (P == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'P' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (numnz == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'numnz' is null for cusolverSpZcsrzfdHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrzfdHost(handle=%p, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, P=%p, numnz=%p)\n",
@@ -5067,16 +6499,44 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrzfdHostNat
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1bufferSizeHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject p, jobject q, jlongArray bufferSizeInBytes)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // p is checked by the library
-    // q is checked by the library
-    // bufferSizeInBytes is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (q == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'q' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (bufferSizeInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferSizeInBytes' is null for cusolverSpXcsrperm_bufferSizeHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrperm_bufferSizeHost(handle=%p, m=%d, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p, q=%p, bufferSizeInBytes=%p)\n",
@@ -5169,17 +6629,49 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrperm_1buff
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrpermHostNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject p, jobject q, jobject map, jobject pBuffer)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // p is checked by the library
-    // q is checked by the library
-    // map is checked by the library
-    // pBuffer is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (p == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'p' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (q == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'q' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (map == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'map' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (pBuffer == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'pBuffer' is null for cusolverSpXcsrpermHost");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrpermHost(handle=%p, m=%d, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, p=%p, q=%p, map=%p, pBuffer=%p)\n",
@@ -5331,7 +6823,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCreateCsrqrInf
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyCsrqrInfoNative(JNIEnv *env, jclass cls, jobject info)
 {
     // Null-checks for non-primitive arguments
-    // info is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpDestroyCsrqrInfo");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDestroyCsrqrInfo(info=%p)\n",
@@ -5357,14 +6853,34 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDestroyCsrqrIn
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrqrAnalysisBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnzA, jobject descrA, jobject csrRowPtrA, jobject csrColIndA, jobject info)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpXcsrqrAnalysisBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnzA is primitive
-    // descrA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // info is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpXcsrqrAnalysisBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpXcsrqrAnalysisBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpXcsrqrAnalysisBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpXcsrqrAnalysisBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpXcsrqrAnalysisBatched(handle=%p, m=%d, n=%d, nnzA=%d, descrA=%p, csrRowPtrA=%p, csrColIndA=%p, info=%p)\n",
@@ -5411,18 +6927,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpXcsrqrAnalysis
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrBufferInfoBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jint batchSize, jobject info, jlongArray internalDataInBytes, jlongArray workspaceInBytes)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // internalDataInBytes is checked by the library
-    // workspaceInBytes is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (internalDataInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'internalDataInBytes' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytes' is null for cusolverSpScsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrqrBufferInfoBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, batchSize=%d, info=%p, internalDataInBytes=%p, workspaceInBytes=%p)\n",
@@ -5481,18 +7029,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrBufferIn
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrBufferInfoBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jint batchSize, jobject info, jlongArray internalDataInBytes, jlongArray workspaceInBytes)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // internalDataInBytes is checked by the library
-    // workspaceInBytes is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (internalDataInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'internalDataInBytes' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytes' is null for cusolverSpDcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrqrBufferInfoBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, batchSize=%d, info=%p, internalDataInBytes=%p, workspaceInBytes=%p)\n",
@@ -5551,18 +7131,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrBufferIn
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrBufferInfoBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jint batchSize, jobject info, jlongArray internalDataInBytes, jlongArray workspaceInBytes)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // internalDataInBytes is checked by the library
-    // workspaceInBytes is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (internalDataInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'internalDataInBytes' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytes' is null for cusolverSpCcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrqrBufferInfoBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, batchSize=%d, info=%p, internalDataInBytes=%p, workspaceInBytes=%p)\n",
@@ -5621,18 +7233,50 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrBufferIn
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrBufferInfoBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrVal, jobject csrRowPtr, jobject csrColInd, jint batchSize, jobject info, jlongArray internalDataInBytes, jlongArray workspaceInBytes)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrVal is checked by the library
-    // csrRowPtr is checked by the library
-    // csrColInd is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrVal == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrVal' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtr == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtr' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColInd == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColInd' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // internalDataInBytes is checked by the library
-    // workspaceInBytes is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (internalDataInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'internalDataInBytes' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytes == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytes' is null for cusolverSpZcsrqrBufferInfoBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrqrBufferInfoBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrVal=%p, csrRowPtr=%p, csrColInd=%p, batchSize=%d, info=%p, internalDataInBytes=%p, workspaceInBytes=%p)\n",
@@ -5691,19 +7335,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrBufferIn
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrsvBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jobject x, jint batchSize, jobject info, jobject pBuffer)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
-    // x is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // pBuffer is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (pBuffer == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'pBuffer' is null for cusolverSpScsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpScsrqrsvBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, x=%p, batchSize=%d, info=%p, pBuffer=%p)\n",
@@ -5765,19 +7445,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpScsrqrsvBatche
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrsvBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jobject x, jint batchSize, jobject info, jobject pBuffer)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
-    // x is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // pBuffer is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (pBuffer == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'pBuffer' is null for cusolverSpDcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpDcsrqrsvBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, x=%p, batchSize=%d, info=%p, pBuffer=%p)\n",
@@ -5839,19 +7555,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpDcsrqrsvBatche
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrsvBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jobject x, jint batchSize, jobject info, jobject pBuffer)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
-    // x is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // pBuffer is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (pBuffer == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'pBuffer' is null for cusolverSpCcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpCcsrqrsvBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, x=%p, batchSize=%d, info=%p, pBuffer=%p)\n",
@@ -5913,19 +7665,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpCcsrqrsvBatche
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverSp_cusolverSpZcsrqrsvBatchedNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nnz, jobject descrA, jobject csrValA, jobject csrRowPtrA, jobject csrColIndA, jobject b, jobject x, jint batchSize, jobject info, jobject pBuffer)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // m is primitive
     // n is primitive
     // nnz is primitive
-    // descrA is checked by the library
-    // csrValA is checked by the library
-    // csrRowPtrA is checked by the library
-    // csrColIndA is checked by the library
-    // b is checked by the library
-    // x is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrValA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrValA' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrRowPtrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrRowPtrA' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (csrColIndA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'csrColIndA' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (b == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'b' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (x == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'x' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // batchSize is primitive
-    // info is checked by the library
-    // pBuffer is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (pBuffer == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'pBuffer' is null for cusolverSpZcsrqrsvBatched");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverSpZcsrqrsvBatched(handle=%p, m=%d, n=%d, nnz=%d, descrA=%p, csrValA=%p, csrRowPtrA=%p, csrColIndA=%p, b=%p, x=%p, batchSize=%d, info=%p, pBuffer=%p)\n",

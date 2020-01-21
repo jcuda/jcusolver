@@ -69,7 +69,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgCreateNative(J
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDestroyNative(JNIEnv *env, jclass cls, jobject handle)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgDestroy");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgDestroy(handle=%p)\n",
@@ -95,9 +99,17 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDestroyNative(
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDeviceSelectNative(JNIEnv *env, jclass cls, jobject handle, jint nbDevices, jintArray deviceId)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgDeviceSelect");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // nbDevices is primitive
-    // deviceId is checked by the library
+    if (deviceId == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'deviceId' is null for cusolverMgDeviceSelect");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgDeviceSelect(handle=%p, nbDevices=%d, deviceId=%p)\n",
@@ -148,7 +160,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgCreateDeviceGr
     }
     // numRowDevices is primitive
     // numColDevices is primitive
-    // deviceId is checked by the library
+    if (deviceId == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'deviceId' is null for cusolverMgCreateDeviceGrid");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // mapping is primitive
 
     // Log message
@@ -194,7 +210,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgCreateDeviceGr
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDestroyGridNative(JNIEnv *env, jclass cls, jobject grid)
 {
     // Null-checks for non-primitive arguments
-    // grid is checked by the library
+    if (grid == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'grid' is null for cusolverMgDestroyGrid");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgDestroyGrid(grid=%p)\n",
@@ -243,7 +263,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgCreateMatrixDe
     // rowBlockSize is primitive
     // colBlockSize is primitive
     // dataType is primitive
-    // grid is checked by the library
+    if (grid == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'grid' is null for cusolverMgCreateMatrixDesc");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgCreateMatrixDesc(desc=%p, numRows=%ld, numCols=%ld, rowBlockSize=%ld, colBlockSize=%ld, dataType=%d, grid=%p)\n",
@@ -294,7 +318,11 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgCreateMatrixDe
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDestroyMatrixDescNative(JNIEnv *env, jclass cls, jobject desc)
 {
     // Null-checks for non-primitive arguments
-    // desc is checked by the library
+    if (desc == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'desc' is null for cusolverMgDestroyMatrixDesc");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgDestroyMatrixDesc(desc=%p)\n",
@@ -320,18 +348,38 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgDestroyMatrixD
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgSyevd_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint uplo, jint N, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobject W, jint dataTypeW, jint computeType, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgSyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // jobz is primitive
     // uplo is primitive
     // N is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgSyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
-    // W is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgSyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverMgSyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // dataTypeW is primitive
     // computeType is primitive
-    // lwork is checked by the library
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverMgSyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgSyevd_bufferSize(handle=%p, jobz=%d, uplo=%d, N=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, W=%p, dataTypeW=%d, computeType=%d, lwork=%p)\n",
@@ -390,20 +438,44 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgSyevd_1bufferS
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgSyevdNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint uplo, jint N, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobject W, jint dataTypeW, jint computeType, jobjectArray array_d_work, jlong lwork, jobject info)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // jobz is primitive
     // uplo is primitive
     // N is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
-    // W is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // dataTypeW is primitive
     // computeType is primitive
-    // array_d_work is checked by the library
+    if (array_d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_work' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // lwork is primitive
-    // info is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverMgSyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgSyevd(handle=%p, jobz=%d, uplo=%d, N=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, W=%p, dataTypeW=%d, computeType=%d, array_d_work=%p, lwork=%ld, info=%p)\n",
@@ -468,16 +540,32 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgSyevdNative(JN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrf_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint M, jint N, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobjectArray array_d_IPIV, jint computeType, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgGetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // M is primitive
     // N is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgGetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgGetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // array_d_IPIV is checked by the library
     // computeType is primitive
-    // lwork is checked by the library
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverMgGetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgGetrf_bufferSize(handle=%p, M=%d, N=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, array_d_IPIV=%p, computeType=%d, lwork=%p)\n",
@@ -530,18 +618,38 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrf_1bufferS
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrfNative(JNIEnv *env, jclass cls, jobject handle, jint M, jint N, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobjectArray array_d_IPIV, jint computeType, jobjectArray array_d_work, jlong lwork, jobject info)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgGetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // M is primitive
     // N is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgGetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgGetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // array_d_IPIV is checked by the library
     // computeType is primitive
-    // array_d_work is checked by the library
+    if (array_d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_work' is null for cusolverMgGetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // lwork is primitive
-    // info is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverMgGetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgGetrf(handle=%p, M=%d, N=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, array_d_IPIV=%p, computeType=%d, array_d_work=%p, lwork=%ld, info=%p)\n",
@@ -600,21 +708,49 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrfNative(JN
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrs_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint TRANS, jint N, jint NRHS, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobjectArray array_d_IPIV, jobjectArray array_d_B, jint IB, jint JB, jobject descrB, jint computeType, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // TRANS is primitive
     // N is primitive
     // NRHS is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
-    // array_d_IPIV is checked by the library
-    // array_d_B is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (array_d_IPIV == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_IPIV' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (array_d_B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_B' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IB is primitive
     // JB is primitive
-    // descrB is checked by the library
+    if (descrB == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrB' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // computeType is primitive
-    // lwork is checked by the library
+    if (lwork == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'lwork' is null for cusolverMgGetrs_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgGetrs_bufferSize(handle=%p, TRANS=%d, N=%d, NRHS=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, array_d_IPIV=%p, array_d_B=%p, IB=%d, JB=%d, descrB=%p, computeType=%d, lwork=%p)\n",
@@ -682,23 +818,55 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrs_1bufferS
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverMg_cusolverMgGetrsNative(JNIEnv *env, jclass cls, jobject handle, jint TRANS, jint N, jint NRHS, jobjectArray array_d_A, jint IA, jint JA, jobject descrA, jobjectArray array_d_IPIV, jobjectArray array_d_B, jint IB, jint JB, jobject descrB, jint computeType, jobjectArray array_d_work, jlong lwork, jobject info)
 {
     // Null-checks for non-primitive arguments
-    // handle is checked by the library
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // TRANS is primitive
     // N is primitive
     // NRHS is primitive
-    // array_d_A is checked by the library
+    if (array_d_A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_A' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IA is primitive
     // JA is primitive
-    // descrA is checked by the library
-    // array_d_IPIV is checked by the library
-    // array_d_B is checked by the library
+    if (descrA == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrA' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (array_d_IPIV == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_IPIV' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (array_d_B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_B' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // IB is primitive
     // JB is primitive
-    // descrB is checked by the library
+    if (descrB == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'descrB' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // computeType is primitive
-    // array_d_work is checked by the library
+    if (array_d_work == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'array_d_work' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
     // lwork is primitive
-    // info is checked by the library
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverMgGetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
 
     // Log message
     Logger::log(LOG_TRACE, "Executing cusolverMgGetrs(handle=%p, TRANS=%d, N=%d, NRHS=%d, array_d_A=%p, IA=%d, JA=%d, descrA=%p, array_d_IPIV=%p, array_d_B=%p, IB=%d, JB=%d, descrB=%p, computeType=%d, array_d_work=%p, lwork=%ld, info=%p)\n",
