@@ -30,6 +30,9 @@ package jcuda.jcusolver;
 /** CUSOLVERRF triangular solve algorithm */
 public class cusolverRfTriangularSolve
 {
+    /**
+     * @deprecated Removed in CUDA 11.0 
+     */
     public static final int CUSOLVERRF_TRIANGULAR_SOLVE_ALG0 = 0;
     /**
      * default

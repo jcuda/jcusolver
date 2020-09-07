@@ -145,7 +145,7 @@ public class JCusolverMg
      * @param numCols (in) number of total columns
      * @param rowBlockSize (in) row block size
      * @param colBlockSize (in) column block size
-     * @param dataType (in) the data type of each element in cudaDataType_t
+     * @param dataType (in) the data type of each element in cudaDataType
      * @param grid (in) the opaque data structure of the distributed grid
      * @return the status code
      * </pre>
@@ -387,5 +387,187 @@ public class JCusolverMg
         Pointer[] array_d_work, 
         long lwork, 
         Pointer info);
+
+
+    public static int cusolverMgPotrf_bufferSize(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        int[] lwork)
+    {
+        return checkResult(cusolverMgPotrf_bufferSizeNative(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, lwork));
+    }
+    private static native int cusolverMgPotrf_bufferSizeNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        int[] lwork);
+
+
+    public static int cusolverMgPotrf(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info)
+    {
+        return checkResult(cusolverMgPotrfNative(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, array_d_work, lwork, h_info));
+    }
+    private static native int cusolverMgPotrfNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info);
+
+
+    public static int cusolverMgPotrs_bufferSize(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        Pointer[] array_d_B, 
+        int IB, 
+        int JB, 
+        cudaLibMgMatrixDesc descrB, 
+        int computeType, 
+        int[] lwork)
+    {
+        return checkResult(cusolverMgPotrs_bufferSizeNative(handle, uplo, n, nrhs, array_d_A, IA, JA, descrA, array_d_B, IB, JB, descrB, computeType, lwork));
+    }
+    private static native int cusolverMgPotrs_bufferSizeNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        Pointer[] array_d_B, 
+        int IB, 
+        int JB, 
+        cudaLibMgMatrixDesc descrB, 
+        int computeType, 
+        int[] lwork);
+
+
+    public static int cusolverMgPotrs(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        Pointer[] array_d_B, 
+        int IB, 
+        int JB, 
+        cudaLibMgMatrixDesc descrB, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info)
+    {
+        return checkResult(cusolverMgPotrsNative(handle, uplo, n, nrhs, array_d_A, IA, JA, descrA, array_d_B, IB, JB, descrB, computeType, array_d_work, lwork, h_info));
+    }
+    private static native int cusolverMgPotrsNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int n, 
+        int nrhs, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        Pointer[] array_d_B, 
+        int IB, 
+        int JB, 
+        cudaLibMgMatrixDesc descrB, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info);
+
+
+    public static int cusolverMgPotri_bufferSize(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        int[] lwork)
+    {
+        return checkResult(cusolverMgPotri_bufferSizeNative(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, lwork));
+    }
+    private static native int cusolverMgPotri_bufferSizeNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        int[] lwork);
+
+
+    public static int cusolverMgPotri(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info)
+    {
+        return checkResult(cusolverMgPotriNative(handle, uplo, N, array_d_A, IA, JA, descrA, computeType, array_d_work, lwork, h_info));
+    }
+    private static native int cusolverMgPotriNative(
+        cusolverMgHandle handle, 
+        int uplo, 
+        int N, 
+        Pointer[] array_d_A, 
+        int IA, 
+        int JA, 
+        cudaLibMgMatrixDesc descrA, 
+        int computeType, 
+        Pointer[] array_d_work, 
+        long lwork, 
+        Pointer h_info);
 
 }

@@ -125,45 +125,6 @@ public class JCusolverDn
         cusolverDnIRSParams params);
 
 
-    public static int cusolverDnIRSParamsSetTol(
-        cusolverDnIRSParams params, 
-        int data_type, 
-        double val)
-    {
-        return checkResult(cusolverDnIRSParamsSetTolNative(params, data_type, val));
-    }
-    private static native int cusolverDnIRSParamsSetTolNative(
-        cusolverDnIRSParams params, 
-        int data_type, 
-        double val);
-
-
-    public static int cusolverDnIRSParamsSetTolInner(
-        cusolverDnIRSParams params, 
-        int data_type, 
-        double val)
-    {
-        return checkResult(cusolverDnIRSParamsSetTolInnerNative(params, data_type, val));
-    }
-    private static native int cusolverDnIRSParamsSetTolInnerNative(
-        cusolverDnIRSParams params, 
-        int data_type, 
-        double val);
-
-
-    public static int cusolverDnIRSParamsSetSolverPrecisions(
-        cusolverDnIRSParams params, 
-        int solver_main_precision, 
-        int solver_lowest_precision)
-    {
-        return checkResult(cusolverDnIRSParamsSetSolverPrecisionsNative(params, solver_main_precision, solver_lowest_precision));
-    }
-    private static native int cusolverDnIRSParamsSetSolverPrecisionsNative(
-        cusolverDnIRSParams params, 
-        int solver_main_precision, 
-        int solver_lowest_precision);
-
-
     public static int cusolverDnIRSParamsSetRefinementSolver(
         cusolverDnIRSParams params, 
         int refinement_solver)
@@ -173,61 +134,6 @@ public class JCusolverDn
     private static native int cusolverDnIRSParamsSetRefinementSolverNative(
         cusolverDnIRSParams params, 
         int refinement_solver);
-
-
-    public static int cusolverDnIRSParamsSetMaxIters(
-        cusolverDnIRSParams params, 
-        int maxiters)
-    {
-        return checkResult(cusolverDnIRSParamsSetMaxItersNative(params, maxiters));
-    }
-    private static native int cusolverDnIRSParamsSetMaxItersNative(
-        cusolverDnIRSParams params, 
-        int maxiters);
-
-
-    public static int cusolverDnIRSParamsSetMaxItersInner(
-        cusolverDnIRSParams params, 
-        int maxiters_inner)
-    {
-        return checkResult(cusolverDnIRSParamsSetMaxItersInnerNative(params, maxiters_inner));
-    }
-    private static native int cusolverDnIRSParamsSetMaxItersInnerNative(
-        cusolverDnIRSParams params, 
-        int maxiters_inner);
-
-
-    public static int cusolverDnIRSParamsGetNiters(
-        cusolverDnIRSParams params, 
-        int[] niters)
-    {
-        return checkResult(cusolverDnIRSParamsGetNitersNative(params, niters));
-    }
-    private static native int cusolverDnIRSParamsGetNitersNative(
-        cusolverDnIRSParams params, 
-        int[] niters);
-
-
-    public static int cusolverDnIRSParamsGetOuterNiters(
-        cusolverDnIRSParams params, 
-        int[] outer_niters)
-    {
-        return checkResult(cusolverDnIRSParamsGetOuterNitersNative(params, outer_niters));
-    }
-    private static native int cusolverDnIRSParamsGetOuterNitersNative(
-        cusolverDnIRSParams params, 
-        int[] outer_niters);
-
-
-    public static int cusolverDnIRSParamsGetMaxIters(
-        cusolverDnIRSParams params, 
-        int[] maxiters)
-    {
-        return checkResult(cusolverDnIRSParamsGetMaxItersNative(params, maxiters));
-    }
-    private static native int cusolverDnIRSParamsGetMaxItersNative(
-        cusolverDnIRSParams params, 
-        int[] maxiters);
 
 
     public static int cusolverDnIRSParamsSetSolverMainPrecision(
@@ -252,92 +158,164 @@ public class JCusolverDn
         int solver_lowest_precision);
 
 
+    public static int cusolverDnIRSParamsSetSolverPrecisions(
+        cusolverDnIRSParams params, 
+        int solver_main_precision, 
+        int solver_lowest_precision)
+    {
+        return checkResult(cusolverDnIRSParamsSetSolverPrecisionsNative(params, solver_main_precision, solver_lowest_precision));
+    }
+    private static native int cusolverDnIRSParamsSetSolverPrecisionsNative(
+        cusolverDnIRSParams params, 
+        int solver_main_precision, 
+        int solver_lowest_precision);
+
+
+    public static int cusolverDnIRSParamsSetTol(
+        cusolverDnIRSParams params, 
+        double val)
+    {
+        return checkResult(cusolverDnIRSParamsSetTolNative(params, val));
+    }
+    private static native int cusolverDnIRSParamsSetTolNative(
+        cusolverDnIRSParams params, 
+        double val);
+
+
+    public static int cusolverDnIRSParamsSetTolInner(
+        cusolverDnIRSParams params, 
+        double val)
+    {
+        return checkResult(cusolverDnIRSParamsSetTolInnerNative(params, val));
+    }
+    private static native int cusolverDnIRSParamsSetTolInnerNative(
+        cusolverDnIRSParams params, 
+        double val);
+
+
+    public static int cusolverDnIRSParamsSetMaxIters(
+        cusolverDnIRSParams params, 
+        int maxiters)
+    {
+        return checkResult(cusolverDnIRSParamsSetMaxItersNative(params, maxiters));
+    }
+    private static native int cusolverDnIRSParamsSetMaxItersNative(
+        cusolverDnIRSParams params, 
+        int maxiters);
+
+
+    public static int cusolverDnIRSParamsSetMaxItersInner(
+        cusolverDnIRSParams params, 
+        int maxiters_inner)
+    {
+        return checkResult(cusolverDnIRSParamsSetMaxItersInnerNative(params, maxiters_inner));
+    }
+    private static native int cusolverDnIRSParamsSetMaxItersInnerNative(
+        cusolverDnIRSParams params, 
+        int maxiters_inner);
+
+
+    public static int cusolverDnIRSParamsGetMaxIters(
+        cusolverDnIRSParams params, 
+        int[] maxiters)
+    {
+        return checkResult(cusolverDnIRSParamsGetMaxItersNative(params, maxiters));
+    }
+    private static native int cusolverDnIRSParamsGetMaxItersNative(
+        cusolverDnIRSParams params, 
+        int[] maxiters);
+
+
+    public static int cusolverDnIRSParamsEnableFallback(
+        cusolverDnIRSParams params)
+    {
+        return checkResult(cusolverDnIRSParamsEnableFallbackNative(params));
+    }
+    private static native int cusolverDnIRSParamsEnableFallbackNative(
+        cusolverDnIRSParams params);
+
+
+    public static int cusolverDnIRSParamsDisableFallback(
+        cusolverDnIRSParams params)
+    {
+        return checkResult(cusolverDnIRSParamsDisableFallbackNative(params));
+    }
+    private static native int cusolverDnIRSParamsDisableFallbackNative(
+        cusolverDnIRSParams params);
+
+
     // =============================================================================
     // cusolverDnIRSInfos prototypes
     // =============================================================================
     public static int cusolverDnIRSInfosDestroy(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos)
     {
-        return checkResult(cusolverDnIRSInfosDestroyNative(params, infos));
+        return checkResult(cusolverDnIRSInfosDestroyNative(infos));
     }
     private static native int cusolverDnIRSInfosDestroyNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos);
 
 
     public static int cusolverDnIRSInfosCreate(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos_ptr)
     {
-        return checkResult(cusolverDnIRSInfosCreateNative(params, infos_ptr));
+        return checkResult(cusolverDnIRSInfosCreateNative(infos_ptr));
     }
     private static native int cusolverDnIRSInfosCreateNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos_ptr);
 
 
     public static int cusolverDnIRSInfosGetNiters(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         int[] niters)
     {
-        return checkResult(cusolverDnIRSInfosGetNitersNative(params, infos, niters));
+        return checkResult(cusolverDnIRSInfosGetNitersNative(infos, niters));
     }
     private static native int cusolverDnIRSInfosGetNitersNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         int[] niters);
 
 
     public static int cusolverDnIRSInfosGetOuterNiters(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         int[] outer_niters)
     {
-        return checkResult(cusolverDnIRSInfosGetOuterNitersNative(params, infos, outer_niters));
+        return checkResult(cusolverDnIRSInfosGetOuterNitersNative(infos, outer_niters));
     }
     private static native int cusolverDnIRSInfosGetOuterNitersNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         int[] outer_niters);
 
 
-    public static int cusolverDnIRSInfosGetMaxIters(
-        cusolverDnIRSParams params, 
-        cusolverDnIRSInfos infos, 
-        int[] maxiters)
-    {
-        return checkResult(cusolverDnIRSInfosGetMaxItersNative(params, infos, maxiters));
-    }
-    private static native int cusolverDnIRSInfosGetMaxItersNative(
-        cusolverDnIRSParams params, 
-        cusolverDnIRSInfos infos, 
-        int[] maxiters);
-
-
     public static int cusolverDnIRSInfosRequestResidual(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos)
     {
-        return checkResult(cusolverDnIRSInfosRequestResidualNative(params, infos));
+        return checkResult(cusolverDnIRSInfosRequestResidualNative(infos));
     }
     private static native int cusolverDnIRSInfosRequestResidualNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos);
 
 
     public static int cusolverDnIRSInfosGetResidualHistory(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         Pointer residual_history)
     {
-        return checkResult(cusolverDnIRSInfosGetResidualHistoryNative(params, infos, residual_history));
+        return checkResult(cusolverDnIRSInfosGetResidualHistoryNative(infos, residual_history));
     }
     private static native int cusolverDnIRSInfosGetResidualHistoryNative(
-        cusolverDnIRSParams params, 
         cusolverDnIRSInfos infos, 
         Pointer residual_history);
+
+
+    public static int cusolverDnIRSInfosGetMaxIters(
+        cusolverDnIRSInfos infos, 
+        int[] maxiters)
+    {
+        return checkResult(cusolverDnIRSInfosGetMaxItersNative(infos, maxiters));
+    }
+    private static native int cusolverDnIRSInfosGetMaxItersNative(
+        cusolverDnIRSInfos infos, 
+        int[] maxiters);
 
 
     //============================================================
@@ -345,8 +323,8 @@ public class JCusolverDn
     //============================================================
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, CC, CK, DD, DS, DH, SS, SH,]gesv users API Prototypes
-     * */
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv 
+     * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv(
         cusolverDnHandle handle, 
@@ -453,6 +431,76 @@ public class JCusolverDn
         int[] d_info);
 
 
+    public static int cusolverDnZEgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZEgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZEgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnZYgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZYgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZYgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
     public static int cusolverDnCCgesv(
         cusolverDnHandle handle, 
         int n, 
@@ -488,6 +536,41 @@ public class JCusolverDn
         int[] d_info);
 
 
+    public static int cusolverDnCEgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCEgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCEgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
     public static int cusolverDnCKgesv(
         cusolverDnHandle handle, 
         int n, 
@@ -507,6 +590,41 @@ public class JCusolverDn
         return checkResult(cusolverDnCKgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
     private static native int cusolverDnCKgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnCYgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCYgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCYgesvNative(
         cusolverDnHandle handle, 
         int n, 
         int nrhs, 
@@ -628,6 +746,76 @@ public class JCusolverDn
         int[] d_info);
 
 
+    public static int cusolverDnDBgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDBgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDBgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDXgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDXgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDXgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
     public static int cusolverDnSSgesv(
         cusolverDnHandle handle, 
         int n, 
@@ -698,11 +886,81 @@ public class JCusolverDn
         int[] d_info);
 
 
+    public static int cusolverDnSBgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSBgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSBgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnSXgesv(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSXgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSXgesvNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ,ZC, ZK, CC, CK, DD, DS, DH, SS, SH,]gesv_bufferSize users API Prototypes
-     * */
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize 
+     * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv_bufferSize(
         cusolverDnHandle handle, 
@@ -797,6 +1055,68 @@ public class JCusolverDn
         long[] lwork_bytes);
 
 
+    public static int cusolverDnZEgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZEgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZEgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnZYgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZYgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZYgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
     public static int cusolverDnCCgesv_bufferSize(
         cusolverDnHandle handle, 
         int n, 
@@ -845,6 +1165,68 @@ public class JCusolverDn
         return checkResult(cusolverDnCKgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
     }
     private static native int cusolverDnCKgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCEgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCEgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCEgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCYgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCYgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCYgesv_bufferSizeNative(
         cusolverDnHandle handle, 
         int n, 
         int nrhs, 
@@ -952,6 +1334,68 @@ public class JCusolverDn
         long[] lwork_bytes);
 
 
+    public static int cusolverDnDBgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDBgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDBgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDXgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDXgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDXgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
     public static int cusolverDnSSgesv_bufferSize(
         cusolverDnHandle handle, 
         int n, 
@@ -1014,17 +1458,8 @@ public class JCusolverDn
         long[] lwork_bytes);
 
 
-    /*******************************************************************************/
-    /*******************************************************************************/
-    /**
-     * expert users API for IRS Prototypes
-     * */
-    /*******************************************************************************/
-    public static int cusolverDnIRSXgesv(
+    public static int cusolverDnSBgesv_bufferSize(
         cusolverDnHandle handle, 
-        cusolverDnIRSParams gesv_irs_params, 
-        cusolverDnIRSInfos gesv_irs_infos, 
-        int inout_data_type, 
         int n, 
         int nrhs, 
         Pointer dA, 
@@ -1035,22 +1470,1289 @@ public class JCusolverDn
         Pointer dX, 
         int lddx, 
         Pointer dWorkspace, 
-        long lwork_bytes, 
-        int[] niters, 
-        int[] d_info)
+        long[] lwork_bytes)
     {
-        return checkResult(cusolverDnIRSXgesvNative(handle, gesv_irs_params, gesv_irs_infos, inout_data_type, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, niters, d_info));
+        return checkResult(cusolverDnSBgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
     }
-    private static native int cusolverDnIRSXgesvNative(
+    private static native int cusolverDnSBgesv_bufferSizeNative(
         cusolverDnHandle handle, 
-        cusolverDnIRSParams gesv_irs_params, 
-        cusolverDnIRSInfos gesv_irs_infos, 
-        int inout_data_type, 
         int n, 
         int nrhs, 
         Pointer dA, 
         int ldda, 
         int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnSXgesv_bufferSize(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnSXgesv_bufferSizeNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnSXgesv_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        int[] dipiv, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    /*******************************************************************************/
+    /*******************************************************************************/
+    /**
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels 
+     * users API Prototypes */
+    /*******************************************************************************/
+    public static int cusolverDnZZgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZZgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZZgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnZCgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZCgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZCgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnZKgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZKgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZKgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnZEgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZEgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZEgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnZYgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnZYgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnZYgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnCCgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCCgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCCgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnCKgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCKgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCKgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnCEgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCEgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCEgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnCYgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnCYgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnCYgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDDgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDDgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDDgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDSgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDSgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDSgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDHgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDHgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDHgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDBgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDBgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDBgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnDXgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnDXgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnDXgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnSSgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSSgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSSgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnSHgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSHgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSHgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnSBgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSBgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSBgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    public static int cusolverDnSXgels(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnSXgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
+    }
+    private static native int cusolverDnSXgelsNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] iter, 
+        int[] d_info);
+
+
+    /*******************************************************************************/
+    /*******************************************************************************/
+    /**
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize 
+     * API prototypes */
+    /*******************************************************************************/
+    public static int cusolverDnZZgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZZgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZZgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnZCgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZCgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZCgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnZKgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZKgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZKgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnZEgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZEgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZEgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnZYgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnZYgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnZYgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCCgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCCgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCCgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCKgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCKgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCKgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCEgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCEgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCEgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnCYgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnCYgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnCYgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDDgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDDgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDDgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDSgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDSgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDSgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDHgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDHgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDHgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDBgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDBgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDBgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnDXgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnDXgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnDXgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnSSgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnSSgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnSSgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnSHgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnSHgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnSHgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnSBgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnSBgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnSBgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    public static int cusolverDnSXgels_bufferSize(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnSXgels_bufferSizeNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes));
+    }
+    private static native int cusolverDnSXgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long[] lwork_bytes);
+
+
+    /*******************************************************************************/
+    /*******************************************************************************/
+    /**
+     * expert users API for IRS Prototypes
+     * */
+    /*******************************************************************************/
+    public static int cusolverDnIRSXgesv(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams gesv_irs_params, 
+        cusolverDnIRSInfos gesv_irs_infos, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] niters, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnIRSXgesvNative(handle, gesv_irs_params, gesv_irs_infos, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, niters, d_info));
+    }
+    private static native int cusolverDnIRSXgesvNative(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams gesv_irs_params, 
+        cusolverDnIRSInfos gesv_irs_infos, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
         Pointer dB, 
         int lddb, 
         Pointer dX, 
@@ -1078,6 +2780,65 @@ public class JCusolverDn
         long[] lwork_bytes);
 
 
+    public static int cusolverDnIRSXgels(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams gels_irs_params, 
+        cusolverDnIRSInfos gels_irs_infos, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] niters, 
+        int[] d_info)
+    {
+        return checkResult(cusolverDnIRSXgelsNative(handle, gels_irs_params, gels_irs_infos, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, niters, d_info));
+    }
+    private static native int cusolverDnIRSXgelsNative(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams gels_irs_params, 
+        cusolverDnIRSInfos gels_irs_infos, 
+        int m, 
+        int n, 
+        int nrhs, 
+        Pointer dA, 
+        int ldda, 
+        Pointer dB, 
+        int lddb, 
+        Pointer dX, 
+        int lddx, 
+        Pointer dWorkspace, 
+        long lwork_bytes, 
+        int[] niters, 
+        int[] d_info);
+
+
+    public static int cusolverDnIRSXgels_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams params, 
+        int m, 
+        int n, 
+        int nrhs, 
+        long[] lwork_bytes)
+    {
+        return checkResult(cusolverDnIRSXgels_bufferSizeNative(handle, params, m, n, nrhs, lwork_bytes));
+    }
+    private static native int cusolverDnIRSXgels_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnIRSParams params, 
+        int m, 
+        int n, 
+        int nrhs, 
+        long[] lwork_bytes);
+
+
+    /*******************************************************************************/
     /** Cholesky factorization and its solver */
     public static int cusolverDnSpotrf_bufferSize(
         cusolverDnHandle handle, 
@@ -7866,6 +9627,531 @@ public class JCusolverDn
         Pointer d_info, 
         Pointer h_R_nrmF, 
         int batchSize);
+
+
+    /** 64-bit API for POTRF */
+    public static int cusolverDnCreateParams(
+        cusolverDnParams params)
+    {
+        return checkResult(cusolverDnCreateParamsNative(params));
+    }
+    private static native int cusolverDnCreateParamsNative(
+        cusolverDnParams params);
+
+
+    public static int cusolverDnDestroyParams(
+        cusolverDnParams params)
+    {
+        return checkResult(cusolverDnDestroyParamsNative(params));
+    }
+    private static native int cusolverDnDestroyParamsNative(
+        cusolverDnParams params);
+
+
+    public static int cusolverDnSetAdvOptions(
+        cusolverDnParams params, 
+        int function, 
+        int algo)
+    {
+        return checkResult(cusolverDnSetAdvOptionsNative(params, function, algo));
+    }
+    private static native int cusolverDnSetAdvOptionsNative(
+        cusolverDnParams params, 
+        int function, 
+        int algo);
+
+
+    public static int cusolverDnPotrf_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnPotrf_bufferSizeNative(handle, params, uplo, n, dataTypeA, A, lda, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnPotrf_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnPotrf(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnPotrfNative(handle, params, uplo, n, dataTypeA, A, lda, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnPotrfNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
+
+
+    /** 64-bit API for POTRS */
+    public static int cusolverDnPotrs(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeB, 
+        Pointer B, 
+        long ldb, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnPotrsNative(handle, params, uplo, n, nrhs, dataTypeA, A, lda, dataTypeB, B, ldb, info));
+    }
+    private static native int cusolverDnPotrsNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int uplo, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeB, 
+        Pointer B, 
+        long ldb, 
+        Pointer info);
+
+
+    /** 64-bit API for GEQRF */
+    public static int cusolverDnGeqrf_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeTau, 
+        Pointer tau, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnGeqrf_bufferSizeNative(handle, params, m, n, dataTypeA, A, lda, dataTypeTau, tau, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnGeqrf_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeTau, 
+        Pointer tau, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnGeqrf(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeTau, 
+        Pointer tau, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnGeqrfNative(handle, params, m, n, dataTypeA, A, lda, dataTypeTau, tau, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnGeqrfNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeTau, 
+        Pointer tau, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
+
+
+    /** 64-bit API for GETRF */
+    public static int cusolverDnGetrf_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnGetrf_bufferSizeNative(handle, params, m, n, dataTypeA, A, lda, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnGetrf_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnGetrf(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        long[] ipiv, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnGetrfNative(handle, params, m, n, dataTypeA, A, lda, ipiv, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnGetrfNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        long[] ipiv, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
+
+
+    /** 64-bit API for GETRS */
+    public static int cusolverDnGetrs(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int trans, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
+        Pointer B, 
+        long ldb, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnGetrsNative(handle, params, trans, n, nrhs, dataTypeA, A, lda, ipiv, dataTypeB, B, ldb, info));
+    }
+    private static native int cusolverDnGetrsNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int trans, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
+        Pointer B, 
+        long ldb, 
+        Pointer info);
+
+
+    /** 64-bit API for SYEVD */
+    public static int cusolverDnSyevd_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnSyevd_bufferSizeNative(handle, params, jobz, uplo, n, dataTypeA, A, lda, dataTypeW, W, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnSyevd_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnSyevd(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnSyevdNative(handle, params, jobz, uplo, n, dataTypeA, A, lda, dataTypeW, W, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnSyevdNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
+
+
+    /** 64-bit API for SYEVDX */
+    public static int cusolverDnSyevdx_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        Pointer vl, 
+        Pointer vu, 
+        long il, 
+        long iu, 
+        long[] h_meig, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnSyevdx_bufferSizeNative(handle, params, jobz, range, uplo, n, dataTypeA, A, lda, vl, vu, il, iu, h_meig, dataTypeW, W, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnSyevdx_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        Pointer vl, 
+        Pointer vu, 
+        long il, 
+        long iu, 
+        long[] h_meig, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnSyevdx(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        Pointer vl, 
+        Pointer vu, 
+        long il, 
+        long iu, 
+        long[] meig64, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnSyevdxNative(handle, params, jobz, range, uplo, n, dataTypeA, A, lda, vl, vu, il, iu, meig64, dataTypeW, W, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnSyevdxNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        int jobz, 
+        int range, 
+        int uplo, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        Pointer vl, 
+        Pointer vu, 
+        long il, 
+        long iu, 
+        long[] meig64, 
+        int dataTypeW, 
+        Pointer W, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
+
+
+    /** 64-bit API for GESVD */
+    public static int cusolverDnGesvd_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobvt, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeS, 
+        Pointer S, 
+        int dataTypeU, 
+        Pointer U, 
+        long ldu, 
+        int dataTypeVT, 
+        Pointer VT, 
+        long ldvt, 
+        int computeType, 
+        long[] workspaceInBytes)
+    {
+        return checkResult(cusolverDnGesvd_bufferSizeNative(handle, params, jobu, jobvt, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeVT, VT, ldvt, computeType, workspaceInBytes));
+    }
+    private static native int cusolverDnGesvd_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobvt, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeS, 
+        Pointer S, 
+        int dataTypeU, 
+        Pointer U, 
+        long ldu, 
+        int dataTypeVT, 
+        Pointer VT, 
+        long ldvt, 
+        int computeType, 
+        long[] workspaceInBytes);
+
+
+    public static int cusolverDnGesvd(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobvt, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeS, 
+        Pointer S, 
+        int dataTypeU, 
+        Pointer U, 
+        long ldu, 
+        int dataTypeVT, 
+        Pointer VT, 
+        long ldvt, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info)
+    {
+        return checkResult(cusolverDnGesvdNative(handle, params, jobu, jobvt, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeVT, VT, ldvt, computeType, pBuffer, workspaceInBytes, info));
+    }
+    private static native int cusolverDnGesvdNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobvt, 
+        long m, 
+        long n, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeS, 
+        Pointer S, 
+        int dataTypeU, 
+        Pointer U, 
+        long ldu, 
+        int dataTypeVT, 
+        Pointer VT, 
+        long ldvt, 
+        int computeType, 
+        Pointer pBuffer, 
+        long workspaceInBytes, 
+        Pointer info);
     
 
 }

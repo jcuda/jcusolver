@@ -2,7 +2,7 @@
  * JCusolver - Java bindings for CUSOLVER, the NVIDIA CUDA solver
  * library, to be used with JCuda
  *
- * Copyright (c) 2010-2017 Marco Hutter - http://www.jcuda.org
+ * Copyright (c) 2010-2020 Marco Hutter - http://www.jcuda.org
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -35,9 +35,10 @@ public class cusolverIRSRefinement
     public static final int CUSOLVER_IRS_REFINE_CLASSICAL_GMRES = 1103;
     public static final int CUSOLVER_IRS_REFINE_GMRES = 1104;
     public static final int CUSOLVER_IRS_REFINE_GMRES_GMRES = 1105;
-    public static final int CUSOLVER_PREC_DD = 1300;
-    public static final int CUSOLVER_PREC_SS = 1301;
-    public static final int CUSOLVER_PREC_SHT = 1302;
+    public static final int CUSOLVER_IRS_REFINE_GMRES_NOPCOND = 1106;
+    public static final int CUSOLVER_PREC_DD = 1150;
+    public static final int CUSOLVER_PREC_SS = 1151;
+    public static final int CUSOLVER_PREC_SHT = 1152;
 
     /**
      * Private constructor to prevent instantiation
@@ -62,6 +63,7 @@ public class cusolverIRSRefinement
             case CUSOLVER_IRS_REFINE_CLASSICAL_GMRES: return "CUSOLVER_IRS_REFINE_CLASSICAL_GMRES";
             case CUSOLVER_IRS_REFINE_GMRES: return "CUSOLVER_IRS_REFINE_GMRES";
             case CUSOLVER_IRS_REFINE_GMRES_GMRES: return "CUSOLVER_IRS_REFINE_GMRES_GMRES";
+            case CUSOLVER_IRS_REFINE_GMRES_NOPCOND: return "CUSOLVER_IRS_REFINE_GMRES_NOPCOND";
             case CUSOLVER_PREC_DD: return "CUSOLVER_PREC_DD";
             case CUSOLVER_PREC_SS: return "CUSOLVER_PREC_SS";
             case CUSOLVER_PREC_SHT: return "CUSOLVER_PREC_SHT";
