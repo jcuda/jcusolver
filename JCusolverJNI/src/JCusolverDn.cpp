@@ -166,7 +166,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnGetStreamNativ
 }
 
 //============================================================
-// IRS headers 
+// IRS headers
 //============================================================
 // =============================================================================
 // IRS helper function API
@@ -28695,7 +28695,6 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdaStrided
     return jniResult;
 }
 
-/** 64-bit API for POTRF */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnCreateParamsNative(JNIEnv* env, jclass cls, jobject params)
 {
     // Null-checks for non-primitive arguments
@@ -28794,6 +28793,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSetAdvOptionsN
     return jniResult;
 }
 
+/** 64-bit API for POTRF */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnPotrf_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jint computeType, jlongArray workspaceInBytes)
 {
     // Null-checks for non-primitive arguments
@@ -30215,6 +30215,1850 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnGesvdNative(JN
     // pBuffer is a native pointer
     // workspaceInBytes is primitive
     // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/**
+ * new 64-bit API
+ */
+ /** 64-bit API for POTRF */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXpotrf_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXpotrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXpotrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXpotrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXpotrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXpotrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXpotrf_bufferSize(handle=%p, params=%p, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, uplo, n, dataTypeA, A, lda, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXpotrf_bufferSize(handle_native, params_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXpotrfNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXpotrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXpotrf(handle=%p, params=%p, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, uplo, n, dataTypeA, A, lda, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXpotrf(handle_native, params_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for POTRS */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXpotrsNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint uplo, jlong n, jlong nrhs, jint dataTypeA, jobject A, jlong lda, jint dataTypeB, jobject B, jlong ldb, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXpotrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXpotrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXpotrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeB is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnXpotrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXpotrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXpotrs(handle=%p, params=%p, uplo=%d, n=%ld, nrhs=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeB=%d, B=%p, ldb=%ld, info=%p)\n",
+        handle, params, uplo, n, nrhs, dataTypeA, A, lda, dataTypeB, B, ldb, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    int64_t nrhs_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeB_native;
+    void* B_native = NULL;
+    int64_t ldb_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    nrhs_native = (int64_t)nrhs;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeB_native = (cudaDataType)dataTypeB;
+    B_native = (void*)getPointer(env, B);
+    ldb_native = (int64_t)ldb;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXpotrs(handle_native, params_native, uplo_native, n_native, nrhs_native, dataTypeA_native, A_native, lda_native, dataTypeB_native, B_native, ldb_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // uplo is primitive
+    // n is primitive
+    // nrhs is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeB is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for GEQRF */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgeqrf_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeTau, jobject tau, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeTau is primitive
+    if (tau == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'tau' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXgeqrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgeqrf_bufferSize(handle=%p, params=%p, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeTau=%d, tau=%p, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, m, n, dataTypeA, A, lda, dataTypeTau, tau, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeTau_native;
+    void* tau_native = NULL;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeTau_native = (cudaDataType)dataTypeTau;
+    tau_native = (void*)getPointer(env, tau);
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgeqrf_bufferSize(handle_native, params_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeTau_native, tau_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeTau is primitive
+    // tau is a native pointer
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgeqrfNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeTau, jobject tau, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeTau is primitive
+    if (tau == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'tau' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXgeqrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgeqrf(handle=%p, params=%p, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeTau=%d, tau=%p, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, m, n, dataTypeA, A, lda, dataTypeTau, tau, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeTau_native;
+    void* tau_native = NULL;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeTau_native = (cudaDataType)dataTypeTau;
+    tau_native = (void*)getPointer(env, tau);
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgeqrf(handle_native, params_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeTau_native, tau_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeTau is primitive
+    // tau is a native pointer
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for GETRF */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgetrf_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXgetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXgetrf_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgetrf_bufferSize(handle=%p, params=%p, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, m, n, dataTypeA, A, lda, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgetrf_bufferSize(handle_native, params_native, m_native, n_native, dataTypeA_native, A_native, lda_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgetrfNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jlongArray ipiv, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (ipiv == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'ipiv' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXgetrf");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgetrf(handle=%p, params=%p, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, ipiv=%p, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, m, n, dataTypeA, A, lda, ipiv, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    int64_t* ipiv_native = NULL;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    ipiv_native = (int64_t*)getPointer(env, ipiv);
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgetrf(handle_native, params_native, m_native, n_native, dataTypeA_native, A_native, lda_native, ipiv_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // ipiv is a native pointer
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for GETRS */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgetrsNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint trans, jlong n, jlong nrhs, jint dataTypeA, jobject A, jlong lda, jlongArray ipiv, jint dataTypeB, jobject B, jlong ldb, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // trans is primitive
+    // n is primitive
+    // nrhs is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (ipiv == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'ipiv' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeB is primitive
+    if (B == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'B' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldb is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXgetrs");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgetrs(handle=%p, params=%p, trans=%d, n=%ld, nrhs=%ld, dataTypeA=%d, A=%p, lda=%ld, ipiv=%p, dataTypeB=%d, B=%p, ldb=%ld, info=%p)\n",
+        handle, params, trans, n, nrhs, dataTypeA, A, lda, ipiv, dataTypeB, B, ldb, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cublasOperation_t trans_native;
+    int64_t n_native = 0;
+    int64_t nrhs_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    int64_t* ipiv_native = NULL;
+    cudaDataType dataTypeB_native;
+    void* B_native = NULL;
+    int64_t ldb_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    trans_native = (cublasOperation_t)trans;
+    n_native = (int64_t)n;
+    nrhs_native = (int64_t)nrhs;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    ipiv_native = (int64_t*)getPointer(env, ipiv);
+    dataTypeB_native = (cudaDataType)dataTypeB;
+    B_native = (void*)getPointer(env, B);
+    ldb_native = (int64_t)ldb;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgetrs(handle_native, params_native, trans_native, n_native, nrhs_native, dataTypeA_native, A_native, lda_native, ipiv_native, dataTypeB_native, B_native, ldb_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // trans is primitive
+    // n is primitive
+    // nrhs is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // ipiv is a native pointer
+    // dataTypeB is primitive
+    // B is a native pointer
+    // ldb is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for SYEVD */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXsyevd_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeW, jobject W, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeW is primitive
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXsyevd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXsyevd_bufferSize(handle=%p, params=%p, jobz=%d, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeW=%d, W=%p, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, jobz, uplo, n, dataTypeA, A, lda, dataTypeW, W, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeW_native;
+    void* W_native = NULL;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeW_native = (cudaDataType)dataTypeW;
+    W_native = (void*)getPointer(env, W);
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXsyevd_bufferSize(handle_native, params_native, jobz_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeW_native, W_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeW is primitive
+    // W is a native pointer
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXsyevdNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeW, jobject W, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeW is primitive
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXsyevd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXsyevd(handle=%p, params=%p, jobz=%d, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeW=%d, W=%p, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, jobz, uplo, n, dataTypeA, A, lda, dataTypeW, W, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeW_native;
+    void* W_native = NULL;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeW_native = (cudaDataType)dataTypeW;
+    W_native = (void*)getPointer(env, W);
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXsyevd(handle_native, params_native, jobz_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeW_native, W_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeW is primitive
+    // W is a native pointer
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for SYEVDX */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXsyevdx_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint range, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jobject vl, jobject vu, jlong il, jlong iu, jlongArray h_meig, jint dataTypeW, jobject W, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (vl == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'vl' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (vu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'vu' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // il is primitive
+    // iu is primitive
+    if (h_meig == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_meig' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeW is primitive
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXsyevdx_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXsyevdx_bufferSize(handle=%p, params=%p, jobz=%d, range=%d, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, vl=%p, vu=%p, il=%ld, iu=%ld, h_meig=%p, dataTypeW=%d, W=%p, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, jobz, range, uplo, n, dataTypeA, A, lda, vl, vu, il, iu, h_meig, dataTypeW, W, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    void* vl_native = NULL;
+    void* vu_native = NULL;
+    int64_t il_native = 0;
+    int64_t iu_native = 0;
+    int64_t* h_meig_native = NULL;
+    cudaDataType dataTypeW_native;
+    void* W_native = NULL;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    vl_native = (void*)getPointer(env, vl);
+    vu_native = (void*)getPointer(env, vu);
+    il_native = (int64_t)il;
+    iu_native = (int64_t)iu;
+    h_meig_native = (int64_t*)getPointer(env, h_meig);
+    dataTypeW_native = (cudaDataType)dataTypeW;
+    W_native = (void*)getPointer(env, W);
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXsyevdx_bufferSize(handle_native, params_native, jobz_native, range_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, h_meig_native, dataTypeW_native, W_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is a native pointer
+    // vu is a native pointer
+    // il is primitive
+    // iu is primitive
+    // h_meig is a native pointer
+    // dataTypeW is primitive
+    // W is a native pointer
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXsyevdxNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint range, jint uplo, jlong n, jint dataTypeA, jobject A, jlong lda, jobject vl, jobject vu, jlong il, jlong iu, jlongArray meig64, jint dataTypeW, jobject W, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    if (vl == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'vl' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (vu == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'vu' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // il is primitive
+    // iu is primitive
+    if (meig64 == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'meig64' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeW is primitive
+    if (W == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'W' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXsyevdx");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXsyevdx(handle=%p, params=%p, jobz=%d, range=%d, uplo=%d, n=%ld, dataTypeA=%d, A=%p, lda=%ld, vl=%p, vu=%p, il=%ld, iu=%ld, meig64=%p, dataTypeW=%d, W=%p, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, jobz, range, uplo, n, dataTypeA, A, lda, vl, vu, il, iu, meig64, dataTypeW, W, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    cusolverEigRange_t range_native;
+    cublasFillMode_t uplo_native;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    void* vl_native = NULL;
+    void* vu_native = NULL;
+    int64_t il_native = 0;
+    int64_t iu_native = 0;
+    int64_t* meig64_native = NULL;
+    cudaDataType dataTypeW_native;
+    void* W_native = NULL;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    range_native = (cusolverEigRange_t)range;
+    uplo_native = (cublasFillMode_t)uplo;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    vl_native = (void*)getPointer(env, vl);
+    vu_native = (void*)getPointer(env, vu);
+    il_native = (int64_t)il;
+    iu_native = (int64_t)iu;
+    meig64_native = (int64_t*)getPointer(env, meig64);
+    dataTypeW_native = (cudaDataType)dataTypeW;
+    W_native = (void*)getPointer(env, W);
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXsyevdx(handle_native, params_native, jobz_native, range_native, uplo_native, n_native, dataTypeA_native, A_native, lda_native, vl_native, vu_native, il_native, iu_native, meig64_native, dataTypeW_native, W_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // range is primitive
+    // uplo is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // vl is a native pointer
+    // vu is a native pointer
+    // il is primitive
+    // iu is primitive
+    // meig64 is a native pointer
+    // dataTypeW is primitive
+    // W is a native pointer
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for GESVD */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgesvd_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jchar jobu, jchar jobvt, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeS, jobject S, jint dataTypeU, jobject U, jlong ldu, jint dataTypeVT, jobject VT, jlong ldvt, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobu is primitive
+    // jobvt is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeS is primitive
+    if (S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'S' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeU is primitive
+    if (U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'U' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // dataTypeVT is primitive
+    if (VT == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'VT' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldvt is primitive
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXgesvd_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgesvd_bufferSize(handle=%p, params=%p, jobu=%c, jobvt=%c, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeS=%d, S=%p, dataTypeU=%d, U=%p, ldu=%ld, dataTypeVT=%d, VT=%p, ldvt=%ld, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, jobu, jobvt, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeVT, VT, ldvt, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    char jobu_native = 0;
+    char jobvt_native = 0;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeS_native;
+    void* S_native = NULL;
+    cudaDataType dataTypeU_native;
+    void* U_native = NULL;
+    int64_t ldu_native = 0;
+    cudaDataType dataTypeVT_native;
+    void* VT_native = NULL;
+    int64_t ldvt_native = 0;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobu_native = (char)jobu;
+    jobvt_native = (char)jobvt;
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeS_native = (cudaDataType)dataTypeS;
+    S_native = (void*)getPointer(env, S);
+    dataTypeU_native = (cudaDataType)dataTypeU;
+    U_native = (void*)getPointer(env, U);
+    ldu_native = (int64_t)ldu;
+    dataTypeVT_native = (cudaDataType)dataTypeVT;
+    VT_native = (void*)getPointer(env, VT);
+    ldvt_native = (int64_t)ldvt;
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgesvd_bufferSize(handle_native, params_native, jobu_native, jobvt_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeS_native, S_native, dataTypeU_native, U_native, ldu_native, dataTypeVT_native, VT_native, ldvt_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobu is primitive
+    // jobvt is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeS is primitive
+    // S is a native pointer
+    // dataTypeU is primitive
+    // U is a native pointer
+    // ldu is primitive
+    // dataTypeVT is primitive
+    // VT is a native pointer
+    // ldvt is primitive
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgesvdNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jchar jobu, jchar jobvt, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeS, jobject S, jint dataTypeU, jobject U, jlong ldu, jint dataTypeVT, jobject VT, jlong ldvt, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject info)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobu is primitive
+    // jobvt is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeS is primitive
+    if (S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'S' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeU is primitive
+    if (U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'U' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // dataTypeVT is primitive
+    if (VT == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'VT' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldvt is primitive
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'info' is null for cusolverDnXgesvd");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgesvd(handle=%p, params=%p, jobu=%c, jobvt=%c, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeS=%d, S=%p, dataTypeU=%d, U=%p, ldu=%ld, dataTypeVT=%d, VT=%p, ldvt=%ld, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, info=%p)\n",
+        handle, params, jobu, jobvt, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeVT, VT, ldvt, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    char jobu_native = 0;
+    char jobvt_native = 0;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeS_native;
+    void* S_native = NULL;
+    cudaDataType dataTypeU_native;
+    void* U_native = NULL;
+    int64_t ldu_native = 0;
+    cudaDataType dataTypeVT_native;
+    void* VT_native = NULL;
+    int64_t ldvt_native = 0;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* info_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobu_native = (char)jobu;
+    jobvt_native = (char)jobvt;
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeS_native = (cudaDataType)dataTypeS;
+    S_native = (void*)getPointer(env, S);
+    dataTypeU_native = (cudaDataType)dataTypeU;
+    U_native = (void*)getPointer(env, U);
+    ldu_native = (int64_t)ldu;
+    dataTypeVT_native = (cudaDataType)dataTypeVT;
+    VT_native = (void*)getPointer(env, VT);
+    ldvt_native = (int64_t)ldvt;
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    info_native = (int*)getPointer(env, info);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgesvd(handle_native, params_native, jobu_native, jobvt_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeS_native, S_native, dataTypeU_native, U_native, ldu_native, dataTypeVT_native, VT_native, ldvt_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, info_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobu is primitive
+    // jobvt is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeS is primitive
+    // S is a native pointer
+    // dataTypeU is primitive
+    // U is a native pointer
+    // ldu is primitive
+    // dataTypeVT is primitive
+    // VT is a native pointer
+    // ldvt is primitive
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // info is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+/** 64-bit API for GESVDP */
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgesvdp_1bufferSizeNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint econ, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeS, jobject S, jint dataTypeU, jobject U, jlong ldu, jint dataTypeV, jobject V, jlong ldv, jint computeType, jlongArray workspaceInBytesOnDevice, jlongArray workspaceInBytesOnHost)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // econ is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeS is primitive
+    if (S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'S' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeU is primitive
+    if (U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'U' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // dataTypeV is primitive
+    if (V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'V' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // computeType is primitive
+    if (workspaceInBytesOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnDevice' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (workspaceInBytesOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'workspaceInBytesOnHost' is null for cusolverDnXgesvdp_bufferSize");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgesvdp_bufferSize(handle=%p, params=%p, jobz=%d, econ=%d, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeS=%d, S=%p, dataTypeU=%d, U=%p, ldu=%ld, dataTypeV=%d, V=%p, ldv=%ld, computeType=%d, workspaceInBytesOnDevice=%p, workspaceInBytesOnHost=%p)\n",
+        handle, params, jobz, econ, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeV, V, ldv, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    int econ_native = 0;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeS_native;
+    void* S_native = NULL;
+    cudaDataType dataTypeU_native;
+    void* U_native = NULL;
+    int64_t ldu_native = 0;
+    cudaDataType dataTypeV_native;
+    void* V_native = NULL;
+    int64_t ldv_native = 0;
+    cudaDataType computeType_native;
+    size_t* workspaceInBytesOnDevice_native = NULL;
+    size_t* workspaceInBytesOnHost_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    econ_native = (int)econ;
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeS_native = (cudaDataType)dataTypeS;
+    S_native = (void*)getPointer(env, S);
+    dataTypeU_native = (cudaDataType)dataTypeU;
+    U_native = (void*)getPointer(env, U);
+    ldu_native = (int64_t)ldu;
+    dataTypeV_native = (cudaDataType)dataTypeV;
+    V_native = (void*)getPointer(env, V);
+    ldv_native = (int64_t)ldv;
+    computeType_native = (cudaDataType)computeType;
+    workspaceInBytesOnDevice_native = (size_t*)getPointer(env, workspaceInBytesOnDevice);
+    workspaceInBytesOnHost_native = (size_t*)getPointer(env, workspaceInBytesOnHost);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgesvdp_bufferSize(handle_native, params_native, jobz_native, econ_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeS_native, S_native, dataTypeU_native, U_native, ldu_native, dataTypeV_native, V_native, ldv_native, computeType_native, workspaceInBytesOnDevice_native, workspaceInBytesOnHost_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // econ is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeS is primitive
+    // S is a native pointer
+    // dataTypeU is primitive
+    // U is a native pointer
+    // ldu is primitive
+    // dataTypeV is primitive
+    // V is a native pointer
+    // ldv is primitive
+    // computeType is primitive
+    // workspaceInBytesOnDevice is a native pointer
+    // workspaceInBytesOnHost is a native pointer
+
+    // Return the result
+    jint jniResult = (jint)jniResult_native;
+    return jniResult;
+}
+
+JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnXgesvdpNative(JNIEnv* env, jclass cls, jobject handle, jobject params, jint jobz, jint econ, jlong m, jlong n, jint dataTypeA, jobject A, jlong lda, jint dataTypeS, jobject S, jint dataTypeU, jobject U, jlong ldu, jint dataTypeV, jobject V, jlong ldv, jint computeType, jobject bufferOnDevice, jlong workspaceInBytesOnDevice, jobject bufferOnHost, jlong workspaceInBytesOnHost, jobject d_info, jobject h_err_sigma)
+{
+    // Null-checks for non-primitive arguments
+    if (handle == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'handle' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (params == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'params' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // jobz is primitive
+    // econ is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    if (A == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'A' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // lda is primitive
+    // dataTypeS is primitive
+    if (S == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'S' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // dataTypeU is primitive
+    if (U == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'U' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldu is primitive
+    // dataTypeV is primitive
+    if (V == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'V' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // ldv is primitive
+    // computeType is primitive
+    if (bufferOnDevice == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnDevice' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnDevice is primitive
+    if (bufferOnHost == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'bufferOnHost' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    // workspaceInBytesOnHost is primitive
+    if (d_info == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'd_info' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+    if (h_err_sigma == NULL)
+    {
+        ThrowByName(env, "java/lang/NullPointerException", "Parameter 'h_err_sigma' is null for cusolverDnXgesvdp");
+        return JCUSOLVER_STATUS_INTERNAL_ERROR;
+    }
+
+    // Log message
+    Logger::log(LOG_TRACE, "Executing cusolverDnXgesvdp(handle=%p, params=%p, jobz=%d, econ=%d, m=%ld, n=%ld, dataTypeA=%d, A=%p, lda=%ld, dataTypeS=%d, S=%p, dataTypeU=%d, U=%p, ldu=%ld, dataTypeV=%d, V=%p, ldv=%ld, computeType=%d, bufferOnDevice=%p, workspaceInBytesOnDevice=%ld, bufferOnHost=%p, workspaceInBytesOnHost=%ld, d_info=%p, h_err_sigma=%p)\n",
+        handle, params, jobz, econ, m, n, dataTypeA, A, lda, dataTypeS, S, dataTypeU, U, ldu, dataTypeV, V, ldv, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, d_info, h_err_sigma);
+
+    // Native variable declarations
+    cusolverDnHandle_t handle_native;
+    cusolverDnParams_t params_native;
+    cusolverEigMode_t jobz_native;
+    int econ_native = 0;
+    int64_t m_native = 0;
+    int64_t n_native = 0;
+    cudaDataType dataTypeA_native;
+    void* A_native = NULL;
+    int64_t lda_native = 0;
+    cudaDataType dataTypeS_native;
+    void* S_native = NULL;
+    cudaDataType dataTypeU_native;
+    void* U_native = NULL;
+    int64_t ldu_native = 0;
+    cudaDataType dataTypeV_native;
+    void* V_native = NULL;
+    int64_t ldv_native = 0;
+    cudaDataType computeType_native;
+    void* bufferOnDevice_native = NULL;
+    size_t workspaceInBytesOnDevice_native = 0;
+    void* bufferOnHost_native = NULL;
+    size_t workspaceInBytesOnHost_native = 0;
+    int* d_info_native = NULL;
+    double* h_err_sigma_native = NULL;
+
+    // Obtain native variable values
+    handle_native = (cusolverDnHandle_t)getNativePointerValue(env, handle);
+    params_native = (cusolverDnParams_t)getNativePointerValue(env, params);
+    jobz_native = (cusolverEigMode_t)jobz;
+    econ_native = (int)econ;
+    m_native = (int64_t)m;
+    n_native = (int64_t)n;
+    dataTypeA_native = (cudaDataType)dataTypeA;
+    A_native = (void*)getPointer(env, A);
+    lda_native = (int64_t)lda;
+    dataTypeS_native = (cudaDataType)dataTypeS;
+    S_native = (void*)getPointer(env, S);
+    dataTypeU_native = (cudaDataType)dataTypeU;
+    U_native = (void*)getPointer(env, U);
+    ldu_native = (int64_t)ldu;
+    dataTypeV_native = (cudaDataType)dataTypeV;
+    V_native = (void*)getPointer(env, V);
+    ldv_native = (int64_t)ldv;
+    computeType_native = (cudaDataType)computeType;
+    bufferOnDevice_native = (void*)getPointer(env, bufferOnDevice);
+    workspaceInBytesOnDevice_native = (size_t)workspaceInBytesOnDevice;
+    bufferOnHost_native = (void*)getPointer(env, bufferOnHost);
+    workspaceInBytesOnHost_native = (size_t)workspaceInBytesOnHost;
+    d_info_native = (int*)getPointer(env, d_info);
+    h_err_sigma_native = (double*)getPointer(env, h_err_sigma);
+
+    // Native function call
+    cusolverStatus_t jniResult_native = cusolverDnXgesvdp(handle_native, params_native, jobz_native, econ_native, m_native, n_native, dataTypeA_native, A_native, lda_native, dataTypeS_native, S_native, dataTypeU_native, U_native, ldu_native, dataTypeV_native, V_native, ldv_native, computeType_native, bufferOnDevice_native, workspaceInBytesOnDevice_native, bufferOnHost_native, workspaceInBytesOnHost_native, d_info_native, h_err_sigma_native);
+
+    // Write back native variable values
+    // handle is read-only
+    // params is read-only
+    // jobz is primitive
+    // econ is primitive
+    // m is primitive
+    // n is primitive
+    // dataTypeA is primitive
+    // A is a native pointer
+    // lda is primitive
+    // dataTypeS is primitive
+    // S is a native pointer
+    // dataTypeU is primitive
+    // U is a native pointer
+    // ldu is primitive
+    // dataTypeV is primitive
+    // V is a native pointer
+    // ldv is primitive
+    // computeType is primitive
+    // bufferOnDevice is a native pointer
+    // workspaceInBytesOnDevice is primitive
+    // bufferOnHost is a native pointer
+    // workspaceInBytesOnHost is primitive
+    // d_info is a native pointer
+    // h_err_sigma is a native pointer
 
     // Return the result
     jint jniResult = (jint)jniResult_native;
