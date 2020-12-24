@@ -78,7 +78,7 @@ public class JCusolver
             String libraryBaseName = "JCusolver-" + JCuda.getJCudaVersion();
             String libraryName = 
                 LibUtils.createPlatformLibraryName(libraryBaseName);
-            LibUtils.loadLibrary(libraryName);
+            LibUtilsCuda.loadLibrary(libraryName);
             initialized = true;
         }
     }
