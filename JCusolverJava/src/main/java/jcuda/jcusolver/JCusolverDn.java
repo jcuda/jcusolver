@@ -102,7 +102,7 @@ public class JCusolverDn
 
 
     //============================================================
-    // IRS headers
+    // IRS headers 
     //============================================================
     // =============================================================================
     // IRS helper function API
@@ -323,7 +323,7 @@ public class JCusolverDn
     //============================================================
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv 
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv(
@@ -959,7 +959,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize 
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv_bufferSize(
@@ -1523,7 +1523,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels 
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgels(
@@ -2159,7 +2159,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize 
      * API prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgels_bufferSize(
@@ -3470,187 +3470,59 @@ public class JCusolverDn
         Pointer devInfo);
 
 
-    public static int cusolverDnStrtri_bufferSize(
+    public static int cusolverDnXtrtri_bufferSize(
         cusolverDnHandle handle, 
         int uplo, 
         int diag, 
-        int n, 
+        long n, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        int[] lwork)
+        long lda, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost)
     {
-        return checkResult(cusolverDnStrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
+        return checkResult(cusolverDnXtrtri_bufferSizeNative(handle, uplo, diag, n, dataTypeA, A, lda, workspaceInBytesOnDevice, workspaceInBytesOnHost));
     }
-    private static native int cusolverDnStrtri_bufferSizeNative(
+    private static native int cusolverDnXtrtri_bufferSizeNative(
         cusolverDnHandle handle, 
         int uplo, 
         int diag, 
-        int n, 
+        long n, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        int[] lwork);
+        long lda, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost);
 
 
-    public static int cusolverDnDtrtri_bufferSize(
+    public static int cusolverDnXtrtri(
         cusolverDnHandle handle, 
         int uplo, 
         int diag, 
-        int n, 
+        long n, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnDtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
-    }
-    private static native int cusolverDnDtrtri_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        int[] lwork);
-
-
-    public static int cusolverDnCtrtri_bufferSize(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnCtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
-    }
-    private static native int cusolverDnCtrtri_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        int[] lwork);
-
-
-    public static int cusolverDnZtrtri_bufferSize(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnZtrtri_bufferSizeNative(handle, uplo, diag, n, A, lda, lwork));
-    }
-    private static native int cusolverDnZtrtri_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        int[] lwork);
-
-
-    public static int cusolverDnStrtri(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
+        long lda, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
         Pointer devInfo)
     {
-        return checkResult(cusolverDnStrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
+        return checkResult(cusolverDnXtrtriNative(handle, uplo, diag, n, dataTypeA, A, lda, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, devInfo));
     }
-    private static native int cusolverDnStrtriNative(
+    private static native int cusolverDnXtrtriNative(
         cusolverDnHandle handle, 
         int uplo, 
         int diag, 
-        int n, 
+        long n, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo);
-
-
-    public static int cusolverDnDtrtri(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo)
-    {
-        return checkResult(cusolverDnDtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
-    }
-    private static native int cusolverDnDtrtriNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo);
-
-
-    public static int cusolverDnCtrtri(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo)
-    {
-        return checkResult(cusolverDnCtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
-    }
-    private static native int cusolverDnCtrtriNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo);
-
-
-    public static int cusolverDnZtrtri(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
-        Pointer devInfo)
-    {
-        return checkResult(cusolverDnZtrtriNative(handle, uplo, diag, n, A, lda, work, lwork, devInfo));
-    }
-    private static native int cusolverDnZtrtriNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int diag, 
-        int n, 
-        Pointer A, 
-        int lda, 
-        Pointer work, 
-        int lwork, 
+        long lda, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
         Pointer devInfo);
 
 
@@ -5007,235 +4879,75 @@ public class JCusolverDn
 
 
     /** Symmetric indefinite solve (SYTRS) */
-    public static int cusolverDnSsytrs_bufferSize(
+    public static int cusolverDnXsytrs_bufferSize(
         cusolverDnHandle handle, 
         int uplo, 
-        int n, 
-        int nrhs, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        Pointer ipiv, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
         Pointer B, 
-        int ldb, 
-        int[] lwork)
+        long ldb, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost)
     {
-        return checkResult(cusolverDnSsytrs_bufferSizeNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, lwork));
+        return checkResult(cusolverDnXsytrs_bufferSizeNative(handle, uplo, n, nrhs, dataTypeA, A, lda, ipiv, dataTypeB, B, ldb, workspaceInBytesOnDevice, workspaceInBytesOnHost));
     }
-    private static native int cusolverDnSsytrs_bufferSizeNative(
+    private static native int cusolverDnXsytrs_bufferSizeNative(
         cusolverDnHandle handle, 
         int uplo, 
-        int n, 
-        int nrhs, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        Pointer ipiv, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
         Pointer B, 
-        int ldb, 
-        int[] lwork);
+        long ldb, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost);
 
 
-    public static int cusolverDnDsytrs_bufferSize(
+    public static int cusolverDnXsytrs(
         cusolverDnHandle handle, 
         int uplo, 
-        int n, 
-        int nrhs, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        Pointer ipiv, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
         Pointer B, 
-        int ldb, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnDsytrs_bufferSizeNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, lwork));
-    }
-    private static native int cusolverDnDsytrs_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        int[] lwork);
-
-
-    public static int cusolverDnCsytrs_bufferSize(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnCsytrs_bufferSizeNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, lwork));
-    }
-    private static native int cusolverDnCsytrs_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        int[] lwork);
-
-
-    public static int cusolverDnZsytrs_bufferSize(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        int[] lwork)
-    {
-        return checkResult(cusolverDnZsytrs_bufferSizeNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, lwork));
-    }
-    private static native int cusolverDnZsytrs_bufferSizeNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        int[] lwork);
-
-
-    public static int cusolverDnSsytrs(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
+        long ldb, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
         Pointer info)
     {
-        return checkResult(cusolverDnSsytrsNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, work, lwork, info));
+        return checkResult(cusolverDnXsytrsNative(handle, uplo, n, nrhs, dataTypeA, A, lda, ipiv, dataTypeB, B, ldb, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, info));
     }
-    private static native int cusolverDnSsytrsNative(
+    private static native int cusolverDnXsytrsNative(
         cusolverDnHandle handle, 
         int uplo, 
-        int n, 
-        int nrhs, 
+        long n, 
+        long nrhs, 
+        int dataTypeA, 
         Pointer A, 
-        int lda, 
-        Pointer ipiv, 
+        long lda, 
+        long[] ipiv, 
+        int dataTypeB, 
         Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info);
-
-
-    public static int cusolverDnDsytrs(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info)
-    {
-        return checkResult(cusolverDnDsytrsNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, work, lwork, info));
-    }
-    private static native int cusolverDnDsytrsNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info);
-
-
-    public static int cusolverDnCsytrs(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info)
-    {
-        return checkResult(cusolverDnCsytrsNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, work, lwork, info));
-    }
-    private static native int cusolverDnCsytrsNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info);
-
-
-    public static int cusolverDnZsytrs(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
-        Pointer info)
-    {
-        return checkResult(cusolverDnZsytrsNative(handle, uplo, n, nrhs, A, lda, ipiv, B, ldb, work, lwork, info));
-    }
-    private static native int cusolverDnZsytrsNative(
-        cusolverDnHandle handle, 
-        int uplo, 
-        int n, 
-        int nrhs, 
-        Pointer A, 
-        int lda, 
-        Pointer ipiv, 
-        Pointer B, 
-        int ldb, 
-        Pointer work, 
-        int lwork, 
+        long ldb, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
         Pointer info);
 
 
@@ -9661,7 +9373,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for POTRF */
-    @Deprecated
     public static int cusolverDnPotrf_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9687,7 +9398,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnPotrf(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9718,7 +9428,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for POTRS */
-    @Deprecated
     public static int cusolverDnPotrs(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9751,7 +9460,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for GEQRF */
-    @Deprecated
     public static int cusolverDnGeqrf_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9781,7 +9489,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnGeqrf(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9816,7 +9523,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for GETRF */
-    @Deprecated
     public static int cusolverDnGetrf_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9842,7 +9548,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnGetrf(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9875,7 +9580,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for GETRS */
-    @Deprecated
     public static int cusolverDnGetrs(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9910,7 +9614,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for SYEVD */
-    @Deprecated
     public static int cusolverDnSyevd_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9942,7 +9645,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnSyevd(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -9979,7 +9681,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for SYEVDX */
-    @Deprecated
     public static int cusolverDnSyevdx_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -10023,7 +9724,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnSyevdx(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -10072,7 +9772,6 @@ public class JCusolverDn
 
 
     /** 64-bit API for GESVD */
-    @Deprecated
     public static int cusolverDnGesvd_bufferSize(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -10118,7 +9817,6 @@ public class JCusolverDn
         long[] workspaceInBytes);
 
 
-    @Deprecated
     public static int cusolverDnGesvd(
         cusolverDnHandle handle, 
         cusolverDnParams params, 
@@ -10802,6 +10500,118 @@ public class JCusolverDn
         long workspaceInBytesOnHost, 
         Pointer d_info, 
         Pointer h_err_sigma);
+
+
+    public static int cusolverDnXgesvdr_bufferSize(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobv, 
+        long m, 
+        long n, 
+        long k, 
+        long p, 
+        long niters, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeSrand, 
+        Pointer Srand, 
+        int dataTypeUrand, 
+        Pointer Urand, 
+        long ldUrand, 
+        int dataTypeVrand, 
+        Pointer Vrand, 
+        long ldVrand, 
+        int computeType, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost)
+    {
+        return checkResult(cusolverDnXgesvdr_bufferSizeNative(handle, params, jobu, jobv, m, n, k, p, niters, dataTypeA, A, lda, dataTypeSrand, Srand, dataTypeUrand, Urand, ldUrand, dataTypeVrand, Vrand, ldVrand, computeType, workspaceInBytesOnDevice, workspaceInBytesOnHost));
+    }
+    private static native int cusolverDnXgesvdr_bufferSizeNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobv, 
+        long m, 
+        long n, 
+        long k, 
+        long p, 
+        long niters, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeSrand, 
+        Pointer Srand, 
+        int dataTypeUrand, 
+        Pointer Urand, 
+        long ldUrand, 
+        int dataTypeVrand, 
+        Pointer Vrand, 
+        long ldVrand, 
+        int computeType, 
+        long[] workspaceInBytesOnDevice, 
+        long[] workspaceInBytesOnHost);
+
+
+    public static int cusolverDnXgesvdr(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobv, 
+        long m, 
+        long n, 
+        long k, 
+        long p, 
+        long niters, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeSrand, 
+        Pointer Srand, 
+        int dataTypeUrand, 
+        Pointer Urand, 
+        long ldUrand, 
+        int dataTypeVrand, 
+        Pointer Vrand, 
+        long ldVrand, 
+        int computeType, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
+        Pointer d_info)
+    {
+        return checkResult(cusolverDnXgesvdrNative(handle, params, jobu, jobv, m, n, k, p, niters, dataTypeA, A, lda, dataTypeSrand, Srand, dataTypeUrand, Urand, ldUrand, dataTypeVrand, Vrand, ldVrand, computeType, bufferOnDevice, workspaceInBytesOnDevice, bufferOnHost, workspaceInBytesOnHost, d_info));
+    }
+    private static native int cusolverDnXgesvdrNative(
+        cusolverDnHandle handle, 
+        cusolverDnParams params, 
+        char jobu, 
+        char jobv, 
+        long m, 
+        long n, 
+        long k, 
+        long p, 
+        long niters, 
+        int dataTypeA, 
+        Pointer A, 
+        long lda, 
+        int dataTypeSrand, 
+        Pointer Srand, 
+        int dataTypeUrand, 
+        Pointer Urand, 
+        long ldUrand, 
+        int dataTypeVrand, 
+        Pointer Vrand, 
+        long ldVrand, 
+        int computeType, 
+        Pointer bufferOnDevice, 
+        long workspaceInBytesOnDevice, 
+        Pointer bufferOnHost, 
+        long workspaceInBytesOnHost, 
+        Pointer d_info);
     
 
 }
