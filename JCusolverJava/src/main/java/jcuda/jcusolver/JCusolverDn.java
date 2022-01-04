@@ -340,7 +340,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZZgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -358,7 +358,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZCgesv(
@@ -375,7 +375,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZCgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -393,7 +393,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZKgesv(
@@ -410,7 +410,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZKgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -428,7 +428,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZEgesv(
@@ -445,7 +445,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZEgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -463,7 +463,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZYgesv(
@@ -480,7 +480,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZYgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -498,7 +498,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCCgesv(
@@ -515,7 +515,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCCgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -533,7 +533,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCEgesv(
@@ -550,7 +550,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCEgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -568,7 +568,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCKgesv(
@@ -585,7 +585,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCKgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -603,7 +603,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCYgesv(
@@ -620,7 +620,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCYgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -638,7 +638,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDDgesv(
@@ -655,7 +655,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDDgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -673,7 +673,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDSgesv(
@@ -690,7 +690,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDSgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -708,7 +708,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDHgesv(
@@ -725,7 +725,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDHgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -743,7 +743,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDBgesv(
@@ -760,7 +760,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDBgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -778,7 +778,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDXgesv(
@@ -795,7 +795,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDXgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -813,7 +813,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSSgesv(
@@ -830,7 +830,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSSgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -848,7 +848,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSHgesv(
@@ -865,7 +865,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSHgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -883,7 +883,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSBgesv(
@@ -900,7 +900,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSBgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -918,7 +918,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSXgesv(
@@ -935,7 +935,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSXgesvNative(handle, n, nrhs, dA, ldda, dipiv, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -953,7 +953,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     /*******************************************************************************/
@@ -1540,7 +1540,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZZgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1558,7 +1558,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZCgels(
@@ -1575,7 +1575,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZCgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1593,7 +1593,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZKgels(
@@ -1610,7 +1610,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZKgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1628,7 +1628,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZEgels(
@@ -1645,7 +1645,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZEgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1663,7 +1663,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnZYgels(
@@ -1680,7 +1680,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnZYgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1698,7 +1698,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCCgels(
@@ -1715,7 +1715,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCCgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1733,7 +1733,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCKgels(
@@ -1750,7 +1750,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCKgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1768,7 +1768,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCEgels(
@@ -1785,7 +1785,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCEgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1803,7 +1803,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnCYgels(
@@ -1820,7 +1820,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnCYgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1838,7 +1838,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDDgels(
@@ -1855,7 +1855,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDDgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1873,7 +1873,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDSgels(
@@ -1890,7 +1890,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDSgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1908,7 +1908,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDHgels(
@@ -1925,7 +1925,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDHgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1943,7 +1943,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDBgels(
@@ -1960,7 +1960,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDBgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -1978,7 +1978,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnDXgels(
@@ -1995,7 +1995,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnDXgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -2013,7 +2013,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSSgels(
@@ -2030,7 +2030,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSSgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -2048,7 +2048,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSHgels(
@@ -2065,7 +2065,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSHgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -2083,7 +2083,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSBgels(
@@ -2100,7 +2100,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSBgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -2118,7 +2118,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnSXgels(
@@ -2135,7 +2135,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnSXgelsNative(handle, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, iter, d_info));
     }
@@ -2153,7 +2153,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] iter, 
-        int[] d_info);
+        Pointer d_info);
 
 
     /*******************************************************************************/
@@ -2741,7 +2741,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] niters, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnIRSXgesvNative(handle, gesv_irs_params, gesv_irs_infos, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, niters, d_info));
     }
@@ -2760,7 +2760,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] niters, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnIRSXgesv_bufferSize(
@@ -2796,7 +2796,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] niters, 
-        int[] d_info)
+        Pointer d_info)
     {
         return checkResult(cusolverDnIRSXgelsNative(handle, gels_irs_params, gels_irs_infos, m, n, nrhs, dA, ldda, dB, lddb, dX, lddx, dWorkspace, lwork_bytes, niters, d_info));
     }
@@ -2816,7 +2816,7 @@ public class JCusolverDn
         Pointer dWorkspace, 
         long lwork_bytes, 
         int[] niters, 
-        int[] d_info);
+        Pointer d_info);
 
 
     public static int cusolverDnIRSXgels_bufferSize(
@@ -10612,6 +10612,6 @@ public class JCusolverDn
         Pointer bufferOnHost, 
         long workspaceInBytesOnHost, 
         Pointer d_info);
-    
+   
 
 }
