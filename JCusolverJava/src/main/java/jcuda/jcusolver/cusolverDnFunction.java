@@ -30,6 +30,7 @@ package jcuda.jcusolver;
 public class cusolverDnFunction
 {
     public static final int CUSOLVERDN_GETRF = 0;
+    public static final int CUSOLVERDN_POTRF = 1;
 
     /**
      * Private constructor to prevent instantiation
@@ -49,6 +50,7 @@ public class cusolverDnFunction
         switch (n)
         {
             case CUSOLVERDN_GETRF: return "CUSOLVERDN_GETRF";
+            case CUSOLVERDN_POTRF: return "CUSOLVERDN_POTRF";
         }
         return "INVALID cusolverDnFunction: "+n;
     }

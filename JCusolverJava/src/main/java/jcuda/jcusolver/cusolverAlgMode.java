@@ -34,6 +34,7 @@ public class cusolverAlgMode
      */
     public static final int CUSOLVER_ALG_0 = 0;
     public static final int CUSOLVER_ALG_1 = 1;
+    public static final int CUSOLVER_ALG_2 = 2;
 
     /**
      * Private constructor to prevent instantiation
@@ -54,6 +55,7 @@ public class cusolverAlgMode
         {
             case CUSOLVER_ALG_0: return "CUSOLVER_ALG_0";
             case CUSOLVER_ALG_1: return "CUSOLVER_ALG_1";
+            case CUSOLVER_ALG_2: return "CUSOLVER_ALG_2";
         }
         return "INVALID cusolverAlgMode: "+n;
     }
