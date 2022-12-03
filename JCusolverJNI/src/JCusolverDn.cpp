@@ -166,7 +166,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnGetStreamNativ
 }
 
 //============================================================
-// IRS headers 
+// IRS headers
 //============================================================
 // =============================================================================
 // IRS helper function API
@@ -863,7 +863,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnIRSInfosGetMax
 //============================================================
 /*******************************************************************************/
 /**
- * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv 
+ * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv
  * users API Prototypes */
 /*******************************************************************************/
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgesvNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nrhs, jobject dA, jint ldda, jintArray dipiv, jobject dB, jint lddb, jobject dX, jint lddx, jobject dWorkspace, jlong lwork_bytes, jintArray iter, jobject d_info)
@@ -2849,7 +2849,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSXgesvNative(J
 /*******************************************************************************/
 /*******************************************************************************/
 /**
- * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize 
+ * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize
  * users API Prototypes */
 /*******************************************************************************/
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgesv_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint n, jint nrhs, jobject dA, jint ldda, jintArray dipiv, jobject dB, jint lddb, jobject dX, jint lddx, jobject dWorkspace, jlongArray lwork_bytes)
@@ -4331,7 +4331,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSXgesv_1buffer
 /*******************************************************************************/
 /*******************************************************************************/
 /**
- * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels 
+ * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels
  * users API Prototypes */
 /*******************************************************************************/
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgelsNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nrhs, jobject dA, jint ldda, jobject dB, jint lddb, jobject dX, jint lddx, jobject dWorkspace, jlong lwork_bytes, jintArray iter, jobject d_info)
@@ -6245,7 +6245,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSXgelsNative(J
 /*******************************************************************************/
 /*******************************************************************************/
 /**
- * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize 
+ * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize
  * API prototypes */
 /*******************************************************************************/
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZZgels_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint m, jint n, jint nrhs, jobject dA, jint ldda, jobject dB, jint lddb, jobject dX, jint lddx, jobject dWorkspace, jlongArray lwork_bytes)
@@ -9665,7 +9665,7 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZpotrsBatchedN
     return jniResult;
 }
 
-/** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM)  */
+/** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM) */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSpotri_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint uplo, jint n, jobject A, jint lda, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
@@ -19182,7 +19182,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZgesvdNative(J
     return jniResult;
 }
 
-/** standard symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+/** standard symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer
+ */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsyevd_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint uplo, jint n, jobject A, jint lda, jobject W, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
@@ -19791,7 +19792,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZheevdNative(J
     return jniResult;
 }
 
-/** standard selective symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+/** standard selective symmetric eigenvalue solver, A*x = lambda*x, by
+ * divide-and-conquer  */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsyevdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
@@ -20624,7 +20626,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZheevdxNative(
     return jniResult;
 }
 
-/** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+/** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by
+ * divide-and-conquer  */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsygvdx_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint range, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jfloat vl, jfloat vu, jint il, jint iu, jobject meig, jobject W, jintArray lwork)
 {
     // Null-checks for non-primitive arguments
@@ -21585,7 +21588,8 @@ JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnZhegvdxNative(
     return jniResult;
 }
 
-/** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+/** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by
+ * divide-and-conquer  */
 JNIEXPORT jint JNICALL Java_jcuda_jcusolver_JCusolverDn_cusolverDnSsygvd_1bufferSizeNative(JNIEnv *env, jclass cls, jobject handle, jint itype, jint jobz, jint uplo, jint n, jobject A, jint lda, jobject B, jint ldb, jobject W, jintArray lwork)
 {
     // Null-checks for non-primitive arguments

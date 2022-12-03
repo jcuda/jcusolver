@@ -102,7 +102,7 @@ public class JCusolverDn
 
 
     //============================================================
-    // IRS headers 
+    // IRS headers
     //============================================================
     // =============================================================================
     // IRS helper function API
@@ -323,7 +323,7 @@ public class JCusolverDn
     //============================================================
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv 
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv(
@@ -959,7 +959,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize 
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gesv_bufferSize
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgesv_bufferSize(
@@ -1523,7 +1523,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels 
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels
      * users API Prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgels(
@@ -2159,7 +2159,7 @@ public class JCusolverDn
     /*******************************************************************************/
     /*******************************************************************************/
     /**
-     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize 
+     * [ZZ, ZC, ZK, ZE, ZY, CC, CK, CE, CY, DD, DS, DH, DB, DX, SS, SH, SB, SX]gels_bufferSize
      * API prototypes */
     /*******************************************************************************/
     public static int cusolverDnZZgels_bufferSize(
@@ -3301,7 +3301,7 @@ public class JCusolverDn
         int batchSize);
 
 
-    /** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM)  */
+    /** s.p.d. matrix inversion (POTRI) and auxiliary routines (TRTRI and LAUUM) */
     public static int cusolverDnSpotri_bufferSize(
         cusolverDnHandle handle, 
         int uplo, 
@@ -6422,7 +6422,8 @@ public class JCusolverDn
         Pointer info);
 
 
-    /** standard symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+    /** standard symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer
+     */
     public static int cusolverDnSsyevd_bufferSize(
         cusolverDnHandle handle, 
         int jobz, 
@@ -6623,7 +6624,8 @@ public class JCusolverDn
         Pointer info);
 
 
-    /** standard selective symmetric eigenvalue solver, A*x = lambda*x, by divide-and-conquer  */
+    /** standard selective symmetric eigenvalue solver, A*x = lambda*x, by
+     * divide-and-conquer  */
     public static int cusolverDnSsyevdx_bufferSize(
         cusolverDnHandle handle, 
         int jobz, 
@@ -6920,7 +6922,8 @@ public class JCusolverDn
         Pointer info);
 
 
-    /** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+    /** selective generalized symmetric eigenvalue solver, A*x = lambda*B*x, by
+     * divide-and-conquer  */
     public static int cusolverDnSsygvdx_bufferSize(
         cusolverDnHandle handle, 
         int itype, 
@@ -7265,7 +7268,8 @@ public class JCusolverDn
         Pointer info);
 
 
-    /** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by divide-and-conquer  */
+    /** generalized symmetric eigenvalue solver, A*x = lambda*B*x, by
+     * divide-and-conquer  */
     public static int cusolverDnSsygvd_bufferSize(
         cusolverDnHandle handle, 
         int itype, 
